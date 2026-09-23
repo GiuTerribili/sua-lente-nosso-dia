@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 
 <html lang="pt-BR">
+
 <head>
 
-```
 <meta charset="UTF-8">
 
 <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
 >
 
 <title>Administração — Giulia & Nathan</title>
@@ -20,526 +21,686 @@
 
 <style>
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: #fffaf6;
+    color: #514943;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* =========================
+   PÁGINA
+========================= */
+
+.page {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 35px 25px 60px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 390px;
+    background: white;
+    padding: 40px 30px;
+    border-radius: 25px;
+    box-shadow: 0 15px 50px rgba(80,60,50,0.10);
+    text-align: center;
+}
+
+.login-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 58px;
+    color: #A87932;
+    font-weight: 400;
+}
+
+.login-subtitle {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #9a918a;
+    margin: 10px 0 30px;
+}
+
+.input {
+    width: 100%;
+    border: 1px solid #e3d9d2;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    outline: none;
+}
+
+.input:focus {
+    border-color: #A87932;
+}
+
+.login-button {
+    width: 100%;
+    border: none;
+    border-radius: 50px;
+    padding: 16px;
+    margin-top: 8px;
+    background: #D9577A;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.login-error {
+    min-height: 25px;
+    margin-top: 15px;
+    color: #D9577A;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 52px;
+    font-weight: 400;
+    color: #A87932;
+}
+
+.subtitle {
+    margin-top: 5px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #9a918a;
+}
+
+.logout {
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px;
+    background: #eee5df;
+    color: #655c55;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* =========================
+   BARRA
+========================= */
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.counter {
+    font-size: 12px;
+    color: #77706a;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.action {
+    border: none;
+    border-radius: 50px;
+    padding: 13px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.select-all {
+    background: #eee5df;
+    color: #655c55;
+}
+
+.download {
+    background: #A87932;
+    color: white;
+}
+
+.delete {
+    background: #D9577A;
+    color: white;
+}
+
+.delete:disabled,
+.download:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* =========================
+   GALERIA
+========================= */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.photo-card {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #f3ebe5;
+    cursor: pointer;
+}
+
+.photo-card.selected {
+    outline: 4px solid #D9577A;
+    outline-offset: -4px;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.check {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    color: transparent;
+    z-index: 2;
+}
+
+.photo-card.selected .check {
+    background: #D9577A;
+    color: white;
+}
+
+.photo-number {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 5px 8px;
+    border-radius: 20px;
+    background: rgba(45,35,30,0.65);
+    color: white;
+    font-size: 9px;
+}
+
+.status {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 35px 20px;
+    font-size: 12px;
+    color: #9a918a;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    body {
-        min-height: 100vh;
-        background: #fffaf6;
-        color: #514943;
-        font-family: 'Montserrat', sans-serif;
-    }
+}
+
+@media (max-width: 550px) {
 
     .page {
-        width: 100%;
-        max-width: 1200px;
-        margin: auto;
-        padding: 35px 25px 60px;
+        padding: 25px 15px 50px;
     }
 
     .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 35px;
+        align-items: flex-start;
     }
 
     .title {
-        font-family: 'Great Vibes', cursive;
-        font-size: 52px;
-        font-weight: 400;
-        color: #A87932;
-    }
-
-    .subtitle {
-        margin-top: 5px;
-        font-size: 10px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #9a918a;
-    }
-
-    .logout {
-        border: none;
-        border-radius: 50px;
-        padding: 12px 20px;
-        background: #eee5df;
-        color: #655c55;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 10px;
-        letter-spacing: 1px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-    .toolbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-        flex-wrap: wrap;
-        margin-bottom: 25px;
-    }
-
-    .counter {
-        font-size: 12px;
-        color: #77706a;
-    }
-
-    .actions {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-
-    .action {
-        border: none;
-        border-radius: 50px;
-        padding: 13px 18px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 10px;
-        letter-spacing: 1px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-    .select-all {
-        background: #eee5df;
-        color: #655c55;
-    }
-
-    .download {
-        background: #A87932;
-        color: white;
-    }
-
-    .delete {
-        background: #D9577A;
-        color: white;
-    }
-
-    .delete:disabled,
-    .download:disabled {
-        opacity: 0.45;
-        cursor: not-allowed;
+        font-size: 43px;
     }
 
     .gallery {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 9px;
     }
 
-    .photo-card {
-        position: relative;
-        aspect-ratio: 1 / 1;
-        border-radius: 15px;
-        overflow: hidden;
-        background: #f3ebe5;
-        cursor: pointer;
-    }
-
-    .photo-card.selected {
-        outline: 4px solid #D9577A;
-        outline-offset: -4px;
-    }
-
-    .photo-card img {
+    .actions {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
     }
 
-    .check {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.92);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 17px;
-        color: transparent;
-        z-index: 2;
+    .action {
+        flex: 1;
     }
 
-    .photo-card.selected .check {
-        background: #D9577A;
-        color: white;
-    }
-
-    .photo-number {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-        padding: 5px 8px;
-        border-radius: 20px;
-        background: rgba(45,35,30,0.65);
-        color: white;
-        font-size: 9px;
-    }
-
-    .status {
-        text-align: center;
-        padding: 35px 20px;
-        font-size: 12px;
-        color: #9a918a;
-    }
-
-    /* LOGIN */
-
-    .login-page {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 25px;
-    }
-
-    .login-box {
-        width: 100%;
-        max-width: 390px;
-        background: white;
-        padding: 40px 30px;
-        border-radius: 25px;
-        box-shadow: 0 15px 50px rgba(80,60,50,0.10);
-        text-align: center;
-    }
-
-    .login-title {
-        font-family: 'Great Vibes', cursive;
-        font-size: 58px;
-        color: #A87932;
-        font-weight: 400;
-    }
-
-    .login-subtitle {
-        font-size: 10px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #9a918a;
-        margin: 10px 0 30px;
-    }
-
-    .input {
-        width: 100%;
-        border: 1px solid #e3d9d2;
-        border-radius: 12px;
-        padding: 15px;
-        margin-bottom: 12px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 13px;
-        outline: none;
-    }
-
-    .login-button {
-        width: 100%;
-        border: none;
-        border-radius: 50px;
-        padding: 16px;
-        margin-top: 8px;
-        background: #D9577A;
-        color: white;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 10px;
-        letter-spacing: 1.5px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-    .login-error {
-        min-height: 25px;
-        margin-top: 15px;
-        color: #D9577A;
-        font-size: 11px;
-    }
-
-    .hidden {
-        display: none !important;
-    }
-
-    @media (max-width: 800px) {
-
-        .gallery {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-    }
-
-    @media (max-width: 550px) {
-
-        .page {
-            padding: 25px 15px 50px;
-        }
-
-        .header {
-            align-items: flex-start;
-        }
-
-        .title {
-            font-size: 43px;
-        }
-
-        .gallery {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 9px;
-        }
-
-        .actions {
-            width: 100%;
-        }
-
-        .action {
-            flex: 1;
-        }
-
-    }
+}
 
 </style>
-```
 
 </head>
 
 <body>
 
-```
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
 <section
     id="loginPage"
     class="login-page"
 >
 
-    <div class="login-box">
+```
+<div class="login-box">
 
-        <h1 class="login-title">
-            Giulia & Nathan
-        </h1>
+    <h1 class="login-title">
+        Giulia & Nathan
+    </h1>
 
-        <p class="login-subtitle">
-            Área da administradora
-        </p>
+    <p class="login-subtitle">
+        Área da administradora
+    </p>
 
-        <input
-            id="email"
-            class="input"
-            type="email"
-            placeholder="Seu e-mail"
-            autocomplete="email"
-        >
+    <input
+        id="email"
+        class="input"
+        type="email"
+        placeholder="Seu e-mail"
+        autocomplete="username"
+    >
 
-        <input
-            id="password"
-            class="input"
-            type="password"
-            placeholder="Sua senha"
-            autocomplete="current-password"
-        >
+    <input
+        id="password"
+        class="input"
+        type="password"
+        placeholder="Sua senha"
+        autocomplete="current-password"
+    >
 
-        <button
-            id="loginButton"
-            class="login-button"
-        >
-            ENTRAR
-        </button>
+    <button
+        id="loginButton"
+        class="login-button"
+    >
+        ENTRAR
+    </button>
 
-        <div
-            id="loginError"
-            class="login-error"
-        ></div>
+    <div
+        id="loginError"
+        class="login-error"
+    ></div>
 
-    </div>
+</div>
+```
 
 </section>
 
-
-<!-- ADMIN -->
+<!-- =========================
+     ADMIN
+========================= -->
 
 <main
     id="adminPage"
     class="page hidden"
 >
 
-    <header class="header">
+```
+<header class="header">
 
-        <div>
+    <div>
 
-            <h1 class="title">
-                Nossas memórias
-            </h1>
+        <h1 class="title">
+            Nossas memórias
+        </h1>
 
-            <p class="subtitle">
-                Painel da administradora
-            </p>
+        <p class="subtitle">
+            Painel da administradora
+        </p>
 
-        </div>
+    </div>
+
+    <button
+        id="logoutButton"
+        class="logout"
+    >
+        SAIR
+    </button>
+
+</header>
+
+
+<section class="toolbar">
+
+    <div
+        id="counter"
+        class="counter"
+    >
+        Nenhuma foto selecionada
+    </div>
+
+    <div class="actions">
 
         <button
-            id="logoutButton"
-            class="logout"
+            id="selectAllButton"
+            class="action select-all"
         >
-            SAIR
+            SELECIONAR TODAS
         </button>
 
-    </header>
-
-
-    <section class="toolbar">
-
-        <div
-            id="counter"
-            class="counter"
+        <button
+            id="downloadButton"
+            class="action download"
+            disabled
         >
-            Nenhuma foto selecionada
-        </div>
+            BAIXAR SELECIONADAS
+        </button>
 
-        <div class="actions">
+        <button
+            id="deleteButton"
+            class="action delete"
+            disabled
+        >
+            EXCLUIR SELECIONADAS
+        </button>
 
-            <button
-                id="selectAllButton"
-                class="action select-all"
-            >
-                SELECIONAR TODAS
-            </button>
+    </div>
 
-            <button
-                id="downloadButton"
-                class="action download"
-                disabled
-            >
-                BAIXAR SELECIONADAS
-            </button>
-
-            <button
-                id="deleteButton"
-                class="action delete"
-                disabled
-            >
-                EXCLUIR SELECIONADAS
-            </button>
-
-        </div>
-
-    </section>
+</section>
 
 
-    <section
-        id="adminGallery"
-        class="gallery"
-    >
+<section
+    id="adminGallery"
+    class="gallery"
+>
 
-        <div class="status">
-            Carregando fotos...
-        </div>
+    <div class="status">
+        Carregando fotos...
+    </div>
 
-    </section>
+</section>
+```
 
 </main>
 
-
-<!-- SUPABASE -->
+<!-- =========================
+     SUPABASE
+========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-    const SUPABASE_URL =
-        'https://jhembtsinuyailrdxrfq.supabase.co';
+const SUPABASE_URL =
+    'https://jhembtsinuyailrdxrfq.supabase.co';
 
-    const SUPABASE_KEY =
-        'sb_publishable_WIFsYfO0rCvzThuhzXXg_dMzYbdHm';
+const SUPABASE_KEY =
+    'sb_publishable_WIFsYfO0rCvzThuhzXXg_dMzYbdHm';
 
 
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================
+   ELEMENTOS
+========================= */
+
+const loginPage =
+    document.getElementById('loginPage');
+
+const adminPage =
+    document.getElementById('adminPage');
+
+const emailInput =
+    document.getElementById('email');
+
+const passwordInput =
+    document.getElementById('password');
+
+const loginButton =
+    document.getElementById('loginButton');
+
+const loginError =
+    document.getElementById('loginError');
+
+const logoutButton =
+    document.getElementById('logoutButton');
+
+const adminGallery =
+    document.getElementById('adminGallery');
+
+const counter =
+    document.getElementById('counter');
+
+const selectAllButton =
+    document.getElementById('selectAllButton');
+
+const downloadButton =
+    document.getElementById('downloadButton');
+
+const deleteButton =
+    document.getElementById('deleteButton');
+
+
+let files = [];
+
+let selectedPaths = new Set();
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginButton.addEventListener(
+    'click',
+    login
+);
+
+
+passwordInput.addEventListener(
+    'keydown',
+    event => {
+
+        if (event.key === 'Enter') {
+            login();
+        }
+
+    }
+);
+
+
+emailInput.addEventListener(
+    'keydown',
+    event => {
+
+        if (event.key === 'Enter') {
+            login();
+        }
+
+    }
+);
+
+
+async function login() {
+
+    const email =
+        emailInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+
+    loginError.textContent = '';
+
+
+    if (!email || !password) {
+
+        loginError.textContent =
+            'Digite seu e-mail e sua senha.';
+
+        return;
+
+    }
+
+
+    loginButton.disabled = true;
+
+    loginButton.textContent =
+        'ENTRANDO...';
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.auth.signInWithPassword({
+
+                email: email,
+
+                password: password
+
+            });
+
+
+        if (error) {
+
+            console.error(
+                'ERRO DE LOGIN:',
+                error
+            );
+
+            /*
+             Mostra temporariamente a mensagem real
+             para conseguirmos diagnosticar o problema.
+            */
+
+            loginError.textContent =
+                error.message ||
+                'Não foi possível entrar.';
+
+            return;
+
+        }
+
+
+        if (!data || !data.session) {
+
+            loginError.textContent =
+                'O login foi realizado, mas nenhuma sessão foi criada.';
+
+            return;
+
+        }
+
+
+        console.log(
+            'LOGIN REALIZADO:',
+            data.user
         );
 
 
-    const loginPage =
-        document.getElementById('loginPage');
+        showAdmin();
 
-    const adminPage =
-        document.getElementById('adminPage');
+    }
 
-    const emailInput =
-        document.getElementById('email');
+    catch (error) {
 
-    const passwordInput =
-        document.getElementById('password');
-
-    const loginButton =
-        document.getElementById('loginButton');
-
-    const loginError =
-        document.getElementById('loginError');
-
-    const logoutButton =
-        document.getElementById('logoutButton');
-
-    const adminGallery =
-        document.getElementById('adminGallery');
-
-    const counter =
-        document.getElementById('counter');
-
-    const selectAllButton =
-        document.getElementById('selectAllButton');
-
-    const downloadButton =
-        document.getElementById('downloadButton');
-
-    const deleteButton =
-        document.getElementById('deleteButton');
-
-
-    let files = [];
-
-    let selectedPaths = new Set();
-
-
-    /* =========================================
-       LOGIN
-    ========================================= */
-
-    loginButton.addEventListener(
-        'click',
-        login
-    );
-
-
-    passwordInput.addEventListener(
-        'keydown',
-        event => {
-
-            if (event.key === 'Enter') {
-                login();
-            }
-
-        }
-    );
-
-
-    async function login() {
+        console.error(
+            'ERRO INESPERADO:',
+            error
+        );
 
         loginError.textContent =
-            '';
+            error.message ||
+            'Ocorreu um erro inesperado.';
 
-        loginButton.disabled =
-            true;
+    }
+
+    finally {
+
+        loginButton.disabled = false;
 
         loginButton.textContent =
-            'ENTRANDO...';
+            'ENTRAR';
 
+    }
+
+}
+
+
+/* =========================
+   VERIFICAR SESSÃO
+========================= */
+
+async function checkSession() {
+
+    try {
 
         const {
             data,
@@ -547,71 +708,27 @@
         } =
             await supabaseClient
                 .auth
-                .signInWithPassword({
-
-                    email:
-                        emailInput.value.trim(),
-
-                    password:
-                        passwordInput.value
-
-                });
+                .getSession();
 
 
         if (error) {
 
-            console.error(error);
-
-            loginError.textContent =
-                'E-mail ou senha incorretos.';
-
-            loginButton.disabled =
-                false;
-
-            loginButton.textContent =
-                'ENTRAR';
+            console.error(
+                'ERRO AO VERIFICAR SESSÃO:',
+                error
+            );
 
             return;
 
         }
 
 
-        if (!data.session) {
+        if (data && data.session) {
 
-            loginError.textContent =
-                'Não foi possível iniciar a sessão.';
-
-            loginButton.disabled =
-                false;
-
-            loginButton.textContent =
-                'ENTRAR';
-
-            return;
-
-        }
-
-
-        showAdmin();
-
-    }
-
-
-    /* =========================================
-       VERIFICAR SESSÃO
-    ========================================= */
-
-    async function checkSession() {
-
-        const {
-            data
-        } =
-            await supabaseClient
-                .auth
-                .getSession();
-
-
-        if (data.session) {
+            console.log(
+                'SESSÃO ENCONTRADA:',
+                data.session.user.email
+            );
 
             showAdmin();
 
@@ -619,61 +736,86 @@
 
     }
 
+    catch (error) {
 
-    function showAdmin() {
-
-        loginPage.classList.add(
-            'hidden'
+        console.error(
+            'ERRO DE SESSÃO:',
+            error
         );
-
-        adminPage.classList.remove(
-            'hidden'
-        );
-
-        loadAdminGallery();
 
     }
 
+}
 
-    /* =========================================
-       SAIR
-    ========================================= */
 
-    logoutButton.addEventListener(
-        'click',
-        async function () {
+/* =========================
+   MOSTRAR ADMIN
+========================= */
 
-            await supabaseClient
-                .auth
-                .signOut();
+function showAdmin() {
 
-            selectedPaths.clear();
-
-            adminPage.classList.add(
-                'hidden'
-            );
-
-            loginPage.classList.remove(
-                'hidden'
-            );
-
-        }
+    loginPage.classList.add(
+        'hidden'
     );
 
+    adminPage.classList.remove(
+        'hidden'
+    );
 
-    /* =========================================
-       GALERIA ADMIN
-    ========================================= */
+    loadAdminGallery();
 
-    async function loadAdminGallery() {
+}
 
-        adminGallery.innerHTML =
-            '<div class="status">Carregando fotos...</div>';
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutButton.addEventListener(
+    'click',
+    async function () {
+
+        await supabaseClient
+            .auth
+            .signOut();
 
         selectedPaths.clear();
 
-        updateToolbar();
+        files = [];
 
+        adminPage.classList.add(
+            'hidden'
+        );
+
+        loginPage.classList.remove(
+            'hidden'
+        );
+
+        emailInput.value = '';
+
+        passwordInput.value = '';
+
+        loginError.textContent = '';
+
+    }
+);
+
+
+/* =========================
+   GALERIA ADMIN
+========================= */
+
+async function loadAdminGallery() {
+
+    adminGallery.innerHTML =
+        '<div class="status">Carregando fotos...</div>';
+
+    selectedPaths.clear();
+
+    updateToolbar();
+
+
+    try {
 
         const {
             data,
@@ -697,10 +839,17 @@
 
         if (error) {
 
-            console.error(error);
+            console.error(
+                'ERRO AO CARREGAR GALERIA:',
+                error
+            );
+
 
             adminGallery.innerHTML =
-                '<div class="status">Não foi possível carregar as fotos.</div>';
+                '<div class="status">' +
+                'Não foi possível carregar as fotos.<br><br>' +
+                error.message +
+                '</div>';
 
             return;
 
@@ -744,7 +893,8 @@
                 const image =
                     document.createElement('img');
 
-                image.src =
+
+                const publicUrl =
                     supabaseClient
                         .storage
                         .from('fotos-casamento')
@@ -755,8 +905,14 @@
                         .publicUrl;
 
 
+                image.src =
+                    publicUrl;
+
                 image.alt =
                     'Foto ' + (index + 1);
+
+                image.loading =
+                    'lazy';
 
 
                 const check =
@@ -779,11 +935,17 @@
                     '#' + (index + 1);
 
 
-                card.appendChild(image);
+                card.appendChild(
+                    image
+                );
 
-                card.appendChild(check);
+                card.appendChild(
+                    check
+                );
 
-                card.appendChild(number);
+                card.appendChild(
+                    number
+                );
 
 
                 card.addEventListener(
@@ -808,348 +970,393 @@
 
     }
 
+    catch (error) {
 
-    /* =========================================
-       SELECIONAR / DESELECIONAR
-    ========================================= */
+        console.error(
+            'ERRO INESPERADO AO CARREGAR GALERIA:',
+            error
+        );
 
-    function toggleSelection(
-        path,
-        card
+
+        adminGallery.innerHTML =
+            '<div class="status">' +
+            'Erro ao carregar a galeria.<br><br>' +
+            error.message +
+            '</div>';
+
+    }
+
+}
+
+
+/* =========================
+   SELEÇÃO
+========================= */
+
+function toggleSelection(
+    path,
+    card
+) {
+
+    if (
+        selectedPaths.has(path)
     ) {
 
-        if (
-            selectedPaths.has(path)
-        ) {
+        selectedPaths.delete(path);
 
-            selectedPaths.delete(path);
+        card.classList.remove(
+            'selected'
+        );
 
-            card.classList.remove(
-                'selected'
+    }
+
+    else {
+
+        selectedPaths.add(path);
+
+        card.classList.add(
+            'selected'
+        );
+
+    }
+
+
+    updateToolbar();
+
+}
+
+
+/* =========================
+   SELECIONAR TODAS
+========================= */
+
+selectAllButton.addEventListener(
+    'click',
+    function () {
+
+        const allSelected =
+            files.length > 0 &&
+            selectedPaths.size === files.length;
+
+
+        const cards =
+            document.querySelectorAll(
+                '.photo-card'
             );
 
-        } else {
 
-            selectedPaths.add(path);
+        if (allSelected) {
 
-            card.classList.add(
-                'selected'
+            selectedPaths.clear();
+
+            cards.forEach(
+                card =>
+                    card.classList.remove(
+                        'selected'
+                    )
             );
 
         }
+
+        else {
+
+            files.forEach(
+                file =>
+                    selectedPaths.add(
+                        file.name
+                    )
+            );
+
+
+            cards.forEach(
+                card =>
+                    card.classList.add(
+                        'selected'
+                    )
+            );
+
+        }
+
 
         updateToolbar();
 
     }
+);
 
 
-    /* =========================================
-       SELECIONAR TODAS
-    ========================================= */
+/* =========================
+   BARRA
+========================= */
 
-    selectAllButton.addEventListener(
-        'click',
-        function () {
+function updateToolbar() {
 
-            const allSelected =
-                selectedPaths.size ===
-                files.length;
+    const count =
+        selectedPaths.size;
 
 
-            const cards =
-                document.querySelectorAll(
-                    '.photo-card'
-                );
+    if (count === 0) {
 
+        counter.textContent =
+            'Nenhuma foto selecionada';
 
-            if (allSelected) {
+    }
 
-                selectedPaths.clear();
+    else {
 
-                cards.forEach(
-                    card =>
-                        card.classList.remove(
-                            'selected'
-                        )
-                );
-
-                selectAllButton.textContent =
-                    'SELECIONAR TODAS';
-
-            } else {
-
-                files.forEach(
-                    file =>
-                        selectedPaths.add(
-                            file.name
-                        )
-                );
-
-                cards.forEach(
-                    card =>
-                        card.classList.add(
-                            'selected'
-                        )
-                );
-
-                selectAllButton.textContent =
-                    'DESMARCAR TODAS';
-
-            }
-
-            updateToolbar();
-
-        }
-    );
-
-
-    /* =========================================
-       BARRA
-    ========================================= */
-
-    function updateToolbar() {
-
-        const count =
-            selectedPaths.size;
-
-
-        if (count === 0) {
-
-            counter.textContent =
-                'Nenhuma foto selecionada';
-
-        } else {
-
-            counter.textContent =
-                count +
-                (
-                    count === 1
-                        ? ' foto selecionada'
-                        : ' fotos selecionadas'
-                );
-
-        }
-
-
-        downloadButton.disabled =
-            count === 0;
-
-        deleteButton.disabled =
-            count === 0;
-
-
-        if (
-            files.length > 0 &&
-            count === files.length
-        ) {
-
-            selectAllButton.textContent =
-                'DESMARCAR TODAS';
-
-        } else {
-
-            selectAllButton.textContent =
-                'SELECIONAR TODAS';
-
-        }
+        counter.textContent =
+            count +
+            (
+                count === 1
+                    ? ' foto selecionada'
+                    : ' fotos selecionadas'
+            );
 
     }
 
 
-    /* =========================================
-       DOWNLOAD
-    ========================================= */
+    downloadButton.disabled =
+        count === 0;
 
-    downloadButton.addEventListener(
-        'click',
-        async function () {
-
-            const paths =
-                Array.from(
-                    selectedPaths
-                );
+    deleteButton.disabled =
+        count === 0;
 
 
-            if (!paths.length) {
-                return;
-            }
+    if (
+        files.length > 0 &&
+        count === files.length
+    ) {
+
+        selectAllButton.textContent =
+            'DESMARCAR TODAS';
+
+    }
+
+    else {
+
+        selectAllButton.textContent =
+            'SELECIONAR TODAS';
+
+    }
+
+}
 
 
-            downloadButton.disabled =
-                true;
+/* =========================
+   DOWNLOAD
+========================= */
 
-            downloadButton.textContent =
-                'BAIXANDO...';
+downloadButton.addEventListener(
+    'click',
+    async function () {
 
-
-            try {
-
-                for (
-                    const path of paths
-                ) {
-
-                    const publicUrl =
-                        supabaseClient
-                            .storage
-                            .from('fotos-casamento')
-                            .getPublicUrl(
-                                path
-                            )
-                            .data
-                            .publicUrl;
+        const paths =
+            Array.from(
+                selectedPaths
+            );
 
 
-                    const link =
-                        document.createElement(
-                            'a'
-                        );
-
-                    link.href =
-                        publicUrl;
-
-                    link.target =
-                        '_blank';
-
-                    link.download =
-                        path;
-
-
-                    document.body.appendChild(
-                        link
-                    );
-
-                    link.click();
-
-                    link.remove();
-
-
-                    await new Promise(
-                        resolve =>
-                            setTimeout(
-                                resolve,
-                                250
-                            )
-                    );
-
-                }
-
-            }
-
-            finally {
-
-                downloadButton.disabled =
-                    selectedPaths.size === 0;
-
-                downloadButton.textContent =
-                    'BAIXAR SELECIONADAS';
-
-            }
-
+        if (!paths.length) {
+            return;
         }
-    );
 
 
-    /* =========================================
-       EXCLUSÃO MÚLTIPLA
-    ========================================= */
+        downloadButton.disabled =
+            true;
 
-    deleteButton.addEventListener(
-        'click',
-        async function () {
-
-            const paths =
-                Array.from(
-                    selectedPaths
-                );
+        downloadButton.textContent =
+            'BAIXANDO...';
 
 
-            if (!paths.length) {
-                return;
-            }
+        try {
 
+            for (
+                const path of paths
+            ) {
 
-            const confirmed =
-                window.confirm(
-                    `Você está prestes a excluir ${paths.length} ${
-                        paths.length === 1
-                            ? 'foto'
-                            : 'fotos'
-                    } permanentemente.\n\nEssa ação não poderá ser desfeita.\n\nDeseja continuar?`
-                );
-
-
-            if (!confirmed) {
-                return;
-            }
-
-
-            deleteButton.disabled =
-                true;
-
-            deleteButton.textContent =
-                'EXCLUINDO...';
-
-
-            try {
-
-                const {
-                    error
-                } =
-                    await supabaseClient
+                const publicUrl =
+                    supabaseClient
                         .storage
                         .from('fotos-casamento')
-                        .remove(
-                            paths
-                        );
+                        .getPublicUrl(
+                            path
+                        )
+                        .data
+                        .publicUrl;
 
 
-                if (error) {
-                    throw error;
-                }
+                const link =
+                    document.createElement(
+                        'a'
+                    );
 
 
-                selectedPaths.clear();
+                link.href =
+                    publicUrl;
+
+                link.target =
+                    '_blank';
+
+                link.download =
+                    path;
 
 
-                await loadAdminGallery();
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    'ERRO AO EXCLUIR:',
-                    error
+                document.body.appendChild(
+                    link
                 );
 
+                link.click();
 
-                alert(
-                    'Não foi possível excluir as fotos. Verifique sua permissão de administradora.'
+                link.remove();
+
+
+                await new Promise(
+                    resolve =>
+                        setTimeout(
+                            resolve,
+                            300
+                        )
                 );
-
-            }
-
-            finally {
-
-                deleteButton.textContent =
-                    'EXCLUIR SELECIONADAS';
-
-                updateToolbar();
 
             }
 
         }
-    );
+
+        catch (error) {
+
+            console.error(
+                'ERRO AO BAIXAR:',
+                error
+            );
+
+            alert(
+                'Não foi possível baixar as fotos.'
+            );
+
+        }
+
+        finally {
+
+            downloadButton.disabled =
+                selectedPaths.size === 0;
+
+            downloadButton.textContent =
+                'BAIXAR SELECIONADAS';
+
+        }
+
+    }
+);
 
 
-    /* =========================================
-       INICIAR
-    ========================================= */
+/* =========================
+   EXCLUSÃO MÚLTIPLA
+========================= */
 
-    checkSession();
+deleteButton.addEventListener(
+    'click',
+    async function () {
 
-</script>
-```
+        const paths =
+            Array.from(
+                selectedPaths
+            );
 
-</body>
-</html>
+
+        if (!paths.length) {
+            return;
+        }
+
+
+        const confirmed =
+            window.confirm(
+                `Você está prestes a excluir ${paths.length} ${
+                    paths.length === 1
+                        ? 'foto'
+                        : 'fotos'
+                } permanentemente.\n\n` +
+                'Essa ação não poderá ser desfeita.\n\n' +
+                'Deseja realmente continuar?'
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        deleteButton.disabled =
+            true;
+
+        deleteButton.textContent =
+            'EXCLUINDO...';
+
+
+        try {
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .storage
+                    .from('fotos-casamento')
+                    .remove(
+                        paths
+                    );
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            selectedPaths.clear();
+
+
+            await loadAdminGallery();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                'ERRO AO EXCLUIR:',
+                error
+            );
+
+
+            alert(
+                'Não foi possível excluir as fotos.\n\n' +
+                error.message
+            );
+
+        }
+
+        finally {
+
+            deleteButton.textContent =
+                'EXCLUIR SELECIONADAS';
+
+            updateToolbar();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   MONITORAR AUTENTICAÇÃO
+========================= */
+
+supabaseClient.auth.onAuthStateChange(
+    function (
+        event,
+        session
+    ) {
+
+        console.log(
+            'AUTH:',
+            event,
+            session
+                ? session.user.email
+                : 'sem
