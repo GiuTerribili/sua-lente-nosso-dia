@@ -8,11 +8,14 @@
 ```
 <title>Giulia & Nathan</title>
 
-<!-- Fontes da identidade do casamento -->
+<!-- Fontes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+>
 
 <style>
 
@@ -73,7 +76,6 @@
     /* DATA */
 
     .date {
-        font-family: 'Montserrat', sans-serif;
         font-size: 13px;
         letter-spacing: 5px;
         color: #655c55;
@@ -98,20 +100,15 @@
         display: inline-block;
         padding: 17px 32px;
         border-radius: 50px;
-
         background: #D9577A;
         color: #ffffff;
-
         text-decoration: none;
         font-family: 'Montserrat', sans-serif;
         font-size: 11px;
         letter-spacing: 1.6px;
         font-weight: 600;
-
         box-shadow: 0 8px 25px rgba(217, 87, 122, 0.20);
-
         transition: all 0.3s ease;
-
         cursor: pointer;
     }
 
@@ -125,7 +122,7 @@
         pointer-events: none;
     }
 
-    /* STATUS DO UPLOAD */
+    /* STATUS */
 
     #uploadStatus {
         min-height: 24px;
@@ -176,21 +173,15 @@
         background: #f3ebe5;
     }
 
-    .empty-gallery {
+    .empty-gallery,
+    .loading-gallery {
         grid-column: 1 / -1;
         font-size: 13px;
         color: #9a918a;
         padding: 30px 15px;
     }
 
-    .loading-gallery {
-        grid-column: 1 / -1;
-        font-size: 12px;
-        color: #9a918a;
-        padding: 20px;
-    }
-
-    /* FRASE FINAL */
+    /* RODAPÉ */
 
     .footer {
         margin-top: 45px;
@@ -200,19 +191,13 @@
         color: #9a918a;
     }
 
-    /* ELEMENTOS DECORATIVOS */
+    /* DECORAÇÃO TEMPORÁRIA */
 
     .decor {
         position: absolute;
         z-index: 1;
         pointer-events: none;
     }
-
-    /*
-    Estes elementos são temporários.
-    Depois vamos substituir pelos hibiscos
-    reais em aquarela.
-    */
 
     .pink-detail {
         width: 180px;
@@ -248,7 +233,7 @@
         border-radius: 50%;
     }
 
-    /* LINHAS DECORATIVAS */
+    /* LINHA */
 
     .line {
         width: 55px;
@@ -258,7 +243,7 @@
         margin: 0 auto 25px;
     }
 
-    /* INPUT DE FOTO */
+    /* INPUT */
 
     #photoInput {
         display: none;
@@ -330,7 +315,6 @@
 ```
 <main class="page">
 
-    <!-- Decoração temporária -->
     <div class="decor pink-detail"></div>
     <div class="decor orange-detail"></div>
 
@@ -356,16 +340,19 @@
             Fotografe, compartilhe e faça parte das nossas memórias.
         </p>
 
-        <!-- BOTÃO PARA TIRAR/ESCOLHER FOTO -->
+        <!-- FOTO -->
 
         <input
             type="file"
             id="photoInput"
             accept="image/*"
-            hidden
         >
 
-        <label for="photoInput" class="button" id="uploadButton">
+        <label
+            for="photoInput"
+            class="button"
+            id="uploadButton"
+        >
             📸 &nbsp; COMPARTILHE SUA FOTO
         </label>
 
@@ -383,7 +370,10 @@
                 Vistas através dos seus olhos
             </p>
 
-            <div id="gallery" class="gallery">
+            <div
+                id="gallery"
+                class="gallery"
+            >
                 <div class="loading-gallery">
                     Carregando nossas memórias...
                 </div>
@@ -399,29 +389,41 @@
 
 </main>
 
+
 <!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
+    /* =========================================
+       CONFIGURAÇÃO DO SUPABASE
+    ========================================= */
+
     const SUPABASE_URL =
         'https://jhembtsinuyailrdxrfq.supabase.co';
 
     const SUPABASE_KEY =
-        'sb_publishable_WIFsYfO0rCvzThuhzXXg_dMzYbdHm';
+        'sb_publishable_WIFsYfO0rCvzThuhzwhXXg_dMzYbdHm';
+
 
     /*
-     * IMPORTANTE:
-     * Usamos "supabaseClient" em vez de "supabase"
-     * para evitar conflito com a biblioteca carregada
-     * pelo navegador.
+     * Criamos apenas UM cliente Supabase.
+     *
+     * O nome "supabaseClient" evita conflito
+     * com a variável global da biblioteca.
      */
 
-    const supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    /* =========================================
+       ELEMENTOS DA PÁGINA
+    ========================================= */
 
     const photoInput =
         document.getElementById('photoInput');
@@ -436,23 +438,23 @@
         document.getElementById('gallery');
 
 
-    /* ============================
-       ENVIAR FOTO
-    ============================ */
+    /* =========================================
+       UPLOAD DA FOTO
+    ========================================= */
 
     photoInput.addEventListener(
         'change',
         async function () {
 
-            const file = this.files[0];
+            const file =
+                this.files && this.files[0];
 
             if (!file) {
                 return;
             }
 
-            /*
-             * Aceita somente imagens.
-             */
+
+            /* Verifica se realmente é imagem */
 
             if (!file.type.startsWith('image/')) {
 
@@ -464,9 +466,8 @@
                 return;
             }
 
-            /*
-             * Limite de 15 MB por foto.
-             */
+
+            /* Limite de 15 MB */
 
             const maxSize =
                 15 * 1024 * 1024;
@@ -474,32 +475,36 @@
             if (file.size > maxSize) {
 
                 uploadStatus.textContent =
-                    'Essa foto é muito grande. Escolha uma foto de até 15 MB.';
+                    'A foto precisa ter no máximo 15 MB.';
 
                 photoInput.value = '';
 
                 return;
             }
 
+
             uploadButton.classList.add('disabled');
 
             uploadStatus.textContent =
                 'Enviando sua foto... 💕';
 
+
             try {
 
                 /*
-                 * Descobre a extensão original.
+                 * Extensão da imagem
                  */
 
-                const fileExtension =
+                let extension =
                     file.name
                         .split('.')
                         .pop()
                         .toLowerCase();
 
+
                 /*
-                 * Cria um nome único.
+                 * Nome único para evitar
+                 * conflito entre convidados.
                  */
 
                 const fileName =
@@ -509,14 +514,14 @@
                         .toString(36)
                         .substring(2, 10) +
                     '.' +
-                    fileExtension;
+                    extension;
+
 
                 /*
-                 * Faz o upload para:
-                 * fotos-casamento
+                 * UPLOAD
                  */
 
-                const { error } =
+                const result =
                     await supabaseClient
                         .storage
                         .from('fotos-casamento')
@@ -530,44 +535,48 @@
                             }
                         );
 
-                if (error) {
-                    throw error;
+
+                if (result.error) {
+                    throw result.error;
                 }
+
+
+                /*
+                 * SUCESSO
+                 */
 
                 uploadStatus.textContent =
                     'Foto enviada! Obrigada por fazer parte das nossas memórias. 💕';
 
-                /*
-                 * Limpa o input.
-                 */
 
                 photoInput.value = '';
 
+
                 /*
-                 * Atualiza a galeria.
+                 * Atualiza a galeria
                  */
 
                 await loadGallery();
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 console.error(
-                    'Erro ao enviar foto:',
+                    'ERRO NO UPLOAD:',
                     error
                 );
-
-                /*
-                 * Mostra uma mensagem mais útil
-                 * no console e uma mensagem amigável
-                 * para o convidado.
-                 */
 
                 uploadStatus.textContent =
                     'Não conseguimos enviar a foto. Tente novamente.';
 
-            } finally {
+            }
 
-                uploadButton.classList.remove('disabled');
+            finally {
+
+                uploadButton.classList.remove(
+                    'disabled'
+                );
 
             }
 
@@ -575,18 +584,23 @@
     );
 
 
-    /* ============================
+    /* =========================================
        CARREGAR GALERIA
-    ============================ */
+    ========================================= */
 
     async function loadGallery() {
 
         gallery.innerHTML =
             '<div class="loading-gallery">Carregando nossas memórias...</div>';
 
+
         try {
 
-            const { data, error } =
+            /*
+             * Busca os arquivos do bucket.
+             */
+
+            const result =
                 await supabaseClient
                     .storage
                     .from('fotos-casamento')
@@ -595,6 +609,7 @@
                         {
                             limit: 100,
                             offset: 0,
+
                             sortBy: {
                                 column: 'created_at',
                                 order: 'desc'
@@ -602,100 +617,129 @@
                         }
                     );
 
-            if (error) {
-                throw error;
+
+            if (result.error) {
+                throw result.error;
             }
 
+
+            const files =
+                result.data || [];
+
+
             /*
-             * Remove possíveis arquivos
-             * que não sejam imagens.
+             * Mantém somente arquivos.
              */
 
             const imageFiles =
-                (data || []).filter(
+                files.filter(
                     file =>
+                        file.name &&
                         !file.name.endsWith('/')
                 );
+
+
+            /*
+             * Nenhuma foto ainda
+             */
 
             if (imageFiles.length === 0) {
 
                 gallery.innerHTML =
-                    '<div class="empty-gallery">As primeiras fotos do nosso dia aparecerão aqui. 💕</div>';
+                    '<div class="empty-gallery">' +
+                    'As primeiras fotos do nosso dia aparecerão aqui. 💕' +
+                    '</div>';
 
                 return;
             }
 
+
             gallery.innerHTML = '';
 
-            imageFiles.forEach(file => {
 
-                /*
-                 * Pega a URL pública da foto.
-                 */
+            /*
+             * Cria cada imagem
+             */
 
-                const {
-                    data: publicUrlData
-                } =
-                    supabaseClient
-                        .storage
-                        .from('fotos-casamento')
-                        .getPublicUrl(
-                            file.name
-                        );
+            imageFiles.forEach(
+                file => {
 
-                const img =
-                    document.createElement('img');
+                    const publicResult =
+                        supabaseClient
+                            .storage
+                            .from('fotos-casamento')
+                            .getPublicUrl(
+                                file.name
+                            );
 
-                img.src =
-                    publicUrlData.publicUrl;
 
-                img.alt =
-                    'Foto do casamento';
+                    const image =
+                        document.createElement('img');
 
-                img.className =
-                    'gallery-item';
 
-                img.loading =
-                    'lazy';
+                    image.src =
+                        publicResult
+                            .data
+                            .publicUrl;
 
-                /*
-                 * Se uma imagem específica
-                 * não carregar, não quebra a galeria.
-                 */
 
-                img.onerror = function () {
+                    image.alt =
+                        'Foto do casamento';
 
-                    console.error(
-                        'Não foi possível carregar:',
-                        file.name
-                    );
 
-                    this.style.display =
-                        'none';
-                };
+                    image.className =
+                        'gallery-item';
 
-                gallery.appendChild(img);
 
-            });
+                    image.loading =
+                        'lazy';
 
-        } catch (error) {
+
+                    /*
+                     * Caso uma foto não carregue,
+                     * escondemos somente aquela imagem.
+                     */
+
+                    image.onerror =
+                        function () {
+
+                            console.error(
+                                'Erro ao carregar imagem:',
+                                file.name
+                            );
+
+                            this.style.display =
+                                'none';
+                        };
+
+
+                    gallery.appendChild(image);
+
+                }
+            );
+
+        }
+
+        catch (error) {
 
             console.error(
-                'Erro ao carregar galeria:',
+                'ERRO AO CARREGAR GALERIA:',
                 error
             );
 
             gallery.innerHTML =
-                '<div class="empty-gallery">Não foi possível carregar as fotos.</div>';
+                '<div class="empty-gallery">' +
+                'Não foi possível carregar as fotos.' +
+                '</div>';
 
         }
 
     }
 
 
-    /* ============================
+    /* =========================================
        INICIAR GALERIA
-    ============================ */
+    ========================================= */
 
     loadGallery();
 
