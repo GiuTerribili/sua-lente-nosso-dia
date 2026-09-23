@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Administração — Giulia & Nathan</title>
 
@@ -32,17 +27,6 @@ body {
     background: #fffaf6;
     color: #514943;
     font-family: 'Montserrat', sans-serif;
-}
-
-/* =========================
-   PÁGINA
-========================= */
-
-.page {
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 35px 25px 60px;
 }
 
 .hidden {
@@ -130,8 +114,15 @@ body {
 }
 
 /* =========================
-   HEADER
+   ADMIN
 ========================= */
+
+.page {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 35px 25px 60px;
+}
 
 .header {
     display: flex;
@@ -347,141 +338,132 @@ body {
      LOGIN
 ========================= -->
 
-<section
-    id="loginPage"
-    class="login-page"
->
+<section id="loginPage" class="login-page">
 
-```
-<div class="login-box">
+    <div class="login-box">
 
-    <h1 class="login-title">
-        Giulia & Nathan
-    </h1>
+        <h1 class="login-title">
+            Giulia & Nathan
+        </h1>
 
-    <p class="login-subtitle">
-        Área da administradora
-    </p>
+        <p class="login-subtitle">
+            Área da administradora
+        </p>
 
-    <input
-        id="email"
-        class="input"
-        type="email"
-        placeholder="Seu e-mail"
-        autocomplete="username"
-    >
+        <input
+            id="email"
+            class="input"
+            type="email"
+            placeholder="Seu e-mail"
+            autocomplete="username"
+        >
 
-    <input
-        id="password"
-        class="input"
-        type="password"
-        placeholder="Sua senha"
-        autocomplete="current-password"
-    >
+        <input
+            id="password"
+            class="input"
+            type="password"
+            placeholder="Sua senha"
+            autocomplete="current-password"
+        >
 
-    <button
-        id="loginButton"
-        class="login-button"
-    >
-        ENTRAR
-    </button>
+        <button
+            id="loginButton"
+            class="login-button"
+            type="button"
+        >
+            ENTRAR
+        </button>
 
-    <div
-        id="loginError"
-        class="login-error"
-    ></div>
+        <div
+            id="loginError"
+            class="login-error"
+        ></div>
 
-</div>
-```
+    </div>
 
 </section>
+
 
 <!-- =========================
      ADMIN
 ========================= -->
 
-<main
-    id="adminPage"
-    class="page hidden"
->
+<main id="adminPage" class="page hidden">
 
-```
-<header class="header">
+    <header class="header">
 
-    <div>
+        <div>
 
-        <h1 class="title">
-            Nossas memórias
-        </h1>
+            <h1 class="title">
+                Nossas memórias
+            </h1>
 
-        <p class="subtitle">
-            Painel da administradora
-        </p>
+            <p class="subtitle">
+                Painel da administradora
+            </p>
 
-    </div>
-
-    <button
-        id="logoutButton"
-        class="logout"
-    >
-        SAIR
-    </button>
-
-</header>
-
-
-<section class="toolbar">
-
-    <div
-        id="counter"
-        class="counter"
-    >
-        Nenhuma foto selecionada
-    </div>
-
-    <div class="actions">
+        </div>
 
         <button
-            id="selectAllButton"
-            class="action select-all"
+            id="logoutButton"
+            class="logout"
+            type="button"
         >
-            SELECIONAR TODAS
+            SAIR
         </button>
 
-        <button
-            id="downloadButton"
-            class="action download"
-            disabled
-        >
-            BAIXAR SELECIONADAS
-        </button>
-
-        <button
-            id="deleteButton"
-            class="action delete"
-            disabled
-        >
-            EXCLUIR SELECIONADAS
-        </button>
-
-    </div>
-
-</section>
+    </header>
 
 
-<section
-    id="adminGallery"
-    class="gallery"
->
+    <section class="toolbar">
 
-    <div class="status">
-        Carregando fotos...
-    </div>
+        <div id="counter" class="counter">
+            Nenhuma foto selecionada
+        </div>
 
-</section>
-```
+        <div class="actions">
+
+            <button
+                id="selectAllButton"
+                class="action select-all"
+                type="button"
+            >
+                SELECIONAR TODAS
+            </button>
+
+            <button
+                id="downloadButton"
+                class="action download"
+                type="button"
+                disabled
+            >
+                BAIXAR SELECIONADAS
+            </button>
+
+            <button
+                id="deleteButton"
+                class="action delete"
+                type="button"
+                disabled
+            >
+                EXCLUIR SELECIONADAS
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section id="adminGallery" class="gallery">
+
+        <div class="status">
+            Carregando fotos...
+        </div>
+
+    </section>
 
 </main>
+
 
 <!-- =========================
      SUPABASE
@@ -495,7 +477,10 @@ const SUPABASE_URL =
     'https://jhembtsinuyailrdxrfq.supabase.co';
 
 const SUPABASE_KEY =
-    'sb_publishable_WIFsYfO0rCvzThuhzXXg_dMzYbdHm';
+    'sb_publishable_WIFsYfO0rCvzThuhzwhXXg_dMzYbdHm';
+
+const ADMIN_EMAIL =
+    'giulia.gpc.df@gmail.com';
 
 
 const supabaseClient =
@@ -561,9 +546,9 @@ loginButton.addEventListener(
 );
 
 
-passwordInput.addEventListener(
+emailInput.addEventListener(
     'keydown',
-    event => {
+    function(event) {
 
         if (event.key === 'Enter') {
             login();
@@ -573,9 +558,9 @@ passwordInput.addEventListener(
 );
 
 
-emailInput.addEventListener(
+passwordInput.addEventListener(
     'keydown',
-    event => {
+    function(event) {
 
         if (event.key === 'Enter') {
             login();
@@ -588,7 +573,9 @@ emailInput.addEventListener(
 async function login() {
 
     const email =
-        emailInput.value.trim();
+        emailInput.value
+            .trim()
+            .toLowerCase();
 
     const password =
         passwordInput.value;
@@ -601,6 +588,16 @@ async function login() {
 
         loginError.textContent =
             'Digite seu e-mail e sua senha.';
+
+        return;
+
+    }
+
+
+    if (email !== ADMIN_EMAIL) {
+
+        loginError.textContent =
+            'Este e-mail não possui acesso à área administrativa.';
 
         return;
 
@@ -635,11 +632,6 @@ async function login() {
                 error
             );
 
-            /*
-             Mostra temporariamente a mensagem real
-             para conseguirmos diagnosticar o problema.
-            */
-
             loginError.textContent =
                 error.message ||
                 'Não foi possível entrar.';
@@ -649,7 +641,10 @@ async function login() {
         }
 
 
-        if (!data || !data.session) {
+        if (
+            !data ||
+            !data.session
+        ) {
 
             loginError.textContent =
                 'O login foi realizado, mas nenhuma sessão foi criada.';
@@ -659,10 +654,29 @@ async function login() {
         }
 
 
-        console.log(
-            'LOGIN REALIZADO:',
-            data.user
-        );
+        const loggedEmail =
+            (
+                data.user.email ||
+                ''
+            )
+                .trim()
+                .toLowerCase();
+
+
+        if (
+            loggedEmail !== ADMIN_EMAIL
+        ) {
+
+            await supabaseClient
+                .auth
+                .signOut();
+
+            loginError.textContent =
+                'Este usuário não possui acesso administrativo.';
+
+            return;
+
+        }
 
 
         showAdmin();
@@ -684,7 +698,8 @@ async function login() {
 
     finally {
 
-        loginButton.disabled = false;
+        loginButton.disabled =
+            false;
 
         loginButton.textContent =
             'ENTRAR';
@@ -723,14 +738,38 @@ async function checkSession() {
         }
 
 
-        if (data && data.session) {
+        if (
+            !data ||
+            !data.session
+        ) {
 
-            console.log(
-                'SESSÃO ENCONTRADA:',
-                data.session.user.email
-            );
+            return;
+
+        }
+
+
+        const sessionEmail =
+            (
+                data.session.user.email ||
+                ''
+            )
+                .trim()
+                .toLowerCase();
+
+
+        if (
+            sessionEmail === ADMIN_EMAIL
+        ) {
 
             showAdmin();
+
+        }
+
+        else {
+
+            await supabaseClient
+                .auth
+                .signOut();
 
         }
 
@@ -773,15 +812,17 @@ function showAdmin() {
 
 logoutButton.addEventListener(
     'click',
-    async function () {
+    async function() {
 
         await supabaseClient
             .auth
             .signOut();
 
+
         selectedPaths.clear();
 
         files = [];
+
 
         adminPage.classList.add(
             'hidden'
@@ -790,6 +831,7 @@ logoutButton.addEventListener(
         loginPage.classList.remove(
             'hidden'
         );
+
 
         emailInput.value = '';
 
@@ -802,13 +844,14 @@ logoutButton.addEventListener(
 
 
 /* =========================
-   GALERIA ADMIN
+   GALERIA
 ========================= */
 
 async function loadAdminGallery() {
 
     adminGallery.innerHTML =
         '<div class="status">Carregando fotos...</div>';
+
 
     selectedPaths.clear();
 
@@ -881,7 +924,7 @@ async function loadAdminGallery() {
 
 
         files.forEach(
-            (file, index) => {
+            function(file, index) {
 
                 const card =
                     document.createElement('div');
@@ -950,7 +993,7 @@ async function loadAdminGallery() {
 
                 card.addEventListener(
                     'click',
-                    function () {
+                    function() {
 
                         toggleSelection(
                             file.name,
@@ -973,7 +1016,7 @@ async function loadAdminGallery() {
     catch (error) {
 
         console.error(
-            'ERRO INESPERADO AO CARREGAR GALERIA:',
+            'ERRO AO CARREGAR GALERIA:',
             error
         );
 
@@ -1032,7 +1075,7 @@ function toggleSelection(
 
 selectAllButton.addEventListener(
     'click',
-    function () {
+    function() {
 
         const allSelected =
             files.length > 0 &&
@@ -1049,11 +1092,15 @@ selectAllButton.addEventListener(
 
             selectedPaths.clear();
 
+
             cards.forEach(
-                card =>
+                function(card) {
+
                     card.classList.remove(
                         'selected'
-                    )
+                    );
+
+                }
             );
 
         }
@@ -1061,18 +1108,24 @@ selectAllButton.addEventListener(
         else {
 
             files.forEach(
-                file =>
+                function(file) {
+
                     selectedPaths.add(
                         file.name
-                    )
+                    );
+
+                }
             );
 
 
             cards.forEach(
-                card =>
+                function(card) {
+
                     card.classList.add(
                         'selected'
-                    )
+                    );
+
+                }
             );
 
         }
@@ -1147,7 +1200,7 @@ function updateToolbar() {
 
 downloadButton.addEventListener(
     'click',
-    async function () {
+    async function() {
 
         const paths =
             Array.from(
@@ -1185,9 +1238,7 @@ downloadButton.addEventListener(
 
 
                 const link =
-                    document.createElement(
-                        'a'
-                    );
+                    document.createElement('a');
 
 
                 link.href =
@@ -1210,11 +1261,14 @@ downloadButton.addEventListener(
 
 
                 await new Promise(
-                    resolve =>
+                    function(resolve) {
+
                         setTimeout(
                             resolve,
                             300
-                        )
+                        );
+
+                    }
                 );
 
             }
@@ -1249,12 +1303,12 @@ downloadButton.addEventListener(
 
 
 /* =========================
-   EXCLUSÃO MÚLTIPLA
+   EXCLUSÃO
 ========================= */
 
 deleteButton.addEventListener(
     'click',
-    async function () {
+    async function() {
 
         const paths =
             Array.from(
@@ -1269,11 +1323,14 @@ deleteButton.addEventListener(
 
         const confirmed =
             window.confirm(
-                `Você está prestes a excluir ${paths.length} ${
+                'Você está prestes a excluir ' +
+                paths.length +
+                (
                     paths.length === 1
-                        ? 'foto'
-                        : 'fotos'
-                } permanentemente.\n\n` +
+                        ? ' foto'
+                        : ' fotos'
+                ) +
+                ' permanentemente.\n\n' +
                 'Essa ação não poderá ser desfeita.\n\n' +
                 'Deseja realmente continuar?'
             );
@@ -1311,7 +1368,6 @@ deleteButton.addEventListener(
 
             selectedPaths.clear();
 
-
             await loadAdminGallery();
 
         }
@@ -1345,11 +1401,11 @@ deleteButton.addEventListener(
 
 
 /* =========================
-   MONITORAR AUTENTICAÇÃO
+   AUTENTICAÇÃO
 ========================= */
 
 supabaseClient.auth.onAuthStateChange(
-    function (
+    function(
         event,
         session
     ) {
@@ -1359,4 +1415,21 @@ supabaseClient.auth.onAuthStateChange(
             event,
             session
                 ? session.user.email
-                : 'sem
+                : 'sem sessão'
+        );
+
+    }
+);
+
+
+/* =========================
+   INICIAR
+========================= */
+
+checkSession();
+
+</script>
+
+</body>
+
+</html>
