@@ -6,7 +6,7 @@
 
     <title>Giulia & Nathan</title>
 
-    <!-- Fontes do casamento -->
+    <!-- Fontes da identidade do casamento -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -22,8 +22,8 @@
 
         body {
             min-height: 100vh;
-            background: #fffaf7;
-            color: #4d4643;
+            background: #fffaf6;
+            color: #514943;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
         }
@@ -40,129 +40,160 @@
         }
 
         .content {
+            width: 100%;
             max-width: 650px;
             position: relative;
             z-index: 2;
         }
 
+        /* TEXTO SUPERIOR */
+
         .intro {
             font-size: 11px;
             letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            color: #77706a;
+            margin-bottom: 18px;
             font-weight: 500;
         }
 
+        /* NOMES */
+
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(65px, 15vw, 110px);
+            font-size: clamp(70px, 16vw, 115px);
             font-weight: 400;
             line-height: 0.95;
+            color: #A87932;
             margin-bottom: 18px;
         }
 
+        /* DATA */
+
         .date {
+            font-family: 'Montserrat', sans-serif;
             font-size: 13px;
             letter-spacing: 5px;
+            color: #655c55;
             margin-bottom: 45px;
             font-weight: 500;
         }
 
+        /* MENSAGEM */
+
         .message {
             font-size: 15px;
             line-height: 1.9;
+            color: #625a55;
             max-width: 470px;
             margin: 0 auto 38px;
             font-weight: 400;
         }
 
+        /* BOTÃO */
+
         .button {
             display: inline-block;
-            padding: 17px 30px;
+            padding: 17px 32px;
             border-radius: 50px;
-            background: #e9795c;
-            color: white;
+
+            background: #D9577A;
+            color: #ffffff;
+
             text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 1.5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 1.6px;
             font-weight: 600;
-            transition: 0.3s ease;
-            box-shadow: 0 8px 25px rgba(233, 121, 92, 0.22);
+
+            box-shadow: 0 8px 25px rgba(217, 87, 122, 0.20);
+
+            transition: all 0.3s ease;
         }
 
         .button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(233, 121, 92, 0.30);
+            box-shadow: 0 12px 30px rgba(217, 87, 122, 0.30);
         }
+
+        /* FRASE FINAL */
 
         .footer {
             margin-top: 45px;
             font-size: 10px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            opacity: 0.55;
+            color: #9a918a;
         }
 
-        /* Elementos tropicais */
+        /* ELEMENTOS DECORATIVOS */
 
-        .flower {
+        .decor {
             position: absolute;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /*
+        Estes elementos são temporários.
+        Depois vamos substituir pelos hibiscos
+        reais em aquarela.
+        */
+
+        .pink-detail {
             width: 180px;
             height: 180px;
-            opacity: 0.20;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .flower-one {
-            top: -60px;
-            left: -60px;
-            background:
-                radial-gradient(circle at 50% 20%, #f47a55 0 25%, transparent 26%),
-                radial-gradient(circle at 80% 50%, #ec4f83 0 25%, transparent 26%),
-                radial-gradient(circle at 50% 80%, #f47a55 0 25%, transparent 26%),
-                radial-gradient(circle at 20% 50%, #ec4f83 0 25%, transparent 26%);
-        }
-
-        .flower-two {
-            bottom: -70px;
-            right: -60px;
-            background:
-                radial-gradient(circle at 50% 20%, #ec4f83 0 25%, transparent 26%),
-                radial-gradient(circle at 80% 50%, #f47a55 0 25%, transparent 26%),
-                radial-gradient(circle at 50% 80%, #ec4f83 0 25%, transparent 26%),
-                radial-gradient(circle at 20% 50%, #f47a55 0 25%, transparent 26%);
-        }
-
-        .leaf {
-            position: absolute;
-            width: 130px;
-            height: 250px;
-            background: #879276;
-            opacity: 0.08;
-            border-radius: 100% 0 100% 0;
-            transform: rotate(35deg);
-        }
-
-        .leaf-one {
-            top: 10%;
-            right: -70px;
-        }
-
-        .leaf-two {
-            bottom: 5%;
+            top: -70px;
             left: -70px;
-            transform: rotate(-145deg);
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(217, 87, 122, 0.18) 0%,
+                    rgba(217, 87, 122, 0.08) 45%,
+                    transparent 70%
+                );
+
+            border-radius: 50%;
         }
+
+        .orange-detail {
+            width: 220px;
+            height: 220px;
+            bottom: -100px;
+            right: -90px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(235, 121, 72, 0.18) 0%,
+                    rgba(235, 121, 72, 0.08) 45%,
+                    transparent 70%
+                );
+
+            border-radius: 50%;
+        }
+
+        /* LINHAS DECORATIVAS */
+
+        .line {
+            width: 55px;
+            height: 1px;
+            background: #A87932;
+            opacity: 0.55;
+            margin: 0 auto 25px;
+        }
+
+        /* MOBILE */
 
         @media (max-width: 600px) {
 
             .page {
-                padding: 40px 20px;
+                padding: 40px 22px;
             }
 
             h1 {
-                font-size: 72px;
+                font-size: 76px;
             }
 
             .date {
@@ -177,7 +208,22 @@
 
             .button {
                 width: 100%;
-                max-width: 300px;
+                max-width: 310px;
+                padding: 18px 20px;
+            }
+
+            .pink-detail {
+                width: 140px;
+                height: 140px;
+                top: -50px;
+                left: -50px;
+            }
+
+            .orange-detail {
+                width: 160px;
+                height: 160px;
+                bottom: -70px;
+                right: -60px;
             }
         }
 
@@ -188,17 +234,17 @@
 
     <main class="page">
 
-        <div class="flower flower-one"></div>
-        <div class="flower flower-two"></div>
-
-        <div class="leaf leaf-one"></div>
-        <div class="leaf leaf-two"></div>
+        <!-- Decoração temporária -->
+        <div class="decor pink-detail"></div>
+        <div class="decor orange-detail"></div>
 
         <section class="content">
 
             <p class="intro">
                 Nosso casamento
             </p>
+
+            <div class="line"></div>
 
             <h1>
                 Giulia & Nathan
