@@ -6,7 +6,14 @@
 
     <title>Giulia & Nathan</title>
 
+    <!-- Fontes do casamento -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -14,100 +21,210 @@
         }
 
         body {
-            font-family: Georgia, serif;
-            background: #f8f3ed;
-            color: #4b4b42;
+            min-height: 100vh;
+            background: #fffaf7;
+            color: #4d4643;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .page {
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             text-align: center;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 600px;
             padding: 50px 25px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .small-text {
-            font-size: 14px;
-            letter-spacing: 3px;
+        .content {
+            max-width: 650px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro {
+            font-size: 11px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 20px;
-            color: #77776d;
+            font-weight: 500;
         }
 
         h1 {
-            font-size: 58px;
-            font-weight: normal;
-            margin-bottom: 10px;
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(65px, 15vw, 110px);
+            font-weight: 400;
+            line-height: 0.95;
+            margin-bottom: 18px;
         }
 
         .date {
-            font-size: 18px;
-            letter-spacing: 4px;
-            margin-bottom: 35px;
+            font-size: 13px;
+            letter-spacing: 5px;
+            margin-bottom: 45px;
+            font-weight: 500;
         }
 
         .message {
-            font-size: 20px;
-            line-height: 1.7;
-            margin-bottom: 40px;
+            font-size: 15px;
+            line-height: 1.9;
+            max-width: 470px;
+            margin: 0 auto 38px;
+            font-weight: 400;
         }
 
         .button {
             display: inline-block;
-            background: #6f7565;
+            padding: 17px 30px;
+            border-radius: 50px;
+            background: #e9795c;
             color: white;
-            padding: 16px 30px;
-            border-radius: 30px;
             text-decoration: none;
-            font-size: 16px;
-            transition: 0.3s;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            transition: 0.3s ease;
+            box-shadow: 0 8px 25px rgba(233, 121, 92, 0.22);
         }
 
         .button:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(233, 121, 92, 0.30);
         }
 
         .footer {
             margin-top: 45px;
-            font-size: 13px;
-            color: #99998e;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.55;
         }
+
+        /* Elementos tropicais */
+
+        .flower {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            opacity: 0.20;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .flower-one {
+            top: -60px;
+            left: -60px;
+            background:
+                radial-gradient(circle at 50% 20%, #f47a55 0 25%, transparent 26%),
+                radial-gradient(circle at 80% 50%, #ec4f83 0 25%, transparent 26%),
+                radial-gradient(circle at 50% 80%, #f47a55 0 25%, transparent 26%),
+                radial-gradient(circle at 20% 50%, #ec4f83 0 25%, transparent 26%);
+        }
+
+        .flower-two {
+            bottom: -70px;
+            right: -60px;
+            background:
+                radial-gradient(circle at 50% 20%, #ec4f83 0 25%, transparent 26%),
+                radial-gradient(circle at 80% 50%, #f47a55 0 25%, transparent 26%),
+                radial-gradient(circle at 50% 80%, #ec4f83 0 25%, transparent 26%),
+                radial-gradient(circle at 20% 50%, #f47a55 0 25%, transparent 26%);
+        }
+
+        .leaf {
+            position: absolute;
+            width: 130px;
+            height: 250px;
+            background: #879276;
+            opacity: 0.08;
+            border-radius: 100% 0 100% 0;
+            transform: rotate(35deg);
+        }
+
+        .leaf-one {
+            top: 10%;
+            right: -70px;
+        }
+
+        .leaf-two {
+            bottom: 5%;
+            left: -70px;
+            transform: rotate(-145deg);
+        }
+
+        @media (max-width: 600px) {
+
+            .page {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 72px;
+            }
+
+            .date {
+                font-size: 11px;
+                letter-spacing: 3px;
+            }
+
+            .message {
+                font-size: 14px;
+                padding: 0 10px;
+            }
+
+            .button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <main class="page">
 
-        <div class="small-text">
-            Nosso casamento
-        </div>
+        <div class="flower flower-one"></div>
+        <div class="flower flower-two"></div>
 
-        <h1>Giulia & Nathan</h1>
+        <div class="leaf leaf-one"></div>
+        <div class="leaf leaf-two"></div>
 
-        <div class="date">
-            20.03.2027
-        </div>
+        <section class="content">
 
-        <p class="message">
-            Queremos viver o nosso casamento através dos seus olhos.
-            <br><br>
-            Fotografe, compartilhe e faça parte das nossas memórias.
-        </p>
+            <p class="intro">
+                Nosso casamento
+            </p>
 
-        <a href="#" class="button">
-            📸 Compartilhar uma foto
-        </a>
+            <h1>
+                Giulia & Nathan
+            </h1>
 
-        <div class="footer">
-            Com amor, Giulia & Nathan
-        </div>
+            <p class="date">
+                20 · 03 · 2027
+            </p>
 
-    </div>
+            <p class="message">
+                Queremos viver o nosso casamento através dos seus olhos.
+                <br>
+                Fotografe, compartilhe e faça parte das nossas memórias.
+            </p>
+
+            <a href="#" class="button">
+                📸 &nbsp; COMPARTILHE SUA FOTO
+            </a>
+
+            <p class="footer">
+                Com amor, Giulia & Nathan
+            </p>
+
+        </section>
+
+    </main>
 
 </body>
 </html>
