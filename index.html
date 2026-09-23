@@ -109,6 +109,8 @@
             box-shadow: 0 8px 25px rgba(217, 87, 122, 0.20);
 
             transition: all 0.3s ease;
+
+            cursor: pointer;
         }
 
         .button:hover {
@@ -182,6 +184,12 @@
             background: #A87932;
             opacity: 0.55;
             margin: 0 auto 25px;
+        }
+
+        /* INPUT DE FOTO */
+
+        #photoInput {
+            display: none;
         }
 
         /* MOBILE */
@@ -260,9 +268,19 @@
                 Fotografe, compartilhe e faça parte das nossas memórias.
             </p>
 
-            <a href="#" class="button">
+            <!-- BOTÃO PARA TIRAR/ESCOLHER FOTO -->
+
+            <input
+                type="file"
+                id="photoInput"
+                accept="image/*"
+                capture="environment"
+                hidden
+            >
+
+            <label for="photoInput" class="button">
                 📸 &nbsp; COMPARTILHE SUA FOTO
-            </a>
+            </label>
 
             <p class="footer">
                 Com amor, Giulia & Nathan
@@ -272,15 +290,20 @@
 
     </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- SUPABASE -->
 
-<script>
-  const SUPABASE_URL = 'https://jhembtsinuyailrdxrfq.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_WIFsYfO0rCvzThuhzwhXXg_dMzYbdHm';
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  const supabase = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-</script></body>
+    <script>
+        const SUPABASE_URL = 'https://jhembtsinuyailrdxrfq.supabase.co';
+
+        const SUPABASE_KEY = 'sb_publishable_WIFsYfO0rCvzThuhzwhXXg_dMzYbdHm';
+
+        const supabase = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+    </script>
+
+</body>
 </html>
