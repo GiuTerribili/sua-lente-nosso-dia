@@ -1,422 +1,448 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Giulia & Nathan</title>
+```
+<title>Giulia & Nathan</title>
 
-    <!-- Fontes da identidade do casamento -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fontes da identidade do casamento -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <style>
+<style>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        body {
-            min-height: 100vh;
-            background: #fffaf6;
-            color: #514943;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-        }
+    body {
+        min-height: 100vh;
+        background: #fffaf6;
+        color: #514943;
+        font-family: 'Montserrat', sans-serif;
+        overflow-x: hidden;
+    }
+
+    .page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 50px 25px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .content {
+        width: 100%;
+        max-width: 900px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* TEXTO SUPERIOR */
+
+    .intro {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #77706a;
+        margin-bottom: 18px;
+        font-weight: 500;
+    }
+
+    /* NOMES */
+
+    h1 {
+        font-family: 'Great Vibes', cursive;
+        font-size: clamp(70px, 16vw, 115px);
+        font-weight: 400;
+        line-height: 0.95;
+        color: #A87932;
+        margin-bottom: 18px;
+    }
+
+    /* DATA */
+
+    .date {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px;
+        letter-spacing: 5px;
+        color: #655c55;
+        margin-bottom: 45px;
+        font-weight: 500;
+    }
+
+    /* MENSAGEM */
+
+    .message {
+        font-size: 15px;
+        line-height: 1.9;
+        color: #625a55;
+        max-width: 470px;
+        margin: 0 auto 38px;
+        font-weight: 400;
+    }
+
+    /* BOTÃO */
+
+    .button {
+        display: inline-block;
+        padding: 17px 32px;
+        border-radius: 50px;
+
+        background: #D9577A;
+        color: #ffffff;
+
+        text-decoration: none;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        letter-spacing: 1.6px;
+        font-weight: 600;
+
+        box-shadow: 0 8px 25px rgba(217, 87, 122, 0.20);
+
+        transition: all 0.3s ease;
+
+        cursor: pointer;
+    }
+
+    .button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(217, 87, 122, 0.30);
+    }
+
+    .button.disabled {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    /* STATUS DO UPLOAD */
+
+    #uploadStatus {
+        min-height: 24px;
+        margin-top: 18px;
+        font-size: 12px;
+        color: #77706a;
+    }
+
+    /* GALERIA */
+
+    .gallery-section {
+        width: 100%;
+        max-width: 900px;
+        margin: 90px auto 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .gallery-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 48px;
+        font-weight: 400;
+        color: #A87932;
+        margin-bottom: 10px;
+    }
+
+    .gallery-subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #9a918a;
+        margin-bottom: 30px;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        width: 100%;
+    }
+
+    .gallery-item {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+        background: #f3ebe5;
+    }
+
+    .empty-gallery {
+        grid-column: 1 / -1;
+        font-size: 13px;
+        color: #9a918a;
+        padding: 30px 15px;
+    }
+
+    .loading-gallery {
+        grid-column: 1 / -1;
+        font-size: 12px;
+        color: #9a918a;
+        padding: 20px;
+    }
+
+    /* FRASE FINAL */
+
+    .footer {
+        margin-top: 45px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #9a918a;
+    }
+
+    /* ELEMENTOS DECORATIVOS */
+
+    .decor {
+        position: absolute;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /*
+    Estes elementos são temporários.
+    Depois vamos substituir pelos hibiscos
+    reais em aquarela.
+    */
+
+    .pink-detail {
+        width: 180px;
+        height: 180px;
+        top: -70px;
+        left: -70px;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(217, 87, 122, 0.18) 0%,
+                rgba(217, 87, 122, 0.08) 45%,
+                transparent 70%
+            );
+
+        border-radius: 50%;
+    }
+
+    .orange-detail {
+        width: 220px;
+        height: 220px;
+        bottom: -100px;
+        right: -90px;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(235, 121, 72, 0.18) 0%,
+                rgba(235, 121, 72, 0.08) 45%,
+                transparent 70%
+            );
+
+        border-radius: 50%;
+    }
+
+    /* LINHAS DECORATIVAS */
+
+    .line {
+        width: 55px;
+        height: 1px;
+        background: #A87932;
+        opacity: 0.55;
+        margin: 0 auto 25px;
+    }
+
+    /* INPUT DE FOTO */
+
+    #photoInput {
+        display: none;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
 
         .page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 50px 25px;
-            position: relative;
-            overflow: hidden;
+            padding: 40px 22px;
         }
-
-        .content {
-            width: 100%;
-            max-width: 650px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* TEXTO SUPERIOR */
-
-        .intro {
-            font-size: 11px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #77706a;
-            margin-bottom: 18px;
-            font-weight: 500;
-        }
-
-        /* NOMES */
 
         h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(70px, 16vw, 115px);
-            font-weight: 400;
-            line-height: 0.95;
-            color: #A87932;
-            margin-bottom: 18px;
+            font-size: 76px;
         }
-
-        /* DATA */
 
         .date {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-            letter-spacing: 5px;
-            color: #655c55;
-            margin-bottom: 45px;
-            font-weight: 500;
+            font-size: 11px;
+            letter-spacing: 3px;
         }
-
-        /* MENSAGEM */
 
         .message {
-            font-size: 15px;
-            line-height: 1.9;
-            color: #625a55;
-            max-width: 470px;
-            margin: 0 auto 38px;
-            font-weight: 400;
+            font-size: 14px;
+            padding: 0 10px;
         }
-
-        /* BOTÃO */
 
         .button {
-            display: inline-block;
-            padding: 17px 32px;
-            border-radius: 50px;
-
-            background: #D9577A;
-            color: #ffffff;
-
-            text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 11px;
-            letter-spacing: 1.6px;
-            font-weight: 600;
-
-            box-shadow: 0 8px 25px rgba(217, 87, 122, 0.20);
-
-            transition: all 0.3s ease;
-
-            cursor: pointer;
+            width: 100%;
+            max-width: 310px;
+            padding: 18px 20px;
         }
-
-        .button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(217, 87, 122, 0.30);
-        }
-
-        .button.disabled {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        /* STATUS DO UPLOAD */
-
-        #uploadStatus {
-            min-height: 24px;
-            margin-top: 18px;
-            font-size: 12px;
-            color: #77706a;
-        }
-
-        /* GALERIA */
 
         .gallery-section {
-            width: 100%;
-            max-width: 900px;
-            margin: 90px auto 20px;
-            position: relative;
-            z-index: 2;
+            margin-top: 70px;
         }
 
         .gallery-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 48px;
-            font-weight: 400;
-            color: #A87932;
-            margin-bottom: 10px;
-        }
-
-        .gallery-subtitle {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #9a918a;
-            margin-bottom: 30px;
+            font-size: 42px;
         }
 
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            width: 100%;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
         }
-
-        .gallery-item {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: 12px;
-            display: block;
-            background: #f3ebe5;
-        }
-
-        .empty-gallery {
-            font-size: 13px;
-            color: #9a918a;
-            padding: 30px 15px;
-        }
-
-        .loading-gallery {
-            font-size: 12px;
-            color: #9a918a;
-            padding: 20px;
-        }
-
-        /* FRASE FINAL */
-
-        .footer {
-            margin-top: 45px;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #9a918a;
-        }
-
-        /* ELEMENTOS DECORATIVOS */
-
-        .decor {
-            position: absolute;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /*
-        Estes elementos são temporários.
-        Depois vamos substituir pelos hibiscos
-        reais em aquarela.
-        */
 
         .pink-detail {
-            width: 180px;
-            height: 180px;
-            top: -70px;
-            left: -70px;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(217, 87, 122, 0.18) 0%,
-                    rgba(217, 87, 122, 0.08) 45%,
-                    transparent 70%
-                );
-
-            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            top: -50px;
+            left: -50px;
         }
 
         .orange-detail {
-            width: 220px;
-            height: 220px;
-            bottom: -100px;
-            right: -90px;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(235, 121, 72, 0.18) 0%,
-                    rgba(235, 121, 72, 0.08) 45%,
-                    transparent 70%
-                );
-
-            border-radius: 50%;
+            width: 160px;
+            height: 160px;
+            bottom: -70px;
+            right: -60px;
         }
+    }
 
-        /* LINHAS DECORATIVAS */
+</style>
+```
 
-        .line {
-            width: 55px;
-            height: 1px;
-            background: #A87932;
-            opacity: 0.55;
-            margin: 0 auto 25px;
-        }
-
-        /* INPUT DE FOTO */
-
-        #photoInput {
-            display: none;
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 600px) {
-
-            .page {
-                padding: 40px 22px;
-            }
-
-            h1 {
-                font-size: 76px;
-            }
-
-            .date {
-                font-size: 11px;
-                letter-spacing: 3px;
-            }
-
-            .message {
-                font-size: 14px;
-                padding: 0 10px;
-            }
-
-            .button {
-                width: 100%;
-                max-width: 310px;
-                padding: 18px 20px;
-            }
-
-            .gallery-section {
-                margin-top: 70px;
-            }
-
-            .gallery-title {
-                font-size: 42px;
-            }
-
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-
-            .pink-detail {
-                width: 140px;
-                height: 140px;
-                top: -50px;
-                left: -50px;
-            }
-
-            .orange-detail {
-                width: 160px;
-                height: 160px;
-                bottom: -70px;
-                right: -60px;
-            }
-        }
-
-    </style>
 </head>
 
 <body>
 
-    <main class="page">
+```
+<main class="page">
 
-        <!-- Decoração temporária -->
-        <div class="decor pink-detail"></div>
-        <div class="decor orange-detail"></div>
+    <!-- Decoração temporária -->
+    <div class="decor pink-detail"></div>
+    <div class="decor orange-detail"></div>
 
-        <section class="content">
+    <section class="content">
 
-            <p class="intro">
-                Nosso casamento
+        <p class="intro">
+            Nosso casamento
+        </p>
+
+        <div class="line"></div>
+
+        <h1>
+            Giulia & Nathan
+        </h1>
+
+        <p class="date">
+            20 · 03 · 2027
+        </p>
+
+        <p class="message">
+            Queremos viver o nosso casamento através dos seus olhos.
+            <br>
+            Fotografe, compartilhe e faça parte das nossas memórias.
+        </p>
+
+        <!-- BOTÃO PARA TIRAR/ESCOLHER FOTO -->
+
+        <input
+            type="file"
+            id="photoInput"
+            accept="image/*"
+            hidden
+        >
+
+        <label for="photoInput" class="button" id="uploadButton">
+            📸 &nbsp; COMPARTILHE SUA FOTO
+        </label>
+
+        <div id="uploadStatus"></div>
+
+        <!-- GALERIA -->
+
+        <section class="gallery-section">
+
+            <h2 class="gallery-title">
+                Fotos do nosso dia
+            </h2>
+
+            <p class="gallery-subtitle">
+                Vistas através dos seus olhos
             </p>
 
-            <div class="line"></div>
-
-            <h1>
-                Giulia & Nathan
-            </h1>
-
-            <p class="date">
-                20 · 03 · 2027
-            </p>
-
-            <p class="message">
-                Queremos viver o nosso casamento através dos seus olhos.
-                <br>
-                Fotografe, compartilhe e faça parte das nossas memórias.
-            </p>
-
-            <!-- BOTÃO PARA TIRAR/ESCOLHER FOTO -->
-
-            <input
-                type="file"
-                id="photoInput"
-                accept="image/*"
-                hidden
-            >
-
-            <label for="photoInput" class="button" id="uploadButton">
-                📸 &nbsp; COMPARTILHE SUA FOTO
-            </label>
-
-            <div id="uploadStatus"></div>
-
-            <!-- GALERIA -->
-
-            <section class="gallery-section">
-
-                <h2 class="gallery-title">
-                    Fotos do nosso dia
-                </h2>
-
-                <p class="gallery-subtitle">
-                    Vistas através dos seus olhos
-                </p>
-
-                <div id="gallery" class="gallery">
-                    <div class="loading-gallery">
-                        Carregando nossas memórias...
-                    </div>
+            <div id="gallery" class="gallery">
+                <div class="loading-gallery">
+                    Carregando nossas memórias...
                 </div>
-
-            </section>
-
-            <p class="footer">
-                Com amor, Giulia & Nathan
-            </p>
+            </div>
 
         </section>
 
-    </main>
+        <p class="footer">
+            Com amor, Giulia & Nathan
+        </p>
 
-    <!-- SUPABASE -->
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</main>
 
-    <script>
+<!-- SUPABASE -->
 
-        const SUPABASE_URL = 'https://jhembtsinuyailrdxrfq.supabase.co';
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        const SUPABASE_KEY = 'sb_publishable_WIFsYfO0rCvzThuhzXXg_dMzYbdHm';
+<script>
 
-        const supabase = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
+    const SUPABASE_URL =
+        'https://jhembtsinuyailrdxrfq.supabase.co';
 
-        const photoInput = document.getElementById('photoInput');
-        const uploadButton = document.getElementById('uploadButton');
-        const uploadStatus = document.getElementById('uploadStatus');
-        const gallery = document.getElementById('gallery');
+    const SUPABASE_KEY =
+        'sb_publishable_WIFsYfO0rCvzThuhzXXg_dMzYbdHm';
 
-        /* ============================
-           ENVIAR FOTO
-        ============================ */
+    /*
+     * IMPORTANTE:
+     * Usamos "supabaseClient" em vez de "supabase"
+     * para evitar conflito com a biblioteca carregada
+     * pelo navegador.
+     */
 
-        photoInput.addEventListener('change', async function () {
+    const supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+    const photoInput =
+        document.getElementById('photoInput');
+
+    const uploadButton =
+        document.getElementById('uploadButton');
+
+    const uploadStatus =
+        document.getElementById('uploadStatus');
+
+    const gallery =
+        document.getElementById('gallery');
+
+
+    /* ============================
+       ENVIAR FOTO
+    ============================ */
+
+    photoInput.addEventListener(
+        'change',
+        async function () {
 
             const file = this.files[0];
 
@@ -424,26 +450,85 @@
                 return;
             }
 
+            /*
+             * Aceita somente imagens.
+             */
+
+            if (!file.type.startsWith('image/')) {
+
+                uploadStatus.textContent =
+                    'Por favor, escolha uma imagem.';
+
+                photoInput.value = '';
+
+                return;
+            }
+
+            /*
+             * Limite de 15 MB por foto.
+             */
+
+            const maxSize =
+                15 * 1024 * 1024;
+
+            if (file.size > maxSize) {
+
+                uploadStatus.textContent =
+                    'Essa foto é muito grande. Escolha uma foto de até 15 MB.';
+
+                photoInput.value = '';
+
+                return;
+            }
+
             uploadButton.classList.add('disabled');
-            uploadStatus.textContent = 'Enviando sua foto... 💕';
+
+            uploadStatus.textContent =
+                'Enviando sua foto... 💕';
 
             try {
 
-                const fileExtension = file.name.split('.').pop();
+                /*
+                 * Descobre a extensão original.
+                 */
+
+                const fileExtension =
+                    file.name
+                        .split('.')
+                        .pop()
+                        .toLowerCase();
+
+                /*
+                 * Cria um nome único.
+                 */
 
                 const fileName =
                     Date.now() +
                     '-' +
-                    Math.random().toString(36).substring(2) +
+                    Math.random()
+                        .toString(36)
+                        .substring(2, 10) +
                     '.' +
                     fileExtension;
 
-                const filePath = fileName;
+                /*
+                 * Faz o upload para:
+                 * fotos-casamento
+                 */
 
-                const { error } = await supabase
-                    .storage
-                    .from('fotos-casamento')
-                    .upload(filePath, file);
+                const { error } =
+                    await supabaseClient
+                        .storage
+                        .from('fotos-casamento')
+                        .upload(
+                            fileName,
+                            file,
+                            {
+                                cacheControl: '3600',
+                                upsert: false,
+                                contentType: file.type
+                            }
+                        );
 
                 if (error) {
                     throw error;
@@ -452,13 +537,30 @@
                 uploadStatus.textContent =
                     'Foto enviada! Obrigada por fazer parte das nossas memórias. 💕';
 
+                /*
+                 * Limpa o input.
+                 */
+
                 photoInput.value = '';
+
+                /*
+                 * Atualiza a galeria.
+                 */
 
                 await loadGallery();
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    'Erro ao enviar foto:',
+                    error
+                );
+
+                /*
+                 * Mostra uma mensagem mais útil
+                 * no console e uma mensagem amigável
+                 * para o convidado.
+                 */
 
                 uploadStatus.textContent =
                     'Não conseguimos enviar a foto. Tente novamente.';
@@ -469,40 +571,53 @@
 
             }
 
-        });
+        }
+    );
 
-        /* ============================
-           CARREGAR GALERIA
-        ============================ */
 
-        async function loadGallery() {
+    /* ============================
+       CARREGAR GALERIA
+    ============================ */
 
-            gallery.innerHTML =
-                '<div class="loading-gallery">Carregando nossas memórias...</div>';
+    async function loadGallery() {
 
-            const { data, error } = await supabase
-                .storage
-                .from('fotos-casamento')
-                .list('', {
-                    limit: 100,
-                    offset: 0,
-                    sortBy: {
-                        column: 'created_at',
-                        order: 'desc'
-                    }
-                });
+        gallery.innerHTML =
+            '<div class="loading-gallery">Carregando nossas memórias...</div>';
+
+        try {
+
+            const { data, error } =
+                await supabaseClient
+                    .storage
+                    .from('fotos-casamento')
+                    .list(
+                        '',
+                        {
+                            limit: 100,
+                            offset: 0,
+                            sortBy: {
+                                column: 'created_at',
+                                order: 'desc'
+                            }
+                        }
+                    );
 
             if (error) {
-
-                console.error(error);
-
-                gallery.innerHTML =
-                    '<div class="empty-gallery">Não foi possível carregar as fotos.</div>';
-
-                return;
+                throw error;
             }
 
-            if (!data || data.length === 0) {
+            /*
+             * Remove possíveis arquivos
+             * que não sejam imagens.
+             */
+
+            const imageFiles =
+                (data || []).filter(
+                    file =>
+                        !file.name.endsWith('/')
+                );
+
+            if (imageFiles.length === 0) {
 
                 gallery.innerHTML =
                     '<div class="empty-gallery">As primeiras fotos do nosso dia aparecerão aqui. 💕</div>';
@@ -512,33 +627,80 @@
 
             gallery.innerHTML = '';
 
-            data.forEach(file => {
+            imageFiles.forEach(file => {
 
-                const { data: publicUrlData } = supabase
-                    .storage
-                    .from('fotos-casamento')
-                    .getPublicUrl(file.name);
+                /*
+                 * Pega a URL pública da foto.
+                 */
 
-                const img = document.createElement('img');
+                const {
+                    data: publicUrlData
+                } =
+                    supabaseClient
+                        .storage
+                        .from('fotos-casamento')
+                        .getPublicUrl(
+                            file.name
+                        );
 
-                img.src = publicUrlData.publicUrl;
-                img.alt = 'Foto do casamento';
-                img.className = 'gallery-item';
-                img.loading = 'lazy';
+                const img =
+                    document.createElement('img');
+
+                img.src =
+                    publicUrlData.publicUrl;
+
+                img.alt =
+                    'Foto do casamento';
+
+                img.className =
+                    'gallery-item';
+
+                img.loading =
+                    'lazy';
+
+                /*
+                 * Se uma imagem específica
+                 * não carregar, não quebra a galeria.
+                 */
+
+                img.onerror = function () {
+
+                    console.error(
+                        'Não foi possível carregar:',
+                        file.name
+                    );
+
+                    this.style.display =
+                        'none';
+                };
 
                 gallery.appendChild(img);
 
             });
 
+        } catch (error) {
+
+            console.error(
+                'Erro ao carregar galeria:',
+                error
+            );
+
+            gallery.innerHTML =
+                '<div class="empty-gallery">Não foi possível carregar as fotos.</div>';
+
         }
 
-        /* ============================
-           INICIAR GALERIA
-        ============================ */
+    }
 
-        loadGallery();
 
-    </script>
+    /* ============================
+       INICIAR GALERIA
+    ============================ */
+
+    loadGallery();
+
+</script>
+```
 
 </body>
 </html>
