@@ -118,6 +118,74 @@
             box-shadow: 0 12px 30px rgba(217, 87, 122, 0.30);
         }
 
+        .button.disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* STATUS DO UPLOAD */
+
+        #uploadStatus {
+            min-height: 24px;
+            margin-top: 18px;
+            font-size: 12px;
+            color: #77706a;
+        }
+
+        /* GALERIA */
+
+        .gallery-section {
+            width: 100%;
+            max-width: 900px;
+            margin: 90px auto 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            font-weight: 400;
+            color: #A87932;
+            margin-bottom: 10px;
+        }
+
+        .gallery-subtitle {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #9a918a;
+            margin-bottom: 30px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+        }
+
+        .gallery-item {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+            background: #f3ebe5;
+        }
+
+        .empty-gallery {
+            font-size: 13px;
+            color: #9a918a;
+            padding: 30px 15px;
+        }
+
+        .loading-gallery {
+            font-size: 12px;
+            color: #9a918a;
+            padding: 20px;
+        }
+
         /* FRASE FINAL */
 
         .footer {
@@ -220,6 +288,19 @@
                 padding: 18px 20px;
             }
 
+            .gallery-section {
+                margin-top: 70px;
+            }
+
+            .gallery-title {
+                font-size: 42px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
             .pink-detail {
                 width: 140px;
                 height: 140px;
@@ -277,9 +358,31 @@
                 hidden
             >
 
-            <label for="photoInput" class="button">
+            <label for="photoInput" class="button" id="uploadButton">
                 📸 &nbsp; COMPARTILHE SUA FOTO
             </label>
+
+            <div id="uploadStatus"></div>
+
+            <!-- GALERIA -->
+
+            <section class="gallery-section">
+
+                <h2 class="gallery-title">
+                    Fotos do nosso dia
+                </h2>
+
+                <p class="gallery-subtitle">
+                    Vistas através dos seus olhos
+                </p>
+
+                <div id="gallery" class="gallery">
+                    <div class="loading-gallery">
+                        Carregando nossas memórias...
+                    </div>
+                </div>
+
+            </section>
 
             <p class="footer">
                 Com amor, Giulia & Nathan
@@ -294,14 +397,147 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
+
         const SUPABASE_URL = 'https://jhembtsinuyailrdxrfq.supabase.co';
 
-        const SUPABASE_KEY = 'sb_publishable_WIFsYfO0rCvzThuhzwhXXg_dMzYbdHm';
+        const SUPABASE_KEY = 'sb_publishable_WIFsYfO0rCvzThuhzXXg_dMzYbdHm';
 
         const supabase = window.supabase.createClient(
             SUPABASE_URL,
             SUPABASE_KEY
         );
+
+        const photoInput = document.getElementById('photoInput');
+        const uploadButton = document.getElementById('uploadButton');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const gallery = document.getElementById('gallery');
+
+        /* ============================
+           ENVIAR FOTO
+        ============================ */
+
+        photoInput.addEventListener('change', async function () {
+
+            const file = this.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            uploadButton.classList.add('disabled');
+            uploadStatus.textContent = 'Enviando sua foto... 💕';
+
+            try {
+
+                const fileExtension = file.name.split('.').pop();
+
+                const fileName =
+                    Date.now() +
+                    '-' +
+                    Math.random().toString(36).substring(2) +
+                    '.' +
+                    fileExtension;
+
+                const filePath = fileName;
+
+                const { error } = await supabase
+                    .storage
+                    .from('fotos-casamento')
+                    .upload(filePath, file);
+
+                if (error) {
+                    throw error;
+                }
+
+                uploadStatus.textContent =
+                    'Foto enviada! Obrigada por fazer parte das nossas memórias. 💕';
+
+                photoInput.value = '';
+
+                await loadGallery();
+
+            } catch (error) {
+
+                console.error(error);
+
+                uploadStatus.textContent =
+                    'Não conseguimos enviar a foto. Tente novamente.';
+
+            } finally {
+
+                uploadButton.classList.remove('disabled');
+
+            }
+
+        });
+
+        /* ============================
+           CARREGAR GALERIA
+        ============================ */
+
+        async function loadGallery() {
+
+            gallery.innerHTML =
+                '<div class="loading-gallery">Carregando nossas memórias...</div>';
+
+            const { data, error } = await supabase
+                .storage
+                .from('fotos-casamento')
+                .list('', {
+                    limit: 100,
+                    offset: 0,
+                    sortBy: {
+                        column: 'created_at',
+                        order: 'desc'
+                    }
+                });
+
+            if (error) {
+
+                console.error(error);
+
+                gallery.innerHTML =
+                    '<div class="empty-gallery">Não foi possível carregar as fotos.</div>';
+
+                return;
+            }
+
+            if (!data || data.length === 0) {
+
+                gallery.innerHTML =
+                    '<div class="empty-gallery">As primeiras fotos do nosso dia aparecerão aqui. 💕</div>';
+
+                return;
+            }
+
+            gallery.innerHTML = '';
+
+            data.forEach(file => {
+
+                const { data: publicUrlData } = supabase
+                    .storage
+                    .from('fotos-casamento')
+                    .getPublicUrl(file.name);
+
+                const img = document.createElement('img');
+
+                img.src = publicUrlData.publicUrl;
+                img.alt = 'Foto do casamento';
+                img.className = 'gallery-item';
+                img.loading = 'lazy';
+
+                gallery.appendChild(img);
+
+            });
+
+        }
+
+        /* ============================
+           INICIAR GALERIA
+        ============================ */
+
+        loadGallery();
+
     </script>
 
 </body>
