@@ -24,33 +24,32 @@
 
     html {
         min-height: 100%;
-        background: #d6cec2;
+        background: #FAF9F6;
     }
 
     body {
         min-height: 100vh;
 
-        /* LINHO NATURAL — BEGE FRIO */
-        background-color: #d6cec2;
+        /* PAPEL PREMIUM — OFF WHITE */
+        background-color: #FAF9F6;
 
         background-image:
-            repeating-linear-gradient(
-                0deg,
-                rgba(255,255,255,.12) 0px,
-                rgba(255,255,255,.12) 1px,
-                rgba(90,80,65,.035) 1px,
-                rgba(90,80,65,.035) 3px
+            radial-gradient(
+                rgba(120,110,100,.035) 0.6px,
+                transparent 0.7px
             ),
-            repeating-linear-gradient(
-                90deg,
-                rgba(255,255,255,.10) 0px,
-                rgba(255,255,255,.10) 1px,
-                rgba(90,80,65,.03) 1px,
-                rgba(90,80,65,.03) 3px
+            radial-gradient(
+                rgba(255,255,255,.55) 0.7px,
+                transparent 0.8px
             );
 
-        background-repeat: repeat, repeat;
-        background-size: auto, auto;
+        background-size:
+            5px 5px,
+            7px 7px;
+
+        background-position:
+            0 0,
+            2px 3px;
 
         color: #514943;
         font-family: 'Montserrat', sans-serif;
@@ -469,7 +468,7 @@
     @media (max-width: 600px) {
 
         body {
-            background-size: auto, auto;
+            background-size: 5px 5px, 7px 7px;
             background-attachment: fixed;
         }
 
@@ -617,11 +616,9 @@
     <section class="gallery-section">
 
         <h2 class="gallery-title">
-            Fotos do nosso dia
+            Nossa galeria
         </h2>
 
-        <p class="gallery-subtitle">
-            através dos seus olhos
         </p>
 
         <div
@@ -1004,153 +1001,3 @@
 
                 renderPreview();
 
-
-                await loadGallery();
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    'ERRO NO UPLOAD:',
-                    error
-                );
-
-
-                uploadStatus.textContent =
-                    'Não conseguimos enviar todas as fotos. Tente novamente.';
-
-            }
-
-            finally {
-
-                uploadButton.classList.remove(
-                    'disabled'
-                );
-
-            }
-
-        }
-    );
-
-
-    async function loadGallery() {
-
-        gallery.innerHTML =
-            '<div class="loading-gallery">Carregando nossas memórias...</div>';
-
-
-        try {
-
-            const result =
-                await supabaseClient
-                    .storage
-                    .from('fotos-casamento')
-                    .list(
-                        '',
-                        {
-                            limit: 100,
-                            offset: 0,
-                            sortBy: {
-                                column: 'created_at',
-                                order: 'desc'
-                            }
-                        }
-                    );
-
-
-            if (result.error) {
-                throw result.error;
-            }
-
-
-            const files =
-                (result.data || [])
-                    .filter(
-                        file =>
-                            file.name &&
-                            !file.name.endsWith('/')
-                    );
-
-
-            if (!files.length) {
-
-                gallery.innerHTML =
-                    '<div class="empty-gallery">' +
-                    'As primeiras fotos do nosso dia aparecerão aqui. 💕' +
-                    '</div>';
-
-                return;
-            }
-
-
-            gallery.innerHTML = '';
-
-
-            files.forEach(
-                file => {
-
-                    const publicUrl =
-                        supabaseClient
-                            .storage
-                            .from('fotos-casamento')
-                            .getPublicUrl(
-                                file.name
-                            )
-                            .data
-                            .publicUrl;
-
-
-                    const image =
-                        document.createElement('img');
-
-
-                    image.src =
-                        publicUrl;
-
-
-                    image.alt =
-                        'Foto do casamento';
-
-
-                    image.className =
-                        'gallery-item';
-
-
-                    image.loading =
-                        'lazy';
-
-
-                    gallery.appendChild(
-                        image
-                    );
-
-                }
-            );
-
-        }
-
-        catch (error) {
-
-            console.error(
-                'ERRO AO CARREGAR GALERIA:',
-                error
-            );
-
-
-            gallery.innerHTML =
-                '<div class="empty-gallery">' +
-                'Não foi possível carregar as fotos.' +
-                '</div>';
-
-        }
-
-    }
-
-
-    loadGallery();
-
-</script>
-
-</body>
-</html>
