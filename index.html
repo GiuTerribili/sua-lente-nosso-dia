@@ -31,11 +31,11 @@
         background:
             linear-gradient(
                 to bottom,
-                #f5a0bd 0%,
-                #f6b09d 25%,
-                #f6c66e 52%,
-                #f39a4a 78%,
-                #ed713d 100%
+                #fde8ef 0%,
+                #fcebe5 28%,
+                #fff4d9 52%,
+                #fcebdc 76%,
+                #fbe4d8 100%
             );
 
         background-attachment: fixed;
@@ -659,4 +659,486 @@
             >
                 VOLTAR
             </button>
+
+            <button
+                type="button"
+                class="confirm-button"
+                id="finalConfirm"
+            >
+                SIM, ENVIAR
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+    const SUPABASE_URL =
+        'https://jhembtsinuyailrdxrfq.supabase.co';
+
+    const SUPABASE_KEY =
+        'sb_publishable_WIFsYfO0rCvzThuhzwhXXg_dMzYbdHm';
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    const photoInput =
+        document.getElementById('photoInput');
+
+    const uploadButton =
+        document.getElementById('uploadButton');
+
+    const uploadStatus =
+        document.getElementById('uploadStatus');
+
+    const previewSection =
+        document.getElementById('previewSection');
+
+    const previewGrid =
+        document.getElementById('previewGrid');
+
+    const clearSelection =
+        document.getElementById('clearSelection');
+
+    const confirmSelection =
+        document.getElementById('confirmSelection');
+
+    const confirmModal =
+        document.getElementById('confirmModal');
+
+    const cancelConfirm =
+        document.getElementById('cancelConfirm');
+
+    const finalConfirm =
+        document.getElementById('finalConfirm');
+
+    const gallery =
+        document.getElementById('gallery');
+
+
+    let selectedFiles = [];
+
+
+    photoInput.addEventListener(
+        'change',
+        function () {
+
+            const newFiles =
+                Array.from(this.files || []);
+
+            if (!newFiles.length) {
+                return;
+            }
+
+
+            newFiles.forEach(file => {
+
+                if (!file.type.startsWith('image/')) {
+                    return;
+                }
+
+
+                const maxSize =
+                    15 * 1024 * 1024;
+
+
+                if (file.size > maxSize) {
+                    return;
+                }
+
+
+                const alreadySelected =
+                    selectedFiles.some(
+                        existing =>
+                            existing.name === file.name &&
+                            existing.size === file.size &&
+                            existing.lastModified === file.lastModified
+                    );
+
+
+                if (!alreadySelected) {
+                    selectedFiles.push(file);
+                }
+
+            });
+
+
+            photoInput.value = '';
+
+            renderPreview();
+
+        }
+    );
+
+
+    function renderPreview() {
+
+        previewGrid.innerHTML = '';
+
+
+        if (!selectedFiles.length) {
+
+            previewSection.classList.remove(
+                'visible'
+            );
+
+            return;
+        }
+
+
+        previewSection.classList.add(
+            'visible'
+        );
+
+
+        selectedFiles.forEach(
+            (file, index) => {
+
+                const item =
+                    document.createElement('div');
+
+                item.className =
+                    'preview-item';
+
+
+                const image =
+                    document.createElement('img');
+
+                image.src =
+                    URL.createObjectURL(file);
+
+
+                const removeButton =
+                    document.createElement('button');
+
+                removeButton.type =
+                    'button';
+
+                removeButton.className =
+                    'remove-preview';
+
+                removeButton.textContent =
+                    '×';
+
+                removeButton.title =
+                    'Remover esta foto';
+
+
+                removeButton.addEventListener(
+                    'click',
+                    function () {
+
+                        selectedFiles.splice(
+                            index,
+                            1
+                        );
+
+                        renderPreview();
+
+                    }
+                );
+
+
+                item.appendChild(image);
+
+                item.appendChild(
+                    removeButton
+                );
+
+                previewGrid.appendChild(item);
+
+            }
+        );
+
+    }
+
+
+    clearSelection.addEventListener(
+        'click',
+        function () {
+
+            selectedFiles = [];
+
+            photoInput.value = '';
+
+            renderPreview();
+
+            uploadStatus.textContent = '';
+
+        }
+    );
+
+
+    confirmSelection.addEventListener(
+        'click',
+        function () {
+
+            if (!selectedFiles.length) {
+                return;
+            }
+
+
+            confirmModal.classList.add(
+                'visible'
+            );
+
+        }
+    );
+
+
+    cancelConfirm.addEventListener(
+        'click',
+        function () {
+
+            confirmModal.classList.remove(
+                'visible'
+            );
+
+        }
+    );
+
+
+    finalConfirm.addEventListener(
+        'click',
+        async function () {
+
+            confirmModal.classList.remove(
+                'visible'
+            );
+
+
+            uploadButton.classList.add(
+                'disabled'
+            );
+
+
+            uploadStatus.textContent =
+                'Enviando suas fotos... 💕';
+
+
+            try {
+
+                let uploaded = 0;
+
+
+                for (
+                    const file of selectedFiles
+                ) {
+
+                    const extension =
+                        file.name
+                            .split('.')
+                            .pop()
+                            .toLowerCase();
+
+
+                    const fileName =
+                        Date.now() +
+                        '-' +
+                        Math.random()
+                            .toString(36)
+                            .substring(2, 10) +
+                        '.' +
+                        extension;
+
+
+                    const result =
+                        await supabaseClient
+                            .storage
+                            .from('fotos-casamento')
+                            .upload(
+                                fileName,
+                                file,
+                                {
+                                    cacheControl: '3600',
+                                    upsert: false,
+                                    contentType: file.type
+                                }
+                            );
+
+
+                    if (result.error) {
+                        throw result.error;
+                    }
+
+
+                    uploaded++;
+
+
+                    uploadStatus.textContent =
+                        `Enviando ${uploaded} de ${selectedFiles.length} fotos... 💕`;
+
+                }
+
+
+                uploadStatus.textContent =
+                    `${uploaded} ${uploaded === 1 ? 'foto enviada' : 'fotos enviadas'}! Obrigada por fazer parte das nossas memórias. 💕`;
+
+
+                selectedFiles = [];
+
+                photoInput.value = '';
+
+                renderPreview();
+
+
+                await loadGallery();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    'ERRO NO UPLOAD:',
+                    error
+                );
+
+
+                uploadStatus.textContent =
+                    'Não conseguimos enviar todas as fotos. Tente novamente.';
+
+            }
+
+            finally {
+
+                uploadButton.classList.remove(
+                    'disabled'
+                );
+
+            }
+
+        }
+    );
+
+
+    async function loadGallery() {
+
+        gallery.innerHTML =
+            '<div class="loading-gallery">Carregando nossas memórias...</div>';
+
+
+        try {
+
+            const result =
+                await supabaseClient
+                    .storage
+                    .from('fotos-casamento')
+                    .list(
+                        '',
+                        {
+                            limit: 100,
+                            offset: 0,
+                            sortBy: {
+                                column: 'created_at',
+                                order: 'desc'
+                            }
+                        }
+                    );
+
+
+            if (result.error) {
+                throw result.error;
+            }
+
+
+            const files =
+                (result.data || [])
+                    .filter(
+                        file =>
+                            file.name &&
+                            !file.name.endsWith('/')
+                    );
+
+
+            if (!files.length) {
+
+                gallery.innerHTML =
+                    '<div class="empty-gallery">' +
+                    'As primeiras fotos do nosso dia aparecerão aqui. 💕' +
+                    '</div>';
+
+                return;
+            }
+
+
+            gallery.innerHTML = '';
+
+
+            files.forEach(
+                file => {
+
+                    const publicUrl =
+                        supabaseClient
+                            .storage
+                            .from('fotos-casamento')
+                            .getPublicUrl(
+                                file.name
+                            )
+                            .data
+                            .publicUrl;
+
+
+                    const image =
+                        document.createElement('img');
+
+
+                    image.src =
+                        publicUrl;
+
+
+                    image.alt =
+                        'Foto do casamento';
+
+
+                    image.className =
+                        'gallery-item';
+
+
+                    image.loading =
+                        'lazy';
+
+
+                    gallery.appendChild(
+                        image
+                    );
+
+                }
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                'ERRO AO CARREGAR GALERIA:',
+                error
+            );
+
+
+            gallery.innerHTML =
+                '<div class="empty-gallery">' +
+                'Não foi possível carregar as fotos.' +
+                '</div>';
+
+        }
+
+    }
+
+
+    loadGallery();
+
+</script>
+
+</body>
+</html>
 ```
