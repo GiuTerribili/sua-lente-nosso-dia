@@ -1,15 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Giulia & Nathan</title>
+```
+<title>Giulia & Nathan</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+```
 
 <style>
 
@@ -21,41 +24,33 @@
 
     html {
         min-height: 100%;
-        background: #fffaf6;
+        background: #d6cec2;
     }
 
     body {
         min-height: 100vh;
 
-        background-color: #fff0df;
+        /* LINHO NATURAL — BEGE FRIO */
+        background-color: #d6cec2;
 
         background-image:
             repeating-linear-gradient(
                 0deg,
                 rgba(255,255,255,.12) 0px,
                 rgba(255,255,255,.12) 1px,
-                rgba(180,130,100,.025) 1px,
-                rgba(180,130,100,.025) 3px
+                rgba(90,80,65,.035) 1px,
+                rgba(90,80,65,.035) 3px
             ),
             repeating-linear-gradient(
                 90deg,
                 rgba(255,255,255,.10) 0px,
                 rgba(255,255,255,.10) 1px,
-                rgba(180,130,100,.025) 1px,
-                rgba(180,130,100,.025) 3px
-            ),
-            linear-gradient(
-                to bottom,
-                #fde8ef 0%,
-                #fcebe5 28%,
-                #fff4d9 52%,
-                #fcebdc 76%,
-                #fbe4d8 100%
+                rgba(90,80,65,.03) 1px,
+                rgba(90,80,65,.03) 3px
             );
 
-        background-attachment: fixed;
-        background-repeat: repeat, repeat, no-repeat;
-        background-size: auto, auto, cover;
+        background-repeat: repeat, repeat;
+        background-size: auto, auto;
 
         color: #514943;
         font-family: 'Montserrat', sans-serif;
@@ -474,7 +469,7 @@
     @media (max-width: 600px) {
 
         body {
-            background-size: auto, auto, cover;
+            background-size: auto, auto;
             background-attachment: fixed;
         }
 
@@ -525,168 +520,173 @@
     }
 
 </style>
+
 </head>
 
 <body>
 
 <main class="page">
 
-    <section class="content">
+```
+<section class="content">
 
-        <p class="intro">
-            Nosso casamento
+    <p class="intro">
+        Nosso casamento
+    </p>
+
+    <div class="line"></div>
+
+    <h1>
+        Giulia & Nathan
+    </h1>
+
+    <p class="date">
+        20 · 03 · 2027
+    </p>
+
+    <p class="message">
+        Queremos reviver o nosso casamento através dos seus olhos.
+        <br>
+        Fotografe, compartilhe e faça parte das nossas memórias.
+    </p>
+
+    <input
+        type="file"
+        id="photoInput"
+        accept="image/*"
+        multiple
+    >
+
+    <label
+        for="photoInput"
+        class="button"
+        id="uploadButton"
+    >
+        📸 &nbsp; COMPARTILHE SUAS FOTOS
+    </label>
+
+    <div id="uploadStatus"></div>
+
+    <section
+        id="previewSection"
+        class="preview-section"
+    >
+
+        <h2 class="preview-title">
+            Antes de enviar...
+        </h2>
+
+        <p class="preview-subtitle">
+            Confira as fotos que você escolheu
         </p>
 
-        <div class="line"></div>
+        <div
+            id="previewGrid"
+            class="preview-grid"
+        ></div>
 
-        <h1>
-            Giulia & Nathan
-        </h1>
+        <div class="preview-actions">
 
-        <p class="date">
-            20 · 03 · 2027
-        </p>
-
-        <p class="message">
-            Queremos reviver o nosso casamento através dos seus olhos.
-            <br>
-            Fotografe, compartilhe e faça parte das nossas memórias.
-        </p>
-
-        <input
-            type="file"
-            id="photoInput"
-            accept="image/*"
-            multiple
-        >
-
-        <label
-            for="photoInput"
-            class="button"
-            id="uploadButton"
-        >
-            📸 &nbsp; COMPARTILHE SUAS FOTOS
-        </label>
-
-        <div id="uploadStatus"></div>
-
-        <section
-            id="previewSection"
-            class="preview-section"
-        >
-
-            <h2 class="preview-title">
-                Antes de enviar...
-            </h2>
-
-            <p class="preview-subtitle">
-                Confira as fotos que você escolheu
-            </p>
-
-            <div
-                id="previewGrid"
-                class="preview-grid"
-            ></div>
-
-            <div class="preview-actions">
-
-                <label
-                    for="photoInput"
-                    class="secondary-button"
-                >
-                    + ADICIONAR MAIS
-                </label>
-
-                <button
-                    type="button"
-                    class="secondary-button"
-                    id="clearSelection"
-                >
-                    LIMPAR
-                </button>
-
-                <button
-                    type="button"
-                    class="confirm-button"
-                    id="confirmSelection"
-                >
-                    ENVIAR FOTOS
-                </button>
-
-            </div>
-
-        </section>
-
-        <section class="gallery-section">
-
-            <h2 class="gallery-title">
-                Nossa galeria
-            </h2>
-
-            </p>
-
-            <div
-                id="gallery"
-                class="gallery"
+            <label
+                for="photoInput"
+                class="secondary-button"
             >
-                <div class="loading-gallery">
-                    Carregando nossas memórias...
-                </div>
-            </div>
+                + ADICIONAR MAIS
+            </label>
 
-        </section>
+            <button
+                type="button"
+                class="secondary-button"
+                id="clearSelection"
+            >
+                LIMPAR
+            </button>
 
-        <p class="footer">
-            Com amor, Giulia & Nathan
-        </p>
+            <button
+                type="button"
+                class="confirm-button"
+                id="confirmSelection"
+            >
+                ENVIAR FOTOS
+            </button>
+
+        </div>
 
     </section>
 
-</main>
+    <section class="gallery-section">
 
+        <h2 class="gallery-title">
+            Fotos do nosso dia
+        </h2>
+
+        <p class="gallery-subtitle">
+            através dos seus olhos
+        </p>
+
+        <div
+            id="gallery"
+            class="gallery"
+        >
+            <div class="loading-gallery">
+                Carregando nossas memórias...
+            </div>
+        </div>
+
+    </section>
+
+    <p class="footer">
+        Com amor, Giulia & Nathan
+    </p>
+
+</section>
+```
+
+</main>
 
 <div
     id="confirmModal"
     class="modal"
 >
 
-    <div class="modal-box">
+```
+<div class="modal-box">
 
-        <h2 class="modal-title">
-            Atenção!
-        </h2>
+    <h2 class="modal-title">
+        Atenção!
+    </h2>
 
-        <p class="modal-text">
-            Depois de enviar, elas ficarão disponíveis
-            na galeria do site e não poderão ser apagadas.
-            <br><br>
-            DDeseja contnuar?
-        </p>
+    <p class="modal-text">
+        Depois de enviar, elas ficarão disponíveis
+        na galeria do site e não poderão ser apagadas.
+        <br><br>
+        Deseja continuar?
+    </p>
 
-        <div class="modal-actions">
+    <div class="modal-actions">
 
-            <button
-                type="button"
-                class="secondary-button"
-                id="cancelConfirm"
-            >
-                VOLTAR
-            </button>
+        <button
+            type="button"
+            class="secondary-button"
+            id="cancelConfirm"
+        >
+            VOLTAR
+        </button>
 
-            <button
-                type="button"
-                class="confirm-button"
-                id="finalConfirm"
-            >
-                SIM, ENVIAR
-            </button>
-
-        </div>
+        <button
+            type="button"
+            class="confirm-button"
+            id="finalConfirm"
+        >
+            SIM, ENVIAR
+        </button>
 
     </div>
 
 </div>
+```
 
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -821,5 +821,336 @@
                     document.createElement('div');
 
                 item.className =
-                    '
-```
+                    'preview-item';
+
+
+                const image =
+                    document.createElement('img');
+
+                image.src =
+                    URL.createObjectURL(file);
+
+
+                const removeButton =
+                    document.createElement('button');
+
+                removeButton.type =
+                    'button';
+
+                removeButton.className =
+                    'remove-preview';
+
+                removeButton.textContent =
+                    '×';
+
+                removeButton.title =
+                    'Remover esta foto';
+
+
+                removeButton.addEventListener(
+                    'click',
+                    function () {
+
+                        selectedFiles.splice(
+                            index,
+                            1
+                        );
+
+                        renderPreview();
+
+                    }
+                );
+
+
+                item.appendChild(image);
+
+                item.appendChild(
+                    removeButton
+                );
+
+                previewGrid.appendChild(item);
+
+            }
+        );
+
+    }
+
+
+    clearSelection.addEventListener(
+        'click',
+        function () {
+
+            selectedFiles = [];
+
+            photoInput.value = '';
+
+            renderPreview();
+
+            uploadStatus.textContent = '';
+
+        }
+    );
+
+
+    confirmSelection.addEventListener(
+        'click',
+        function () {
+
+            if (!selectedFiles.length) {
+                return;
+            }
+
+
+            confirmModal.classList.add(
+                'visible'
+            );
+
+        }
+    );
+
+
+    cancelConfirm.addEventListener(
+        'click',
+        function () {
+
+            confirmModal.classList.remove(
+                'visible'
+            );
+
+        }
+    );
+
+
+    finalConfirm.addEventListener(
+        'click',
+        async function () {
+
+            confirmModal.classList.remove(
+                'visible'
+            );
+
+
+            uploadButton.classList.add(
+                'disabled'
+            );
+
+
+            uploadStatus.textContent =
+                'Enviando suas fotos... 💕';
+
+
+            try {
+
+                let uploaded = 0;
+
+
+                for (
+                    const file of selectedFiles
+                ) {
+
+                    const extension =
+                        file.name
+                            .split('.')
+                            .pop()
+                            .toLowerCase();
+
+
+                    const fileName =
+                        Date.now() +
+                        '-' +
+                        Math.random()
+                            .toString(36)
+                            .substring(2, 10) +
+                        '.' +
+                        extension;
+
+
+                    const result =
+                        await supabaseClient
+                            .storage
+                            .from('fotos-casamento')
+                            .upload(
+                                fileName,
+                                file,
+                                {
+                                    cacheControl: '3600',
+                                    upsert: false,
+                                    contentType: file.type
+                                }
+                            );
+
+
+                    if (result.error) {
+                        throw result.error;
+                    }
+
+
+                    uploaded++;
+
+
+                    uploadStatus.textContent =
+                        `Enviando ${uploaded} de ${selectedFiles.length} fotos... 💕`;
+
+                }
+
+
+                uploadStatus.textContent =
+                    `${uploaded} ${uploaded === 1 ? 'foto enviada' : 'fotos enviadas'}! Obrigada por fazer parte das nossas memórias. 💕`;
+
+
+                selectedFiles = [];
+
+                photoInput.value = '';
+
+                renderPreview();
+
+
+                await loadGallery();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    'ERRO NO UPLOAD:',
+                    error
+                );
+
+
+                uploadStatus.textContent =
+                    'Não conseguimos enviar todas as fotos. Tente novamente.';
+
+            }
+
+            finally {
+
+                uploadButton.classList.remove(
+                    'disabled'
+                );
+
+            }
+
+        }
+    );
+
+
+    async function loadGallery() {
+
+        gallery.innerHTML =
+            '<div class="loading-gallery">Carregando nossas memórias...</div>';
+
+
+        try {
+
+            const result =
+                await supabaseClient
+                    .storage
+                    .from('fotos-casamento')
+                    .list(
+                        '',
+                        {
+                            limit: 100,
+                            offset: 0,
+                            sortBy: {
+                                column: 'created_at',
+                                order: 'desc'
+                            }
+                        }
+                    );
+
+
+            if (result.error) {
+                throw result.error;
+            }
+
+
+            const files =
+                (result.data || [])
+                    .filter(
+                        file =>
+                            file.name &&
+                            !file.name.endsWith('/')
+                    );
+
+
+            if (!files.length) {
+
+                gallery.innerHTML =
+                    '<div class="empty-gallery">' +
+                    'As primeiras fotos do nosso dia aparecerão aqui. 💕' +
+                    '</div>';
+
+                return;
+            }
+
+
+            gallery.innerHTML = '';
+
+
+            files.forEach(
+                file => {
+
+                    const publicUrl =
+                        supabaseClient
+                            .storage
+                            .from('fotos-casamento')
+                            .getPublicUrl(
+                                file.name
+                            )
+                            .data
+                            .publicUrl;
+
+
+                    const image =
+                        document.createElement('img');
+
+
+                    image.src =
+                        publicUrl;
+
+
+                    image.alt =
+                        'Foto do casamento';
+
+
+                    image.className =
+                        'gallery-item';
+
+
+                    image.loading =
+                        'lazy';
+
+
+                    gallery.appendChild(
+                        image
+                    );
+
+                }
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                'ERRO AO CARREGAR GALERIA:',
+                error
+            );
+
+
+            gallery.innerHTML =
+                '<div class="empty-gallery">' +
+                'Não foi possível carregar as fotos.' +
+                '</div>';
+
+        }
+
+    }
+
+
+    loadGallery();
+
+</script>
+
+</body>
+</html>
