@@ -1,6 +1,7 @@
 ```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,743 +11,1032 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        html {
-            min-height: 100%;
-            background: #fffaf6;
-        }
+    html {
+        min-height: 100%;
+        background: #fffaf6;
+    }
+
+    body {
+        min-height: 100vh;
+        background-color: #fffaf6;
+
+        /* PNG DO FUNDO */
+        background-image: url("Pretty%20trail%20of%20hibiscus%20flowers%21%21.png");
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: 100% auto;
+        background-attachment: fixed;
+
+        color: #514943;
+        font-family: 'Montserrat', sans-serif;
+        overflow-x: hidden;
+    }
+
+    .page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 50px 25px;
+        position: relative;
+    }
+
+    .content {
+        width: 100%;
+        max-width: 900px;
+        position: relative;
+        z-index: 5;
+    }
+
+    .intro {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #77706a;
+        margin-bottom: 18px;
+        font-weight: 500;
+    }
+
+    h1 {
+        font-family: 'Great Vibes', cursive;
+        font-size: clamp(70px, 16vw, 115px);
+        font-weight: 400;
+        line-height: 0.95;
+        color: #A87932;
+        margin-bottom: 18px;
+    }
+
+    .date {
+        font-size: 13px;
+        letter-spacing: 5px;
+        color: #655c55;
+        margin-bottom: 45px;
+        font-weight: 500;
+    }
+
+    .message {
+        font-size: 15px;
+        line-height: 1.9;
+        color: #625a55;
+        max-width: 470px;
+        margin: 0 auto 38px;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 17px 32px;
+        border-radius: 50px;
+        background: #D9577A;
+        color: #ffffff;
+        text-decoration: none;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        letter-spacing: 1.6px;
+        font-weight: 600;
+        box-shadow: 0 8px 25px rgba(217, 87, 122, 0.20);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(217, 87, 122, 0.30);
+    }
+
+    .button.disabled {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    #photoInput {
+        display: none;
+    }
+
+    #uploadStatus {
+        min-height: 24px;
+        margin-top: 18px;
+        font-size: 12px;
+        color: #77706a;
+    }
+
+
+    /* =========================================
+       PRÉVIA
+    ========================================= */
+
+    .preview-section {
+        display: none;
+        width: 100%;
+        max-width: 760px;
+        margin: 40px auto 0;
+    }
+
+    .preview-section.visible {
+        display: block;
+    }
+
+    .preview-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 38px;
+        color: #A87932;
+        margin-bottom: 8px;
+    }
+
+    .preview-subtitle {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #9a918a;
+        margin-bottom: 25px;
+    }
+
+    .preview-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .preview-item {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 12px;
+        background: #f3ebe5;
+    }
+
+    .preview-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .remove-preview {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 28px;
+        height: 28px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(60, 45, 40, 0.78);
+        color: white;
+        font-size: 17px;
+        cursor: pointer;
+        line-height: 28px;
+    }
+
+    .preview-actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 25px;
+        flex-wrap: wrap;
+    }
+
+    .secondary-button,
+    .confirm-button {
+        border: none;
+        border-radius: 50px;
+        padding: 15px 25px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .secondary-button {
+        background: #eee5df;
+        color: #655c55;
+    }
+
+    .confirm-button {
+        background: #D9577A;
+        color: white;
+    }
+
+
+    /* =========================================
+       MODAL
+    ========================================= */
+
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(45, 35, 30, 0.55);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+    }
+
+    .modal.visible {
+        display: flex;
+    }
+
+    .modal-box {
+        width: 100%;
+        max-width: 390px;
+        background: #fffaf6;
+        border-radius: 22px;
+        padding: 35px 28px;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.20);
+    }
+
+    .modal-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 40px;
+        color: #A87932;
+        margin-bottom: 12px;
+    }
+
+    .modal-text {
+        font-size: 13px;
+        line-height: 1.7;
+        color: #625a55;
+        margin-bottom: 25px;
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .modal-actions button {
+        flex: 1;
+    }
+
+
+    /* =========================================
+       GALERIA
+    ========================================= */
+
+    .gallery-section {
+        width: 100%;
+        max-width: 900px;
+        margin: 90px auto 20px;
+    }
+
+    .gallery-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 48px;
+        font-weight: 400;
+        color: #A87932;
+        margin-bottom: 10px;
+    }
+
+    .gallery-subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #9a918a;
+        margin-bottom: 30px;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    .gallery-item {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+        background: #f3ebe5;
+    }
+
+    .empty-gallery,
+    .loading-gallery {
+        grid-column: 1 / -1;
+        font-size: 13px;
+        color: #9a918a;
+        padding: 30px 15px;
+    }
+
+    .footer {
+        margin-top: 45px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #9a918a;
+    }
+
+    .line {
+        width: 55px;
+        height: 1px;
+        background: #A87932;
+        opacity: 0.55;
+        margin: 0 auto 25px;
+    }
+
+
+    /* =========================================
+       CELULAR
+    ========================================= */
+
+    @media (max-width: 600px) {
 
         body {
-            min-height: 100vh;
-            background-color: #fffaf6;
-            background-image: url("fundo-hibiscos.png");
-            background-repeat: no-repeat;
-            background-position: center top;
             background-size: 100% auto;
+            background-position: center top;
             background-attachment: fixed;
-
-            color: #514943;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
         }
 
         .page {
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 50px 20px;
-            position: relative;
-        }
-
-        .content {
-            width: 100%;
-            max-width: 650px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #a36b61;
-            margin-bottom: 15px;
+            padding: 40px 22px;
         }
 
         h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 72px;
-            font-weight: 400;
-            line-height: 1;
-            color: #514943;
-            margin-bottom: 15px;
+            font-size: 76px;
         }
 
         .date {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 5px;
-            color: #a36b61;
-            margin-bottom: 35px;
-        }
-
-        .intro {
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1.8;
-            color: #514943;
-            max-width: 520px;
-            margin: 0 auto 35px;
-        }
-
-        .upload-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-
-            padding: 16px 28px;
-
-            background: #a36b61;
-            color: #fffaf6;
-
-            border: none;
-            border-radius: 2px;
-
-            font-family: 'Montserrat', sans-serif;
             font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 2px;
-
-            cursor: pointer;
-            transition: all 0.3s ease;
-
-            box-shadow: 0 5px 15px rgba(81, 73, 67, 0.15);
+            letter-spacing: 3px;
         }
 
-        .upload-button:hover {
-            background: #89564e;
-            transform: translateY(-2px);
-            box-shadow: 0 7px 20px rgba(81, 73, 67, 0.2);
+        .message {
+            font-size: 14px;
+            padding: 0 10px;
         }
 
-        #fileInput {
-            display: none;
-        }
-
-        .preview-container {
-            display: none;
-            margin-top: 25px;
-        }
-
-        .preview-container.active {
-            display: block;
-        }
-
-        .preview {
+        .button {
             width: 100%;
-            max-width: 400px;
-            max-height: 400px;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto 20px;
-
-            border-radius: 2px;
-            box-shadow: 0 5px 20px rgba(81, 73, 67, 0.15);
+            max-width: 310px;
+            padding: 18px 20px;
         }
 
-        .preview-info {
-            font-size: 11px;
-            color: #7d736c;
-            margin-bottom: 15px;
-        }
-
-        .send-button {
-            padding: 12px 25px;
-            background: transparent;
-            color: #a36b61;
-            border: 1px solid #a36b61;
-            border-radius: 2px;
-
-            font-family: 'Montserrat', sans-serif;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 2px;
-
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .send-button:hover {
-            background: #a36b61;
-            color: #fffaf6;
-        }
-
-        .send-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .status {
-            margin-top: 15px;
-            font-size: 11px;
-            line-height: 1.5;
-        }
-
-        .status.success {
-            color: #6d8b70;
-        }
-
-        .status.error {
-            color: #b05a5a;
+        .preview-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 7px;
         }
 
         .gallery-section {
-            width: 100%;
-            max-width: 1000px;
-            margin: 80px auto 0;
-            padding: 0 20px;
+            margin-top: 70px;
         }
 
         .gallery-title {
-            text-align: center;
-            font-family: 'Great Vibes', cursive;
-            font-size: 48px;
-            font-weight: 400;
-            color: #514943;
-            margin-bottom: 10px;
-        }
-
-        .gallery-subtitle {
-            text-align: center;
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: #7d736c;
-            margin-bottom: 35px;
+            font-size: 42px;
         }
 
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
         }
 
-        .gallery-item {
-            aspect-ratio: 1;
-            overflow: hidden;
-            border-radius: 2px;
-            background: rgba(255, 250, 246, 0.7);
-            box-shadow: 0 3px 12px rgba(81, 73, 67, 0.1);
-        }
+    }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            cursor: pointer;
-            transition: transform 0.4s ease;
-        }
+</style>
 
-        .gallery-item img:hover {
-            transform: scale(1.05);
-        }
-
-        .empty-gallery {
-            text-align: center;
-            padding: 60px 20px;
-            color: #7d736c;
-            font-size: 12px;
-            line-height: 1.8;
-        }
-
-        .line {
-            width: 50px;
-            height: 1px;
-            background: #a36b61;
-            margin: 25px auto;
-        }
-
-        footer {
-            text-align: center;
-            padding: 60px 20px 30px;
-            font-family: 'Great Vibes', cursive;
-            font-size: 25px;
-            color: #514943;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-            background: rgba(50, 43, 39, 0.88);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal img {
-            max-width: 95vw;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 2px;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-
-            background: none;
-            border: none;
-
-            color: #fff;
-            font-size: 32px;
-            font-weight: 300;
-
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        @media (max-width: 600px) {
-
-            body {
-                background-image: url("fundo-hibiscos.png");
-                background-repeat: no-repeat;
-                background-position: center top;
-                background-size: 100% auto;
-                background-attachment: fixed;
-            }
-
-            .page {
-                min-height: 100vh;
-                padding: 45px 20px;
-            }
-
-            h1 {
-                font-size: 58px;
-            }
-
-            .subtitle {
-                font-size: 10px;
-                letter-spacing: 3px;
-            }
-
-            .date {
-                font-size: 12px;
-                letter-spacing: 4px;
-            }
-
-            .intro {
-                font-size: 13px;
-                line-height: 1.7;
-            }
-
-            .gallery-section {
-                margin-top: 60px;
-                padding: 0 15px;
-            }
-
-            .gallery-title {
-                font-size: 42px;
-            }
-
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-
-            footer {
-                padding-top: 50px;
-                font-size: 23px;
-            }
-        }
-    </style>
 </head>
+
 
 <body>
 
-    <main class="page">
-        <div class="content">
+<main class="page">
 
-            <div class="subtitle">
-                Nosso casamento
-            </div>
+    <section class="content">
 
-            <h1>
-                Giulia & Nathan
-            </h1>
-
-            <div class="date">
-                20 · 03 · 2027
-            </div>
-
-            <p class="intro">
-                Queremos reviver o nosso casamento através dos seus olhos.
-                Fotografe, compartilhe e faça parte das nossas memórias.
-            </p>
-
-            <label for="fileInput" class="upload-button">
-                📸&nbsp;&nbsp; COMPARTILHE SUAS FOTOS
-            </label>
-
-            <input
-                type="file"
-                id="fileInput"
-                accept="image/*"
-                multiple
-            >
-
-            <div class="preview-container" id="previewContainer">
-
-                <img
-                    id="preview"
-                    class="preview"
-                    alt="Pré-visualização da foto"
-                >
-
-                <div class="preview-info" id="previewInfo"></div>
-
-                <button
-                    class="send-button"
-                    id="sendButton"
-                >
-                    ENVIAR FOTO
-                </button>
-
-                <div
-                    class="status"
-                    id="status"
-                ></div>
-
-            </div>
-
-        </div>
-    </main>
-
-
-    <section class="gallery-section">
-
-        <h2 class="gallery-title">
-            Nossas memórias
-        </h2>
+        <p class="intro">
+            Nosso casamento
+        </p>
 
         <div class="line"></div>
 
-        <p class="gallery-subtitle">
-            FOTOS COMPARTILHADAS PELOS NOSSOS CONVIDADOS
+        <h1>
+            Giulia & Nathan
+        </h1>
+
+        <p class="date">
+            20 · 03 · 2027
         </p>
 
-        <div class="gallery" id="gallery"></div>
+        <p class="message">
+            Queremos reviver o nosso casamento através dos seus olhos.
+            <br>
+            Fotografe, compartilhe e faça parte das nossas memórias.
+        </p>
 
-        <div class="empty-gallery" id="emptyGallery">
-            Ainda não temos fotos compartilhadas.<br>
-            Seja o primeiro a registrar um momento!
-        </div>
+        <input
+            type="file"
+            id="photoInput"
+            accept="image/*"
+            multiple
+        >
+
+        <label
+            for="photoInput"
+            class="button"
+            id="uploadButton"
+        >
+            📸 &nbsp; COMPARTILHE SUAS FOTOS
+        </label>
+
+        <div id="uploadStatus"></div>
+
+
+        <!-- PRÉVIA DAS FOTOS -->
+
+        <section
+            id="previewSection"
+            class="preview-section"
+        >
+
+            <h2 class="preview-title">
+                Antes de enviar...
+            </h2>
+
+            <p class="preview-subtitle">
+                Confira as fotos que você escolheu
+            </p>
+
+            <div
+                id="previewGrid"
+                class="preview-grid"
+            ></div>
+
+            <div class="preview-actions">
+
+                <label
+                    for="photoInput"
+                    class="secondary-button"
+                >
+                    + ADICIONAR MAIS
+                </label>
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="clearSelection"
+                >
+                    LIMPAR
+                </button>
+
+                <button
+                    type="button"
+                    class="confirm-button"
+                    id="confirmSelection"
+                >
+                    ENVIAR FOTOS
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- GALERIA -->
+
+        <section class="gallery-section">
+
+            <h2 class="gallery-title">
+                Galeria
+            </h2>
+
+            <p class="gallery-subtitle">
+                em tempo real
+            </p>
+
+            <div
+                id="gallery"
+                class="gallery"
+            >
+                <div class="loading-gallery">
+                    Carregando nossas memórias...
+                </div>
+            </div>
+
+        </section>
+
+
+        <p class="footer">
+            Com amor, Giulia & Nathan
+        </p>
 
     </section>
 
-
-    <footer>
-        Com amor, Giulia & Nathan
-    </footer>
+</main>
 
 
-    <div class="modal" id="modal">
+<!-- MODAL DE CONFIRMAÇÃO -->
 
-        <button class="modal-close" id="modalClose">
-            ×
-        </button>
+<div
+    id="confirmModal"
+    class="modal"
+>
 
-        <img
-            id="modalImage"
-            src=""
-            alt="Foto ampliada"
-        >
+    <div class="modal-box">
+
+        <h2 class="modal-title">
+            Tudo certo?
+        </h2>
+
+        <p class="modal-text">
+            Depois de enviar, elas ficarão disponíveis na galeria do site e não poderão ser apagadas.
+            <br><br>
+            Tem certeza que deseja enviar?
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="secondary-button"
+                id="cancelConfirm"
+            >
+                VOLTAR
+            </button>
+
+            <button
+                type="button"
+                class="confirm-button"
+                id="finalConfirm"
+            >
+                SIM, ENVIAR
+            </button>
+
+        </div>
 
     </div>
 
+</div>
 
-    <script>
 
-        const SUPABASE_URL = 'https://jhembtsinuyailrdxrfq.supabase.co';
+<!-- SUPABASE -->
 
-        const SUPABASE_KEY = 'sb_publishable_WIFsYfO0rCvzThuhzwhXXg_dMzYbdHm';
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        const supabaseClient = window.supabase.createClient(
+<script>
+
+    const SUPABASE_URL =
+        'https://jhembtsinuyailrdxrfq.supabase.co';
+
+    const SUPABASE_KEY =
+        'sb_publishable_WIFsYfO0rCvzThuhzwhXXg_dMzYbdHm';
+
+    const supabaseClient =
+        window.supabase.createClient(
             SUPABASE_URL,
             SUPABASE_KEY
         );
 
 
-        const fileInput = document.getElementById('fileInput');
-        const previewContainer = document.getElementById('previewContainer');
-        const preview = document.getElementById('preview');
-        const previewInfo = document.getElementById('previewInfo');
-        const sendButton = document.getElementById('sendButton');
-        const status = document.getElementById('status');
+    const photoInput =
+        document.getElementById('photoInput');
 
-        const gallery = document.getElementById('gallery');
-        const emptyGallery = document.getElementById('emptyGallery');
+    const uploadButton =
+        document.getElementById('uploadButton');
 
-        const modal = document.getElementById('modal');
-        const modalImage = document.getElementById('modalImage');
-        const modalClose = document.getElementById('modalClose');
+    const uploadStatus =
+        document.getElementById('uploadStatus');
+
+    const previewSection =
+        document.getElementById('previewSection');
+
+    const previewGrid =
+        document.getElementById('previewGrid');
+
+    const clearSelection =
+        document.getElementById('clearSelection');
+
+    const confirmSelection =
+        document.getElementById('confirmSelection');
+
+    const confirmModal =
+        document.getElementById('confirmModal');
+
+    const cancelConfirm =
+        document.getElementById('cancelConfirm');
+
+    const finalConfirm =
+        document.getElementById('finalConfirm');
+
+    const gallery =
+        document.getElementById('gallery');
 
 
-        let selectedFile = null;
+    let selectedFiles = [];
 
 
-        fileInput.addEventListener('change', function () {
+    /* ESCOLHER FOTOS */
 
-            const file = this.files[0];
+    photoInput.addEventListener(
+        'change',
+        function () {
 
-            if (!file) {
+            const newFiles =
+                Array.from(this.files || []);
+
+            if (!newFiles.length) {
                 return;
             }
 
-            selectedFile = file;
+            newFiles.forEach(file => {
 
-            const reader = new FileReader();
-
-            reader.onload = function (event) {
-
-                preview.src = event.target.result;
-
-                previewInfo.textContent =
-                    file.name + ' · ' +
-                    Math.round(file.size / 1024) + ' KB';
-
-                previewContainer.classList.add('active');
-
-                status.textContent = '';
-                status.className = 'status';
-
-            };
-
-            reader.readAsDataURL(file);
-
-        });
-
-
-        sendButton.addEventListener('click', async function () {
-
-            if (!selectedFile) {
-                return;
-            }
-
-            sendButton.disabled = true;
-            sendButton.textContent = 'ENVIANDO...';
-
-            status.textContent = '';
-            status.className = 'status';
-
-            try {
-
-                const fileExtension =
-                    selectedFile.name.split('.').pop();
-
-                const fileName =
-                    Date.now() +
-                    '-' +
-                    Math.random().toString(36).substring(2, 10) +
-                    '.' +
-                    fileExtension;
-
-                const filePath =
-                    'fotos/' + fileName;
-
-
-                const { error: uploadError } =
-                    await supabaseClient.storage
-                        .from('fotos-casamento')
-                        .upload(
-                            filePath,
-                            selectedFile,
-                            {
-                                cacheControl: '3600',
-                                upsert: false
-                            }
-                        );
-
-
-                if (uploadError) {
-                    throw uploadError;
-                }
-
-
-                const { data } =
-                    supabaseClient.storage
-                        .from('fotos-casamento')
-                        .getPublicUrl(filePath);
-
-
-                status.textContent =
-                    'Foto enviada com sucesso! ❤️';
-
-                status.className =
-                    'status success';
-
-
-                selectedFile = null;
-                fileInput.value = '';
-
-                setTimeout(function () {
-
-                    previewContainer.classList.remove('active');
-
-                }, 2500);
-
-
-                loadGallery();
-
-            } catch (error) {
-
-                console.error(error);
-
-                status.textContent =
-                    'Não foi possível enviar a foto. Tente novamente.';
-
-                status.className =
-                    'status error';
-
-            } finally {
-
-                sendButton.disabled = false;
-                sendButton.textContent = 'ENVIAR FOTO';
-
-            }
-
-        });
-
-
-        async function loadGallery() {
-
-            try {
-
-                const { data, error } =
-                    await supabaseClient.storage
-                        .from('fotos-casamento')
-                        .list(
-                            'fotos',
-                            {
-                                limit: 100,
-                                sortBy: {
-                                    column: 'created_at',
-                                    order: 'desc'
-                                }
-                            }
-                        );
-
-
-                if (error) {
-                    throw error;
-                }
-
-
-                gallery.innerHTML = '';
-
-
-                if (!data || data.length === 0) {
-
-                    emptyGallery.style.display = 'block';
-
+                if (!file.type.startsWith('image/')) {
                     return;
-
                 }
 
+                const maxSize =
+                    15 * 1024 * 1024;
 
-                emptyGallery.style.display = 'none';
+                if (file.size > maxSize) {
+                    return;
+                }
 
-
-                data.forEach(function (file) {
-
-                    const {
-                        data: publicUrlData
-                    } = supabaseClient.storage
-                        .from('fotos-casamento')
-                        .getPublicUrl(
-                            'fotos/' + file.name
-                        );
-
-
-                    const item =
-                        document.createElement('div');
-
-                    item.className =
-                        'gallery-item';
-
-
-                    const img =
-                        document.createElement('img');
-
-                    img.src =
-                        publicUrlData.publicUrl;
-
-                    img.alt =
-                        'Foto compartilhada';
-
-
-                    img.addEventListener(
-                        'click',
-                        function () {
-
-                            modalImage.src =
-                                publicUrlData.publicUrl;
-
-                            modal.classList.add('active');
-
-                        }
+                const alreadySelected =
+                    selectedFiles.some(
+                        existing =>
+                            existing.name === file.name &&
+                            existing.size === file.size &&
+                            existing.lastModified === file.lastModified
                     );
 
+                if (!alreadySelected) {
+                    selectedFiles.push(file);
+                }
 
-                    item.appendChild(img);
+            });
 
-                    gallery.appendChild(item);
+            photoInput.value = '';
 
-                });
+            renderPreview();
+
+        }
+    );
 
 
-            } catch (error) {
+    /* PRÉVIA */
+
+    function renderPreview() {
+
+        previewGrid.innerHTML = '';
+
+        if (!selectedFiles.length) {
+
+            previewSection.classList.remove(
+                'visible'
+            );
+
+            return;
+        }
+
+        previewSection.classList.add(
+            'visible'
+        );
+
+
+        selectedFiles.forEach(
+            (file, index) => {
+
+                const item =
+                    document.createElement('div');
+
+                item.className =
+                    'preview-item';
+
+
+                const image =
+                    document.createElement('img');
+
+                image.src =
+                    URL.createObjectURL(file);
+
+
+                const removeButton =
+                    document.createElement('button');
+
+                removeButton.type =
+                    'button';
+
+                removeButton.className =
+                    'remove-preview';
+
+                removeButton.textContent =
+                    '×';
+
+                removeButton.title =
+                    'Remover esta foto';
+
+
+                removeButton.addEventListener(
+                    'click',
+                    function () {
+
+                        selectedFiles.splice(
+                            index,
+                            1
+                        );
+
+                        renderPreview();
+
+                    }
+                );
+
+
+                item.appendChild(image);
+
+                item.appendChild(
+                    removeButton
+                );
+
+                previewGrid.appendChild(item);
+
+            }
+        );
+
+    }
+
+
+    /* LIMPAR SELEÇÃO */
+
+    clearSelection.addEventListener(
+        'click',
+        function () {
+
+            selectedFiles = [];
+
+            photoInput.value = '';
+
+            renderPreview();
+
+            uploadStatus.textContent = '';
+
+        }
+    );
+
+
+    /* ABRIR CONFIRMAÇÃO */
+
+    confirmSelection.addEventListener(
+        'click',
+        function () {
+
+            if (!selectedFiles.length) {
+                return;
+            }
+
+            confirmModal.classList.add(
+                'visible'
+            );
+
+        }
+    );
+
+
+    cancelConfirm.addEventListener(
+        'click',
+        function () {
+
+            confirmModal.classList.remove(
+                'visible'
+            );
+
+        }
+    );
+
+
+    /* CONFIRMAÇÃO FINAL + UPLOAD */
+
+    finalConfirm.addEventListener(
+        'click',
+        async function () {
+
+            confirmModal.classList.remove(
+                'visible'
+            );
+
+            uploadButton.classList.add(
+                'disabled'
+            );
+
+            uploadStatus.textContent =
+                'Enviando suas fotos... 💕';
+
+            try {
+
+                let uploaded =
+                    0;
+
+
+                for (
+                    const file of selectedFiles
+                ) {
+
+                    const extension =
+                        file.name
+                            .split('.')
+                            .pop()
+                            .toLowerCase();
+
+
+                    const fileName =
+                        Date.now() +
+                        '-' +
+                        Math.random()
+                            .toString(36)
+                            .substring(2, 10) +
+                        '.' +
+                        extension;
+
+
+                    const result =
+                        await supabaseClient
+                            .storage
+                            .from('fotos-casamento')
+                            .upload(
+                                fileName,
+                                file,
+                                {
+                                    cacheControl: '3600',
+                                    upsert: false,
+                                    contentType: file.type
+                                }
+                            );
+
+
+                    if (result.error) {
+                        throw result.error;
+                    }
+
+
+                    uploaded++;
+
+
+                    uploadStatus.textContent =
+                        `Enviando ${uploaded} de ${selectedFiles.length} fotos... 💕`;
+
+                }
+
+
+                uploadStatus.textContent =
+                    `${uploaded} ${uploaded === 1 ? 'foto enviada' : 'fotos enviadas'}! Obrigada por fazer parte das nossas memórias. 💕`;
+
+
+                selectedFiles = [];
+
+                photoInput.value = '';
+
+                renderPreview();
+
+                await loadGallery();
+
+            }
+
+            catch (error) {
 
                 console.error(
-                    'Erro ao carregar galeria:',
+                    'ERRO NO UPLOAD:',
                     error
+                );
+
+                uploadStatus.textContent =
+                    'Não conseguimos enviar todas as fotos. Tente novamente.';
+
+            }
+
+            finally {
+
+                uploadButton.classList.remove(
+                    'disabled'
                 );
 
             }
 
         }
+    );
 
 
-        modalClose.addEventListener(
-            'click',
-            function () {
+    /* GALERIA */
 
-                modal.classList.remove('active');
+    async function loadGallery() {
 
+        gallery.innerHTML =
+            '<div class="loading-gallery">Carregando nossas memórias...</div>';
+
+        try {
+
+            const result =
+                await supabaseClient
+                    .storage
+                    .from('fotos-casamento')
+                    .list(
+                        '',
+                        {
+                            limit: 100,
+                            offset: 0,
+                            sortBy: {
+                                column: 'created_at',
+                                order: 'desc'
+                            }
+                        }
+                    );
+
+
+            if (result.error) {
+                throw result.error;
             }
-        );
 
 
-        modal.addEventListener(
-            'click',
-            function (event) {
+            const files =
+                (result.data || [])
+                    .filter(
+                        file =>
+                            file.name &&
+                            !file.name.endsWith('/')
+                    );
 
-                if (event.target === modal) {
 
-                    modal.classList.remove('active');
+            if (!files.length) {
+
+                gallery.innerHTML =
+                    '<div class="empty-gallery">' +
+                    'As primeiras fotos do nosso dia aparecerão aqui. 💕' +
+                    '</div>';
+
+                return;
+            }
+
+
+            gallery.innerHTML = '';
+
+
+            files.forEach(
+                file => {
+
+                    const publicUrl =
+                        supabaseClient
+                            .storage
+                            .from('fotos-casamento')
+                            .getPublicUrl(
+                                file.name
+                            )
+                            .data
+                            .publicUrl;
+
+
+                    const image =
+                        document.createElement('img');
+
+                    image.src =
+                        publicUrl;
+
+                    image.alt =
+                        'Foto do casamento';
+
+                    image.className =
+                        'gallery-item';
+
+                    image.loading =
+                        'lazy';
+
+
+                    gallery.appendChild(
+                        image
+                    );
 
                 }
+            );
 
-            }
-        );
+        }
+
+        catch (error) {
+
+            console.error(
+                'ERRO AO CARREGAR GALERIA:',
+                error
+            );
+
+            gallery.innerHTML =
+                '<div class="empty-gallery">' +
+                'Não foi possível carregar as fotos.' +
+                '</div>';
+
+        }
+
+    }
 
 
-        loadGallery();
+    loadGallery();
 
-    </script>
+</script>
 
 </body>
 </html>
