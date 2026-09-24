@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>Giulia & Nathan</title>
+    <title>Giulia & Nathan</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -44,7 +43,7 @@
         width: 100%;
         max-width: 900px;
         position: relative;
-        z-index: 2;
+        z-index: 5;
     }
 
     .intro {
@@ -117,6 +116,74 @@
         font-size: 12px;
         color: #77706a;
     }
+
+
+    /* =========================================
+       HIBISCOS DECORATIVOS
+    ========================================= */
+
+    .floral-decoration {
+        position: absolute;
+        z-index: 2;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .floral-decoration svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+    }
+
+
+    /* HIBISCO SUPERIOR ESQUERDO */
+
+    .hibiscus-left {
+        width: 360px;
+        height: 360px;
+        top: -125px;
+        left: -105px;
+        opacity: 0.62;
+        transform: rotate(-12deg);
+    }
+
+
+    /* HIBISCO SUPERIOR DIREITO */
+
+    .hibiscus-right {
+        width: 320px;
+        height: 320px;
+        top: -35px;
+        right: -125px;
+        opacity: 0.52;
+        transform: rotate(18deg);
+    }
+
+
+    /* HIBISCO INFERIOR DIREITO */
+
+    .hibiscus-bottom {
+        width: 390px;
+        height: 390px;
+        right: -145px;
+        bottom: -165px;
+        opacity: 0.55;
+        transform: rotate(-8deg);
+    }
+
+
+    /* HIBISCO PEQUENO INFERIOR ESQUERDO */
+
+    .hibiscus-small {
+        width: 220px;
+        height: 220px;
+        left: -80px;
+        bottom: -85px;
+        opacity: 0.38;
+        transform: rotate(15deg);
+    }
+
 
     /* PRÉVIA */
 
@@ -212,6 +279,7 @@
         color: white;
     }
 
+
     /* MODAL */
 
     .modal {
@@ -261,6 +329,7 @@
     .modal-actions button {
         flex: 1;
     }
+
 
     /* GALERIA */
 
@@ -317,42 +386,6 @@
         color: #9a918a;
     }
 
-    .decor {
-        position: absolute;
-        z-index: 1;
-        pointer-events: none;
-    }
-
-    .pink-detail {
-        width: 180px;
-        height: 180px;
-        top: -70px;
-        left: -70px;
-        background:
-            radial-gradient(
-                circle,
-                rgba(217, 87, 122, 0.18) 0%,
-                rgba(217, 87, 122, 0.08) 45%,
-                transparent 70%
-            );
-        border-radius: 50%;
-    }
-
-    .orange-detail {
-        width: 220px;
-        height: 220px;
-        bottom: -100px;
-        right: -90px;
-        background:
-            radial-gradient(
-                circle,
-                rgba(235, 121, 72, 0.18) 0%,
-                rgba(235, 121, 72, 0.08) 45%,
-                transparent 70%
-            );
-        border-radius: 50%;
-    }
-
     .line {
         width: 55px;
         height: 1px;
@@ -360,6 +393,11 @@
         opacity: 0.55;
         margin: 0 auto 25px;
     }
+
+
+    /* =========================================
+       RESPONSIVIDADE
+    ========================================= */
 
     @media (max-width: 600px) {
 
@@ -405,33 +443,554 @@
             gap: 8px;
         }
 
-        .pink-detail {
-            width: 140px;
-            height: 140px;
-            top: -50px;
-            left: -50px;
+
+        /* HIBISCOS NO CELULAR */
+
+        .hibiscus-left {
+            width: 230px;
+            height: 230px;
+            top: -80px;
+            left: -75px;
+            opacity: 0.48;
         }
 
-        .orange-detail {
+        .hibiscus-right {
+            width: 210px;
+            height: 210px;
+            top: 35px;
+            right: -85px;
+            opacity: 0.42;
+        }
+
+        .hibiscus-bottom {
+            width: 250px;
+            height: 250px;
+            right: -95px;
+            bottom: -105px;
+            opacity: 0.45;
+        }
+
+        .hibiscus-small {
             width: 160px;
             height: 160px;
-            bottom: -70px;
-            right: -60px;
+            left: -65px;
+            bottom: -65px;
+            opacity: 0.30;
         }
+
     }
 
 </style>
-```
 
 </head>
 
+
 <body>
 
-```
 <main class="page">
 
-    <div class="decor pink-detail"></div>
-    <div class="decor orange-detail"></div>
+
+    <!-- =========================================
+         HIBISCO SUPERIOR ESQUERDO
+    ========================================== -->
+
+    <div class="floral-decoration hibiscus-left">
+
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+
+                <filter id="softLeft">
+                    <feGaussianBlur stdDeviation="0.7"/>
+                </filter>
+
+                <radialGradient id="petalPink1">
+                    <stop offset="0%" stop-color="#f7b5c7"/>
+                    <stop offset="55%" stop-color="#df7191"/>
+                    <stop offset="100%" stop-color="#c84f73"/>
+                </radialGradient>
+
+                <radialGradient id="petalPink2">
+                    <stop offset="0%" stop-color="#f9c5d2"/>
+                    <stop offset="65%" stop-color="#e889a3"/>
+                    <stop offset="100%" stop-color="#d15c7d"/>
+                </radialGradient>
+
+            </defs>
+
+
+            <!-- folhas -->
+
+            <path
+                d="M70 280 C105 235 145 225 185 235 C145 275 110 292 70 280Z"
+                fill="#879b72"
+                opacity=".55"
+            />
+
+            <path
+                d="M115 315 C155 265 205 250 245 270 C205 315 160 330 115 315Z"
+                fill="#718b67"
+                opacity=".42"
+            />
+
+            <path
+                d="M42 245 C60 205 90 185 125 190 C105 225 80 245 42 245Z"
+                fill="#9cab82"
+                opacity=".45"
+            />
+
+
+            <!-- flor principal -->
+
+            <g filter="url(#softLeft)">
+
+                <ellipse
+                    cx="178"
+                    cy="145"
+                    rx="65"
+                    ry="92"
+                    fill="url(#petalPink1)"
+                    transform="rotate(-28 178 145)"
+                    opacity=".92"
+                />
+
+                <ellipse
+                    cx="178"
+                    cy="145"
+                    rx="65"
+                    ry="92"
+                    fill="url(#petalPink2)"
+                    transform="rotate(28 178 145)"
+                    opacity=".92"
+                />
+
+                <ellipse
+                    cx="178"
+                    cy="145"
+                    rx="65"
+                    ry="92"
+                    fill="url(#petalPink1)"
+                    transform="rotate(92 178 145)"
+                    opacity=".88"
+                />
+
+                <ellipse
+                    cx="178"
+                    cy="145"
+                    rx="65"
+                    ry="92"
+                    fill="url(#petalPink2)"
+                    transform="rotate(148 178 145)"
+                    opacity=".88"
+                />
+
+                <ellipse
+                    cx="178"
+                    cy="145"
+                    rx="63"
+                    ry="88"
+                    fill="url(#petalPink1)"
+                    transform="rotate(208 178 145)"
+                    opacity=".9"
+                />
+
+            </g>
+
+
+            <!-- centro -->
+
+            <circle
+                cx="178"
+                cy="145"
+                r="29"
+                fill="#e7a83f"
+                opacity=".85"
+            />
+
+            <circle
+                cx="178"
+                cy="145"
+                r="14"
+                fill="#c96b45"
+                opacity=".7"
+            />
+
+
+            <!-- estame -->
+
+            <path
+                d="M178 150 C210 125 235 100 248 70"
+                stroke="#c96b45"
+                stroke-width="4"
+                fill="none"
+                opacity=".8"
+            />
+
+            <circle cx="248" cy="70" r="6" fill="#e1a43c"/>
+
+        </svg>
+
+    </div>
+
+
+
+    <!-- =========================================
+         HIBISCO SUPERIOR DIREITO
+    ========================================== -->
+
+    <div class="floral-decoration hibiscus-right">
+
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+
+                <radialGradient id="pinkRight">
+                    <stop offset="0%" stop-color="#fac3d0"/>
+                    <stop offset="55%" stop-color="#e57d99"/>
+                    <stop offset="100%" stop-color="#c95778"/>
+                </radialGradient>
+
+                <radialGradient id="coralRight">
+                    <stop offset="0%" stop-color="#ffd0c4"/>
+                    <stop offset="65%" stop-color="#e98575"/>
+                    <stop offset="100%" stop-color="#cb655b"/>
+                </radialGradient>
+
+            </defs>
+
+
+            <!-- folhas -->
+
+            <path
+                d="M230 290 C270 235 320 215 360 235 C330 285 280 305 230 290Z"
+                fill="#819671"
+                opacity=".55"
+            />
+
+            <path
+                d="M180 325 C220 275 270 260 315 280 C280 325 225 340 180 325Z"
+                fill="#718867"
+                opacity=".45"
+            />
+
+
+            <!-- pétalas -->
+
+            <ellipse
+                cx="210"
+                cy="160"
+                rx="62"
+                ry="90"
+                fill="url(#pinkRight)"
+                transform="rotate(-30 210 160)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="210"
+                cy="160"
+                rx="62"
+                ry="90"
+                fill="url(#coralRight)"
+                transform="rotate(30 210 160)"
+                opacity=".85"
+            />
+
+            <ellipse
+                cx="210"
+                cy="160"
+                rx="62"
+                ry="90"
+                fill="url(#pinkRight)"
+                transform="rotate(90 210 160)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="210"
+                cy="160"
+                rx="62"
+                ry="90"
+                fill="url(#pinkRight)"
+                transform="rotate(150 210 160)"
+                opacity=".84"
+            />
+
+            <ellipse
+                cx="210"
+                cy="160"
+                rx="62"
+                ry="90"
+                fill="url(#coralRight)"
+                transform="rotate(210 210 160)"
+                opacity=".85"
+            />
+
+
+            <!-- centro -->
+
+            <circle
+                cx="210"
+                cy="160"
+                r="27"
+                fill="#e7a643"
+                opacity=".85"
+            />
+
+            <circle
+                cx="210"
+                cy="160"
+                r="12"
+                fill="#bd634e"
+                opacity=".7"
+            />
+
+
+            <!-- estame -->
+
+            <path
+                d="M210 165 C238 145 260 118 275 90"
+                stroke="#c96a4e"
+                stroke-width="4"
+                fill="none"
+                opacity=".8"
+            />
+
+            <circle cx="275" cy="90" r="6" fill="#e0a039"/>
+
+        </svg>
+
+    </div>
+
+
+
+    <!-- =========================================
+         HIBISCO INFERIOR DIREITO
+    ========================================== -->
+
+    <div class="floral-decoration hibiscus-bottom">
+
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+
+                <radialGradient id="pinkBottom">
+                    <stop offset="0%" stop-color="#f8b8c9"/>
+                    <stop offset="60%" stop-color="#dc718f"/>
+                    <stop offset="100%" stop-color="#bd4f72"/>
+                </radialGradient>
+
+            </defs>
+
+
+            <!-- folhas -->
+
+            <path
+                d="M35 260 C75 210 125 195 165 215 C130 260 85 280 35 260Z"
+                fill="#7f9671"
+                opacity=".55"
+            />
+
+            <path
+                d="M80 320 C125 265 175 250 220 270 C185 320 130 340 80 320Z"
+                fill="#718766"
+                opacity=".45"
+            />
+
+            <path
+                d="M220 315 C260 260 310 245 355 265 C320 315 270 330 220 315Z"
+                fill="#8ca178"
+                opacity=".5"
+            />
+
+
+            <!-- flor -->
+
+            <ellipse
+                cx="220"
+                cy="170"
+                rx="68"
+                ry="94"
+                fill="url(#pinkBottom)"
+                transform="rotate(-25 220 170)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="220"
+                cy="170"
+                rx="68"
+                ry="94"
+                fill="url(#pinkBottom)"
+                transform="rotate(25 220 170)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="220"
+                cy="170"
+                rx="68"
+                ry="94"
+                fill="url(#pinkBottom)"
+                transform="rotate(90 220 170)"
+                opacity=".85"
+            />
+
+            <ellipse
+                cx="220"
+                cy="170"
+                rx="68"
+                ry="94"
+                fill="url(#pinkBottom)"
+                transform="rotate(150 220 170)"
+                opacity=".86"
+            />
+
+            <ellipse
+                cx="220"
+                cy="170"
+                rx="68"
+                ry="94"
+                fill="url(#pinkBottom)"
+                transform="rotate(205 220 170)"
+                opacity=".85"
+            />
+
+
+            <!-- centro -->
+
+            <circle
+                cx="220"
+                cy="170"
+                r="29"
+                fill="#e6a33f"
+                opacity=".85"
+            />
+
+            <circle
+                cx="220"
+                cy="170"
+                r="13"
+                fill="#c4674c"
+                opacity=".7"
+            />
+
+
+            <!-- estame -->
+
+            <path
+                d="M220 175 C245 155 270 130 286 98"
+                stroke="#c96b4e"
+                stroke-width="4"
+                fill="none"
+                opacity=".8"
+            />
+
+            <circle cx="286" cy="98" r="6" fill="#dfa13b"/>
+
+        </svg>
+
+    </div>
+
+
+
+    <!-- =========================================
+         HIBISCO PEQUENO INFERIOR ESQUERDO
+    ========================================== -->
+
+    <div class="floral-decoration hibiscus-small">
+
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+
+                <radialGradient id="smallPink">
+                    <stop offset="0%" stop-color="#f9c4d0"/>
+                    <stop offset="60%" stop-color="#df7d99"/>
+                    <stop offset="100%" stop-color="#c75a7b"/>
+                </radialGradient>
+
+            </defs>
+
+
+            <path
+                d="M70 300 C110 245 160 230 205 250 C170 300 120 320 70 300Z"
+                fill="#81966f"
+                opacity=".55"
+            />
+
+            <path
+                d="M130 340 C170 285 220 270 265 290 C230 335 180 350 130 340Z"
+                fill="#718665"
+                opacity=".42"
+            />
+
+
+            <ellipse
+                cx="185"
+                cy="170"
+                rx="60"
+                ry="85"
+                fill="url(#smallPink)"
+                transform="rotate(-25 185 170)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="185"
+                cy="170"
+                rx="60"
+                ry="85"
+                fill="url(#smallPink)"
+                transform="rotate(30 185 170)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="185"
+                cy="170"
+                rx="60"
+                ry="85"
+                fill="url(#smallPink)"
+                transform="rotate(90 185 170)"
+                opacity=".85"
+            />
+
+            <ellipse
+                cx="185"
+                cy="170"
+                rx="60"
+                ry="85"
+                fill="url(#smallPink)"
+                transform="rotate(150 185 170)"
+                opacity=".84"
+            />
+
+            <circle
+                cx="185"
+                cy="170"
+                r="25"
+                fill="#e5a23f"
+                opacity=".85"
+            />
+
+            <circle
+                cx="185"
+                cy="170"
+                r="11"
+                fill="#c76b4d"
+                opacity=".7"
+            />
+
+        </svg>
+
+    </div>
+
+
+
+    <!-- =========================================
+         CONTEÚDO PRINCIPAL
+    ========================================== -->
 
     <section class="content">
 
@@ -450,7 +1009,7 @@
         </p>
 
         <p class="message">
-            Queremos viver o nosso casamento através dos seus olhos.
+            Queremos reviver o nosso casamento através dos seus olhos.
             <br>
             Fotografe, compartilhe e faça parte das nossas memórias.
         </p>
@@ -472,7 +1031,11 @@
 
         <div id="uploadStatus"></div>
 
-        <!-- PRÉVIA DAS FOTOS -->
+
+
+        <!-- =========================================
+             PRÉVIA DAS FOTOS
+        ========================================== -->
 
         <section
             id="previewSection"
@@ -521,16 +1084,20 @@
 
         </section>
 
-        <!-- GALERIA -->
+
+
+        <!-- =========================================
+             GALERIA
+        ========================================== -->
 
         <section class="gallery-section">
 
             <h2 class="gallery-title">
-                Fotos do nosso dia
+                Galeria
             </h2>
 
             <p class="gallery-subtitle">
-                Vistas através dos seus olhos
+                em tempo real
             </p>
 
             <div
@@ -544,6 +1111,7 @@
 
         </section>
 
+
         <p class="footer">
             Com amor, Giulia & Nathan
         </p>
@@ -553,7 +1121,10 @@
 </main>
 
 
-<!-- CONFIRMAÇÃO -->
+
+<!-- =========================================
+     MODAL DE CONFIRMAÇÃO
+========================================== -->
 
 <div
     id="confirmModal"
@@ -567,10 +1138,9 @@
         </h2>
 
         <p class="modal-text">
-            Você conferiu todas as fotos que escolheu?
+            Depois de enviar, elas ficarão disponíveis na galeria do site e não poderão ser apagadas.
             <br><br>
-            Depois de enviar, elas ficarão disponíveis
-            na galeria do casamento.
+            Tem certeza que deseja enviar?
         </p>
 
         <div class="modal-actions">
@@ -598,7 +1168,10 @@
 </div>
 
 
-<!-- SUPABASE -->
+
+<!-- =========================================
+     SUPABASE
+========================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -681,6 +1254,7 @@
                 if (file.size > maxSize) {
                     return;
                 }
+
 
                 /*
                  * Evita duplicar a mesma foto
@@ -1072,7 +1646,6 @@
     loadGallery();
 
 </script>
-```
 
 </body>
 </html>
