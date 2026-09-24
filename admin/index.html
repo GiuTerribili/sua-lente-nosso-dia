@@ -27,6 +27,49 @@ body {
     background: #fffaf6;
     color: #514943;
     font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* =========================
+   FUNDO FLORAL — HIBISCOS
+========================= */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.78;
+}
+
+/* =========================
+   ARRANJO SUPERIOR ESQUERDO
+========================= */
+
+body::before {
+    width: 540px;
+    height: 540px;
+    top: -120px;
+    left: -110px;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='540' height='540' viewBox='0 0 540 540'%3E%3Cg%3E%3C!-- hibisco rosa --%3E%3Cg transform='translate(145 150)'%3E%3Cpath d='M0 35C-55 5-68-55-15-62C-8-110 55-104 65-55C110-55 116 5 70 28C65 75 10 82 0 35Z' fill='%23df718d' opacity='.48'/%3E%3Cpath d='M25 25C-8-5-2-40 25-43C52-42 55-5 25 25Z' fill='%23e997a9' opacity='.55'/%3E%3Cpath d='M30 25C38 40 45 60 45 82' stroke='%23d79a4e' stroke-width='4' fill='none' opacity='.7'/%3E%3Ccircle cx='45' cy='84' r='6' fill='%23e3a34e' opacity='.8'/%3E%3C/g%3E%3C!-- hibisco laranja --%3E%3Cg transform='translate(310 105) scale(.78)'%3E%3Cpath d='M0 35C-55 5-68-55-15-62C-8-110 55-104 65-55C110-55 116 5 70 28C65 75 10 82 0 35Z' fill='%23e88a42' opacity='.52'/%3E%3Cpath d='M25 25C-8-5-2-40 25-43C52-42 55-5 25 25Z' fill='%23f0a667' opacity='.58'/%3E%3Cpath d='M30 25C38 40 45 60 45 82' stroke='%23d79a4e' stroke-width='4' fill='none' opacity='.7'/%3E%3Ccircle cx='45' cy='84' r='6' fill='%23e3a34e' opacity='.8'/%3E%3C/g%3E%3C!-- hibisco rosa menor --%3E%3Cg transform='translate(80 335) scale(.65)'%3E%3Cpath d='M0 35C-55 5-68-55-15-62C-8-110 55-104 65-55C110-55 116 5 70 28C65 75 10 82 0 35Z' fill='%23df718d' opacity='.42'/%3E%3Cpath d='M30 25C38 40 45 60 45 82' stroke='%23d79a4e' stroke-width='4' fill='none' opacity='.7'/%3E%3C/g%3E%3C!-- hibisco laranja menor --%3E%3Cg transform='translate(330 350) scale(.58)'%3E%3Cpath d='M0 35C-55 5-68-55-15-62C-8-110 55-104 65-55C110-55 116 5 70 28C65 75 10 82 0 35Z' fill='%23e88a42' opacity='.42'/%3E%3Cpath d='M30 25C38 40 45 60 45 82' stroke='%23d79a4e' stroke-width='4' fill='none' opacity='.7'/%3E%3C/g%3E%3C!-- folhas delicadas --%3E%3Cpath d='M85 240C50 205 25 210 15 225C45 250 65 258 95 260Z' fill='%2393a27c' opacity='.28'/%3E%3Cpath d='M275 260C315 225 345 230 355 245C325 270 305 278 275 280Z' fill='%2393a27c' opacity='.25'/%3E%3Cpath d='M210 410C170 380 150 390 145 410C175 425 195 425 215 425Z' fill='%2393a27c' opacity='.23'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* =========================
+   ARRANJO SUPERIOR DIREITO
+========================= */
+
+body::after {
+    width: 500px;
+    height: 500px;
+    top: -100px;
+    right: -120px;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Cg%3E%3Cg transform='translate(115 125) scale(.72)'%3E%3Cpath d='M0 35C-55 5-68-55-15-62C-8-110 55-104 65-55C110-55 116 5 70 28C65 75 10 82 0 35Z' fill='%23df718d' opacity='.48'/%3E%3Cpath d='M30 25C38 40 45 60 45 82' stroke='%23d79a4e' stroke-width='4' fill='none' opacity='.7'/%3E%3C/g%3E%3Cg transform='translate(285 145) scale(.88)'%3E%3Cpath d='M0 35C-55 5-68-55-15-62C-8-110 55-104 65-55C110-55 116 5 70 28C65 75 10 82 0 35Z' fill='%23e88a42' opacity='.50'/%3E%3Cpath d='M30 25C38 40 45 60 45 82' stroke='%23d79a4e' stroke-width='4' fill='none' opacity='.7'/%3E%3C/g%3E%3Cg transform='translate(210 310) scale(.62)'%3E%3Cpath d='M0 35C-55 5-68-55-15-62C-8-110 55-104 65-55C110-55 116 5 70 28C65 75 10 82 0 35Z' fill='%23df718d' opacity='.43'/%3E%3Cpath d='M30 25C38 40 45 60 45 82' stroke='%23d79a4e' stroke-width='4' fill='none' opacity='.7'/%3E%3C/g%3E%3Cpath d='M65 250C30 220 10 230 10 248C35 265 50 267 75 267Z' fill='%2393a27c' opacity='.25'/%3E%3Cpath d='M380 285C420 250 445 260 450 280C420 300 400 305 375 305Z' fill='%2393a27c' opacity='.25'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .hidden {
@@ -43,16 +86,21 @@ body {
     align-items: center;
     justify-content: center;
     padding: 25px;
+    position: relative;
+    z-index: 1;
 }
 
 .login-box {
     width: 100%;
     max-width: 390px;
-    background: white;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     padding: 40px 30px;
     border-radius: 25px;
     box-shadow: 0 15px 50px rgba(80,60,50,0.10);
     text-align: center;
+    border: 1px solid rgba(255,255,255,0.75);
 }
 
 .login-title {
@@ -79,6 +127,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
     outline: none;
+    background: rgba(255,255,255,0.92);
 }
 
 .input:focus {
@@ -122,6 +171,8 @@ body {
     max-width: 1200px;
     margin: auto;
     padding: 35px 25px 60px;
+    position: relative;
+    z-index: 1;
 }
 
 .header {
@@ -151,7 +202,7 @@ body {
     border: none;
     border-radius: 50px;
     padding: 12px 20px;
-    background: #eee5df;
+    background: rgba(238,229,223,0.92);
     color: #655c55;
     font-family: 'Montserrat', sans-serif;
     font-size: 10px;
@@ -233,6 +284,7 @@ body {
     overflow: hidden;
     background: #f3ebe5;
     cursor: pointer;
+    box-shadow: 0 5px 18px rgba(80,60,50,0.06);
 }
 
 .photo-card.selected {
@@ -293,6 +345,20 @@ body {
 
 @media (max-width: 800px) {
 
+    body::before {
+        width: 380px;
+        height: 380px;
+        top: -70px;
+        left: -100px;
+    }
+
+    body::after {
+        width: 350px;
+        height: 350px;
+        top: -60px;
+        right: -100px;
+    }
+
     .gallery {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -300,6 +366,22 @@ body {
 }
 
 @media (max-width: 550px) {
+
+    body::before {
+        width: 300px;
+        height: 300px;
+        top: -65px;
+        left: -100px;
+        opacity: 0.58;
+    }
+
+    body::after {
+        width: 280px;
+        height: 280px;
+        top: -55px;
+        right: -100px;
+        opacity: 0.58;
+    }
 
     .page {
         padding: 25px 15px 50px;
