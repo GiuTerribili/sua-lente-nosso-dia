@@ -26,125 +26,114 @@
         background: #fffaf6;
     }
 
+    /* =========================================
+       FUNDO AQUARELA
+       ========================================= */
+
     body {
         min-height: 100vh;
 
-        /*
-         * FUNDO AQUARELA
-         * Manchas orgânicas em rosa, laranja,
-         * amarelo e vermelho.
-         */
         background-color: #fffaf6;
+
+        /*
+         * As manchas são aplicadas DIRETAMENTE
+         * no fundo.
+         *
+         * Não existe:
+         * - imagem de fundo
+         * - body::before
+         * - body::after
+         * - blur
+         * - overlay
+         * - camada translúcida
+         */
 
         background-image:
 
-            /* ROSA — canto superior esquerdo */
+            /* ROSA — superior esquerdo */
             radial-gradient(
-                ellipse 170px 130px at 7% 9%,
+                ellipse 150px 115px at 5% 8%,
                 rgba(226, 66, 108, 0.20) 0%,
-                rgba(226, 66, 108, 0.15) 28%,
-                rgba(226, 66, 108, 0.08) 48%,
-                rgba(226, 66, 108, 0.03) 65%,
-                transparent 78%
-            ),
-
-            /* pequenas gotas rosa */
-            radial-gradient(
-                ellipse 55px 38px at 17% 15%,
-                rgba(226, 66, 108, 0.13) 0%,
-                rgba(226, 66, 108, 0.07) 48%,
-                transparent 75%
-            ),
-
-            /* LARANJA — canto superior direito */
-            radial-gradient(
-                ellipse 190px 145px at 94% 13%,
-                rgba(239, 116, 55, 0.21) 0%,
-                rgba(239, 116, 55, 0.15) 30%,
-                rgba(239, 116, 55, 0.08) 50%,
-                rgba(239, 116, 55, 0.03) 68%,
+                rgba(226, 66, 108, 0.13) 42%,
+                rgba(226, 66, 108, 0.05) 65%,
                 transparent 80%
             ),
 
-            /* gota laranja */
+            /* PEQUENA GOTA ROSA */
             radial-gradient(
-                ellipse 65px 45px at 84% 20%,
+                ellipse 45px 65px at 15% 16%,
+                rgba(226, 66, 108, 0.13) 0%,
+                rgba(226, 66, 108, 0.05) 60%,
+                transparent 80%
+            ),
+
+            /* LARANJA — superior direito */
+            radial-gradient(
+                ellipse 170px 125px at 96% 10%,
+                rgba(239, 116, 55, 0.21) 0%,
+                rgba(239, 116, 55, 0.14) 40%,
+                rgba(239, 116, 55, 0.05) 65%,
+                transparent 82%
+            ),
+
+            /* PEQUENA GOTA LARANJA */
+            radial-gradient(
+                ellipse 45px 75px at 85% 19%,
                 rgba(239, 116, 55, 0.13) 0%,
-                rgba(239, 116, 55, 0.06) 50%,
-                transparent 78%
+                rgba(239, 116, 55, 0.05) 60%,
+                transparent 82%
             ),
 
             /* AMARELO — lateral esquerda */
             radial-gradient(
-                ellipse 145px 175px at 4% 47%,
+                ellipse 125px 165px at 3% 48%,
                 rgba(244, 193, 55, 0.17) 0%,
-                rgba(244, 193, 55, 0.12) 28%,
-                rgba(244, 193, 55, 0.06) 50%,
-                rgba(244, 193, 55, 0.025) 68%,
+                rgba(244, 193, 55, 0.11) 40%,
+                rgba(244, 193, 55, 0.04) 65%,
                 transparent 82%
             ),
 
-            /* pequenas gotas amarelas */
+            /* PEQUENA GOTA AMARELA */
             radial-gradient(
-                ellipse 48px 70px at 13% 58%,
+                ellipse 40px 65px at 13% 57%,
                 rgba(244, 193, 55, 0.12) 0%,
-                rgba(244, 193, 55, 0.05) 55%,
-                transparent 80%
+                rgba(244, 193, 55, 0.04) 65%,
+                transparent 82%
             ),
 
             /* VERMELHO — lateral direita */
             radial-gradient(
-                ellipse 175px 210px at 98% 49%,
+                ellipse 145px 190px at 98% 52%,
                 rgba(207, 57, 63, 0.16) 0%,
-                rgba(207, 57, 63, 0.11) 28%,
-                rgba(207, 57, 63, 0.06) 50%,
-                rgba(207, 57, 63, 0.025) 68%,
+                rgba(207, 57, 63, 0.10) 40%,
+                rgba(207, 57, 63, 0.04) 65%,
                 transparent 83%
             ),
 
-            /* gota vermelha */
+            /* PEQUENA GOTA VERMELHA */
             radial-gradient(
-                ellipse 55px 80px at 88% 58%,
+                ellipse 45px 75px at 88% 61%,
                 rgba(207, 57, 63, 0.12) 0%,
-                rgba(207, 57, 63, 0.05) 52%,
-                transparent 80%
+                rgba(207, 57, 63, 0.04) 65%,
+                transparent 82%
             ),
 
             /* ROSA — parte inferior */
             radial-gradient(
-                ellipse 190px 135px at 34% 94%,
+                ellipse 175px 125px at 30% 97%,
                 rgba(231, 76, 111, 0.16) 0%,
-                rgba(231, 76, 111, 0.10) 30%,
-                rgba(231, 76, 111, 0.045) 53%,
-                transparent 78%
+                rgba(231, 76, 111, 0.09) 42%,
+                rgba(231, 76, 111, 0.03) 68%,
+                transparent 82%
             ),
 
             /* LARANJA — parte inferior direita */
             radial-gradient(
-                ellipse 180px 140px at 76% 94%,
+                ellipse 170px 125px at 77% 96%,
                 rgba(239, 116, 55, 0.17) 0%,
-                rgba(239, 116, 55, 0.10) 30%,
-                rgba(239, 116, 55, 0.04) 55%,
-                transparent 80%
-            ),
-
-            /* pequenas manchas espalhadas */
-            radial-gradient(
-                ellipse 75px 50px at 28% 30%,
-                rgba(226, 66, 108, 0.08) 0%,
-                transparent 75%
-            ),
-
-            radial-gradient(
-                ellipse 80px 55px at 72% 34%,
-                rgba(239, 116, 55, 0.08) 0%,
-                transparent 75%
-            ),
-
-            radial-gradient(
-                ellipse 65px 90px at 57% 76%,
-                rgba(244, 193, 55, 0.07) 0%,
-                transparent 75%
+                rgba(239, 116, 55, 0.09) 42%,
+                rgba(239, 116, 55, 0.03) 68%,
+                transparent 82%
             );
 
         background-attachment: fixed;
@@ -155,6 +144,11 @@
         font-family: 'Montserrat', sans-serif;
         overflow-x: hidden;
     }
+
+
+    /* =========================================
+       PÁGINA
+       ========================================= */
 
     .page {
         min-height: 100vh;
@@ -173,6 +167,11 @@
         position: relative;
         z-index: 2;
     }
+
+
+    /* =========================================
+       CABEÇALHO
+       ========================================= */
 
     .intro {
         font-size: 11px;
@@ -207,6 +206,11 @@
         max-width: 470px;
         margin: 0 auto 38px;
     }
+
+
+    /* =========================================
+       BOTÃO
+       ========================================= */
 
     .button {
         display: inline-block;
@@ -245,7 +249,10 @@
         color: #77706a;
     }
 
-    /* PRÉVIA */
+
+    /* =========================================
+       PRÉVIA
+       ========================================= */
 
     .preview-section {
         display: none;
@@ -339,7 +346,10 @@
         color: white;
     }
 
-    /* MODAL */
+
+    /* =========================================
+       MODAL
+       ========================================= */
 
     .modal {
         display: none;
@@ -389,7 +399,10 @@
         flex: 1;
     }
 
-    /* GALERIA */
+
+    /* =========================================
+       GALERIA
+       ========================================= */
 
     .gallery-section {
         width: 100%;
@@ -446,39 +459,10 @@
         color: #9a918a;
     }
 
-    .decor {
-        position: absolute;
-        z-index: 1;
-        pointer-events: none;
-    }
 
-    .pink-detail {
-        width: 180px;
-        height: 180px;
-        top: -70px;
-        left: -70px;
-        background:
-            radial-gradient(
-                ellipse 90px 75px,
-                rgba(217, 87, 122, 0.08) 0%,
-                rgba(217, 87, 122, 0.035) 50%,
-                transparent 75%
-            );
-    }
-
-    .orange-detail {
-        width: 220px;
-        height: 220px;
-        bottom: -100px;
-        right: -90px;
-        background:
-            radial-gradient(
-                ellipse 110px 85px,
-                rgba(235, 121, 72, 0.08) 0%,
-                rgba(235, 121, 72, 0.035) 50%,
-                transparent 75%
-            );
-    }
+    /* =========================================
+       LINHA DECORATIVA
+       ========================================= */
 
     .line {
         width: 55px;
@@ -487,6 +471,11 @@
         opacity: 0.55;
         margin: 0 auto 25px;
     }
+
+
+    /* =========================================
+       RESPONSIVO
+       ========================================= */
 
     @media (max-width: 600px) {
 
@@ -536,20 +525,6 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 8px;
         }
-
-        .pink-detail {
-            width: 140px;
-            height: 140px;
-            top: -50px;
-            left: -50px;
-        }
-
-        .orange-detail {
-            width: 160px;
-            height: 160px;
-            bottom: -70px;
-            right: -60px;
-        }
     }
 
 </style>
@@ -559,9 +534,6 @@
 <body>
 
 <main class="page">
-
-    <div class="decor pink-detail"></div>
-    <div class="decor orange-detail"></div>
 
     <section class="content">
 
@@ -601,6 +573,7 @@
         </label>
 
         <div id="uploadStatus"></div>
+
 
         <!-- PRÉVIA DAS FOTOS -->
 
@@ -651,6 +624,7 @@
 
         </section>
 
+
         <!-- GALERIA -->
 
         <section class="gallery-section">
@@ -674,6 +648,7 @@
 
         </section>
 
+
         <p class="footer">
             Com amor, Giulia & Nathan
         </p>
@@ -683,7 +658,9 @@
 </main>
 
 
-<!-- CONFIRMAÇÃO -->
+<!-- =========================================
+     CONFIRMAÇÃO
+     ========================================= -->
 
 <div
     id="confirmModal"
@@ -728,7 +705,9 @@
 </div>
 
 
-<!-- SUPABASE -->
+<!-- =========================================
+     SUPABASE
+     ========================================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -786,7 +765,7 @@
 
     /* =========================================
        ESCOLHER FOTOS
-    ========================================= */
+       ========================================= */
 
     photoInput.addEventListener(
         'change',
@@ -812,6 +791,12 @@
                     return;
                 }
 
+
+                /*
+                 * Evita duplicar a mesma foto
+                 * na seleção.
+                 */
+
                 const alreadySelected =
                     selectedFiles.some(
                         existing =>
@@ -836,7 +821,7 @@
 
     /* =========================================
        PRÉVIA
-    ========================================= */
+       ========================================= */
 
     function renderPreview() {
 
@@ -920,7 +905,7 @@
 
     /* =========================================
        LIMPAR SELEÇÃO
-    ========================================= */
+       ========================================= */
 
     clearSelection.addEventListener(
         'click',
@@ -940,7 +925,7 @@
 
     /* =========================================
        ABRIR SEGUNDA CONFIRMAÇÃO
-    ========================================= */
+       ========================================= */
 
     confirmSelection.addEventListener(
         'click',
@@ -972,7 +957,7 @@
 
     /* =========================================
        CONFIRMAÇÃO FINAL + UPLOAD
-    ========================================= */
+       ========================================= */
 
     finalConfirm.addEventListener(
         'click',
@@ -1084,7 +1069,7 @@
 
     /* =========================================
        GALERIA
-    ========================================= */
+       ========================================= */
 
     async function loadGallery() {
 
