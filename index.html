@@ -27,7 +27,23 @@
     body {
         min-height: 100vh;
 
-        background:
+        background-color: #fff0df;
+
+        background-image:
+            repeating-linear-gradient(
+                0deg,
+                rgba(255,255,255,.12) 0px,
+                rgba(255,255,255,.12) 1px,
+                rgba(180,130,100,.025) 1px,
+                rgba(180,130,100,.025) 3px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                rgba(255,255,255,.10) 0px,
+                rgba(255,255,255,.10) 1px,
+                rgba(180,130,100,.025) 1px,
+                rgba(180,130,100,.025) 3px
+            ),
             linear-gradient(
                 to bottom,
                 #fde8ef 0%,
@@ -38,8 +54,8 @@
             );
 
         background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
+        background-repeat: repeat, repeat, no-repeat;
+        background-size: auto, auto, cover;
 
         color: #514943;
         font-family: 'Montserrat', sans-serif;
@@ -458,7 +474,7 @@
     @media (max-width: 600px) {
 
         body {
-            background-size: cover;
+            background-size: auto, auto, cover;
             background-attachment: fixed;
         }
 
@@ -805,337 +821,5 @@
                     document.createElement('div');
 
                 item.className =
-                    'preview-item';
-
-
-                const image =
-                    document.createElement('img');
-
-                image.src =
-                    URL.createObjectURL(file);
-
-
-                const removeButton =
-                    document.createElement('button');
-
-                removeButton.type =
-                    'button';
-
-                removeButton.className =
-                    'remove-preview';
-
-                removeButton.textContent =
-                    '×';
-
-                removeButton.title =
-                    'Remover esta foto';
-
-
-                removeButton.addEventListener(
-                    'click',
-                    function () {
-
-                        selectedFiles.splice(
-                            index,
-                            1
-                        );
-
-                        renderPreview();
-
-                    }
-                );
-
-
-                item.appendChild(image);
-
-                item.appendChild(
-                    removeButton
-                );
-
-                previewGrid.appendChild(item);
-
-            }
-        );
-
-    }
-
-
-    clearSelection.addEventListener(
-        'click',
-        function () {
-
-            selectedFiles = [];
-
-            photoInput.value = '';
-
-            renderPreview();
-
-            uploadStatus.textContent = '';
-
-        }
-    );
-
-
-    confirmSelection.addEventListener(
-        'click',
-        function () {
-
-            if (!selectedFiles.length) {
-                return;
-            }
-
-
-            confirmModal.classList.add(
-                'visible'
-            );
-
-        }
-    );
-
-
-    cancelConfirm.addEventListener(
-        'click',
-        function () {
-
-            confirmModal.classList.remove(
-                'visible'
-            );
-
-        }
-    );
-
-
-    finalConfirm.addEventListener(
-        'click',
-        async function () {
-
-            confirmModal.classList.remove(
-                'visible'
-            );
-
-
-            uploadButton.classList.add(
-                'disabled'
-            );
-
-
-            uploadStatus.textContent =
-                'Enviando suas fotos... 💕';
-
-
-            try {
-
-                let uploaded = 0;
-
-
-                for (
-                    const file of selectedFiles
-                ) {
-
-                    const extension =
-                        file.name
-                            .split('.')
-                            .pop()
-                            .toLowerCase();
-
-
-                    const fileName =
-                        Date.now() +
-                        '-' +
-                        Math.random()
-                            .toString(36)
-                            .substring(2, 10) +
-                        '.' +
-                        extension;
-
-
-                    const result =
-                        await supabaseClient
-                            .storage
-                            .from('fotos-casamento')
-                            .upload(
-                                fileName,
-                                file,
-                                {
-                                    cacheControl: '3600',
-                                    upsert: false,
-                                    contentType: file.type
-                                }
-                            );
-
-
-                    if (result.error) {
-                        throw result.error;
-                    }
-
-
-                    uploaded++;
-
-
-                    uploadStatus.textContent =
-                        `Enviando ${uploaded} de ${selectedFiles.length} fotos... 💕`;
-
-                }
-
-
-                uploadStatus.textContent =
-                    `${uploaded} ${uploaded === 1 ? 'foto enviada' : 'fotos enviadas'}! Obrigada por fazer parte das nossas memórias. 💕`;
-
-
-                selectedFiles = [];
-
-                photoInput.value = '';
-
-                renderPreview();
-
-
-                await loadGallery();
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    'ERRO NO UPLOAD:',
-                    error
-                );
-
-
-                uploadStatus.textContent =
-                    'Não conseguimos enviar todas as fotos. Tente novamente.';
-
-            }
-
-            finally {
-
-                uploadButton.classList.remove(
-                    'disabled'
-                );
-
-            }
-
-        }
-    );
-
-
-    async function loadGallery() {
-
-        gallery.innerHTML =
-            '<div class="loading-gallery">Carregando nossas memórias...</div>';
-
-
-        try {
-
-            const result =
-                await supabaseClient
-                    .storage
-                    .from('fotos-casamento')
-                    .list(
-                        '',
-                        {
-                            limit: 100,
-                            offset: 0,
-                            sortBy: {
-                                column: 'created_at',
-                                order: 'desc'
-                            }
-                        }
-                    );
-
-
-            if (result.error) {
-                throw result.error;
-            }
-
-
-            const files =
-                (result.data || [])
-                    .filter(
-                        file =>
-                            file.name &&
-                            !file.name.endsWith('/')
-                    );
-
-
-            if (!files.length) {
-
-                gallery.innerHTML =
-                    '<div class="empty-gallery">' +
-                    'As primeiras fotos do nosso dia aparecerão aqui. 💕' +
-                    '</div>';
-
-                return;
-            }
-
-
-            gallery.innerHTML = '';
-
-
-            files.forEach(
-                file => {
-
-                    const publicUrl =
-                        supabaseClient
-                            .storage
-                            .from('fotos-casamento')
-                            .getPublicUrl(
-                                file.name
-                            )
-                            .data
-                            .publicUrl;
-
-
-                    const image =
-                        document.createElement('img');
-
-
-                    image.src =
-                        publicUrl;
-
-
-                    image.alt =
-                        'Foto do casamento';
-
-
-                    image.className =
-                        'gallery-item';
-
-
-                    image.loading =
-                        'lazy';
-
-
-                    gallery.appendChild(
-                        image
-                    );
-
-                }
-            );
-
-        }
-
-        catch (error) {
-
-            console.error(
-                'ERRO AO CARREGAR GALERIA:',
-                error
-            );
-
-
-            gallery.innerHTML =
-                '<div class="empty-gallery">' +
-                'Não foi possível carregar as fotos.' +
-                '</div>';
-
-        }
-
-    }
-
-
-    loadGallery();
-
-</script>
-
-</body>
-</html>
+                    '
 ```
