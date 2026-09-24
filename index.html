@@ -1,738 +1,1651 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Giulia & Nathan</title>
- 
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap%22 rel="stylesheet">
- 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
- 
-        body {
-            min-height: 100vh;
-            background: #fff;
-            color: #514943;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-        }
- 
-        /* Imagem enviada como plano de fundo */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            background-image: url("fundo-floral.png");
-            background-repeat: no-repeat;
-            background-position: left top;
-            background-size: auto 100%;
-        }
- 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        min-height: 100vh;
+        background: #fffaf6;
+        color: #514943;
+        font-family: 'Montserrat', sans-serif;
+        overflow-x: hidden;
+    }
+
+    .page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 50px 25px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .content {
+        width: 100%;
+        max-width: 900px;
+        position: relative;
+        z-index: 5;
+    }
+
+    .intro {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #77706a;
+        margin-bottom: 18px;
+        font-weight: 500;
+    }
+
+    h1 {
+        font-family: 'Great Vibes', cursive;
+        font-size: clamp(70px, 16vw, 115px);
+        font-weight: 400;
+        line-height: 0.95;
+        color: #A87932;
+        margin-bottom: 18px;
+    }
+
+    .date {
+        font-size: 13px;
+        letter-spacing: 5px;
+        color: #655c55;
+        margin-bottom: 45px;
+        font-weight: 500;
+    }
+
+    .message {
+        font-size: 15px;
+        line-height: 1.9;
+        color: #625a55;
+        max-width: 470px;
+        margin: 0 auto 38px;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 17px 32px;
+        border-radius: 50px;
+        background: #D9577A;
+        color: #ffffff;
+        text-decoration: none;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        letter-spacing: 1.6px;
+        font-weight: 600;
+        box-shadow: 0 8px 25px rgba(217, 87, 122, 0.20);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(217, 87, 122, 0.30);
+    }
+
+    .button.disabled {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    #photoInput {
+        display: none;
+    }
+
+    #uploadStatus {
+        min-height: 24px;
+        margin-top: 18px;
+        font-size: 12px;
+        color: #77706a;
+    }
+
+
+    /* =========================================
+       HIBISCOS DECORATIVOS
+    ========================================= */
+
+    .floral-decoration {
+        position: absolute;
+        z-index: 2;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .floral-decoration svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+    }
+
+
+    /* HIBISCO SUPERIOR ESQUERDO */
+
+    .hibiscus-left {
+        width: 360px;
+        height: 360px;
+        top: -125px;
+        left: -105px;
+        opacity: 0.62;
+        transform: rotate(-12deg);
+    }
+
+
+    /* HIBISCO SUPERIOR DIREITO */
+
+    .hibiscus-right {
+        width: 320px;
+        height: 320px;
+        top: -35px;
+        right: -125px;
+        opacity: 0.52;
+        transform: rotate(18deg);
+    }
+
+
+    /* HIBISCO INFERIOR DIREITO */
+
+    .hibiscus-bottom {
+        width: 390px;
+        height: 390px;
+        right: -145px;
+        bottom: -165px;
+        opacity: 0.55;
+        transform: rotate(-8deg);
+    }
+
+
+    /* HIBISCO PEQUENO INFERIOR ESQUERDO */
+
+    .hibiscus-small {
+        width: 220px;
+        height: 220px;
+        left: -80px;
+        bottom: -85px;
+        opacity: 0.38;
+        transform: rotate(15deg);
+    }
+
+
+    /* PRÉVIA */
+
+    .preview-section {
+        display: none;
+        width: 100%;
+        max-width: 760px;
+        margin: 40px auto 0;
+    }
+
+    .preview-section.visible {
+        display: block;
+    }
+
+    .preview-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 38px;
+        color: #A87932;
+        margin-bottom: 8px;
+    }
+
+    .preview-subtitle {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #9a918a;
+        margin-bottom: 25px;
+    }
+
+    .preview-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .preview-item {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 12px;
+        background: #f3ebe5;
+    }
+
+    .preview-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .remove-preview {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 28px;
+        height: 28px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(60, 45, 40, 0.78);
+        color: white;
+        font-size: 17px;
+        cursor: pointer;
+        line-height: 28px;
+    }
+
+    .preview-actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 25px;
+        flex-wrap: wrap;
+    }
+
+    .secondary-button,
+    .confirm-button {
+        border: none;
+        border-radius: 50px;
+        padding: 15px 25px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .secondary-button {
+        background: #eee5df;
+        color: #655c55;
+    }
+
+    .confirm-button {
+        background: #D9577A;
+        color: white;
+    }
+
+
+    /* MODAL */
+
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(45, 35, 30, 0.55);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+    }
+
+    .modal.visible {
+        display: flex;
+    }
+
+    .modal-box {
+        width: 100%;
+        max-width: 390px;
+        background: #fffaf6;
+        border-radius: 22px;
+        padding: 35px 28px;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.20);
+    }
+
+    .modal-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 40px;
+        color: #A87932;
+        margin-bottom: 12px;
+    }
+
+    .modal-text {
+        font-size: 13px;
+        line-height: 1.7;
+        color: #625a55;
+        margin-bottom: 25px;
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .modal-actions button {
+        flex: 1;
+    }
+
+
+    /* GALERIA */
+
+    .gallery-section {
+        width: 100%;
+        max-width: 900px;
+        margin: 90px auto 20px;
+    }
+
+    .gallery-title {
+        font-family: 'Great Vibes', cursive;
+        font-size: 48px;
+        font-weight: 400;
+        color: #A87932;
+        margin-bottom: 10px;
+    }
+
+    .gallery-subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #9a918a;
+        margin-bottom: 30px;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    .gallery-item {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+        background: #f3ebe5;
+    }
+
+    .empty-gallery,
+    .loading-gallery {
+        grid-column: 1 / -1;
+        font-size: 13px;
+        color: #9a918a;
+        padding: 30px 15px;
+    }
+
+    .footer {
+        margin-top: 45px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #9a918a;
+    }
+
+    .line {
+        width: 55px;
+        height: 1px;
+        background: #A87932;
+        opacity: 0.55;
+        margin: 0 auto 25px;
+    }
+
+
+    /* =========================================
+       RESPONSIVIDADE
+    ========================================= */
+
+    @media (max-width: 600px) {
+
         .page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 50px 25px;
+            padding: 40px 22px;
         }
- 
-        .content {
-            width: 100%;
-            max-width: 900px;
-            position: relative;
-        }
- 
-        .intro {
-            font-size: 11px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #77706a;
-            margin-bottom: 18px;
-            font-weight: 500;
-        }
- 
-        .line {
-            width: 55px;
-            height: 1px;
-            background: #a87932;
-            opacity: 0.55;
-            margin: 0 auto 25px;
-        }
- 
+
         h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(70px, 16vw, 115px);
-            font-weight: 400;
-            line-height: 1.1;
-            color: #a87932;
-            margin-bottom: 18px;
+            font-size: 76px;
         }
- 
+
         .date {
-            font-size: 13px;
-            letter-spacing: 5px;
-            color: #655c55;
-            margin-bottom: 45px;
-            font-weight: 500;
+            font-size: 11px;
+            letter-spacing: 3px;
         }
- 
+
         .message {
-            font-size: 15px;
-            line-height: 1.9;
-            color: #625a55;
-            max-width: 470px;
-            margin: 0 auto 38px;
+            font-size: 14px;
+            padding: 0 10px;
         }
- 
+
         .button {
-            display: inline-block;
-            padding: 17px 32px;
-            border-radius: 50px;
-            background: #d9577a;
-            color: #fff;
-            text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 11px;
-            letter-spacing: 1.6px;
-            font-weight: 600;
-            box-shadow: 0 8px 25px rgba(217, 87, 122, 0.20);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
- 
-        .button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(217, 87, 122, 0.30);
-        }
- 
-        .button.disabled {
-            opacity: 0.6;
-            pointer-events: none;
-        }
- 
-        #photoInput {
-            display: none;
-        }
- 
-        #uploadStatus {
-            min-height: 24px;
-            margin-top: 18px;
-            font-size: 12px;
-            color: #77706a;
-        }
- 
-        /* Prévia */
-        .preview-section {
-            display: none;
             width: 100%;
-            max-width: 760px;
-            margin: 40px auto 0;
+            max-width: 310px;
+            padding: 18px 20px;
         }
- 
-        .preview-section.visible {
-            display: block;
-        }
- 
-        .preview-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 38px;
-            color: #a87932;
-            margin-bottom: 8px;
-        }
- 
-        .preview-subtitle {
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #9a918a;
-            margin-bottom: 25px;
-        }
- 
+
         .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
- 
-        .preview-item {
-            position: relative;
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            border-radius: 12px;
-            background: #f3ebe5;
-        }
- 
-        .preview-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
- 
-        .remove-preview {
-            position: absolute;
-            top: 7px;
-            right: 7px;
-            width: 28px;
-            height: 28px;
-            border: none;
-            border-radius: 50%;
-            background: rgba(60, 45, 40, 0.78);
-            color: #fff;
-            font-size: 17px;
-            cursor: pointer;
-            line-height: 28px;
-        }
- 
-        .preview-actions {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
- 
-        .secondary-button,
-        .confirm-button {
-            border: none;
-            border-radius: 50px;
-            padding: 15px 25px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 10px;
-            letter-spacing: 1.2px;
-            font-weight: 600;
-            cursor: pointer;
-        }
- 
-        .secondary-button {
-            background: #eee5df;
-            color: #655c55;
-        }
- 
-        .confirm-button {
-            background: #d9577a;
-            color: #fff;
-        }
- 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(45, 35, 30, 0.55);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 25px;
-        }
- 
-        .modal.visible {
-            display: flex;
-        }
- 
-        .modal-box {
-            width: 100%;
-            max-width: 390px;
-            background: #fffaf6;
-            border-radius: 22px;
-            padding: 35px 28px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.20);
-        }
- 
-        .modal-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 40px;
-            color: #a87932;
-            margin-bottom: 12px;
-        }
- 
-        .modal-text {
-            font-size: 13px;
-            line-height: 1.7;
-            color: #625a55;
-            margin-bottom: 25px;
-        }
- 
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-        }
- 
-        .modal-actions button {
-            flex: 1;
-        }
- 
-        /* Galeria */
-        .gallery-section {
-            width: 100%;
-            max-width: 900px;
-            margin: 90px auto 20px;
-        }
- 
-        .gallery-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 48px;
-            font-weight: 400;
-            color: #a87932;
-            margin-bottom: 10px;
-        }
- 
-        .gallery-subtitle {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #9a918a;
-            margin-bottom: 30px;
-        }
- 
-        .gallery {
-            display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 7px;
         }
- 
-        .gallery-item {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: 12px;
-            display: block;
-            background: #f3ebe5;
+
+        .gallery-section {
+            margin-top: 70px;
         }
- 
-        .empty-gallery,
-        .loading-gallery {
-            grid-column: 1 / -1;
-            font-size: 13px;
-            color: #9a918a;
-            padding: 30px 15px;
+
+        .gallery-title {
+            font-size: 42px;
         }
- 
-        .footer {
-            margin-top: 45px;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #9a918a;
+
+        .gallery {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
         }
- 
-        @media (max-width: 600px) {
-            body::before {
-                background-size: 100% auto;
-                background-position: left top;
-            }
- 
-            .page {
-                padding: 40px 22px;
-            }
- 
-            h1 {
-                font-size: 76px;
-            }
- 
-            .date {
-                font-size: 11px;
-                letter-spacing: 3px;
-            }
- 
-            .message {
-                font-size: 14px;
-                padding: 0 10px;
-            }
- 
-            .button {
-                width: 100%;
-                max-width: 310px;
-                padding: 18px 20px;
-            }
- 
-            .preview-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 7px;
-            }
- 
-            .gallery-section {
-                margin-top: 70px;
-            }
- 
-            .gallery-title {
-                font-size: 42px;
-            }
- 
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
+
+
+        /* HIBISCOS NO CELULAR */
+
+        .hibiscus-left {
+            width: 230px;
+            height: 230px;
+            top: -80px;
+            left: -75px;
+            opacity: 0.48;
         }
+
+        .hibiscus-right {
+            width: 210px;
+            height: 210px;
+            top: 35px;
+            right: -85px;
+            opacity: 0.42;
+        }
+
+        .hibiscus-bottom {
+            width: 250px;
+            height: 250px;
+            right: -95px;
+            bottom: -105px;
+            opacity: 0.45;
+        }
+
+        .hibiscus-small {
+            width: 160px;
+            height: 160px;
+            left: -65px;
+            bottom: -65px;
+            opacity: 0.30;
+        }
+
+    }
+
 </style>
+
 </head>
- 
+
+
 <body>
+
 <main class="page">
-<section class="content">
-<p class="intro">Nosso casamento</p>
-<div class="line"></div>
- 
-            <h1>Giulia & Nathan</h1>
- 
-            <p class="date">20 · 03 · 2027</p>
- 
-            <p class="message">
-                Queremos reviver o nosso casamento através dos seus olhos.
-<br>
-                Fotografe, compartilhe e faça parte das nossas memórias.
-</p>
- 
-            <input
-                type="file"
-                id="photoInput"
-                accept="image/*"
-                multiple
->
- 
-            <label
-                for="photoInput"
-                class="button"
-                id="uploadButton"
->
-                📸 &nbsp; COMPARTILHE SUAS FOTOS
-</label>
- 
-            <div id="uploadStatus"></div>
- 
-            <section id="previewSection" class="preview-section">
-<h2 class="preview-title">Antes de enviar...</h2>
- 
-                <p class="preview-subtitle">
-                    Confira as fotos que você escolheu
-</p>
- 
-                <div id="previewGrid" class="preview-grid"></div>
- 
-                <div class="preview-actions">
-<label for="photoInput" class="secondary-button">
-                        + ADICIONAR MAIS
-</label>
- 
-                    <button
-                        type="button"
-                        class="secondary-button"
-                        id="clearSelection"
->
-                        LIMPAR
-</button>
- 
-                    <button
-                        type="button"
-                        class="confirm-button"
-                        id="confirmSelection"
->
-                        ENVIAR FOTOS
-</button>
-</div>
-</section>
- 
-            <section class="gallery-section">
-<h2 class="gallery-title">Galeria</h2>
- 
-                <p class="gallery-subtitle">em tempo real</p>
- 
-                <div id="gallery" class="gallery">
-<div class="loading-gallery">
-                        Carregando nossas memórias...
-</div>
-</div>
-</section>
- 
-            <p class="footer">Com amor, Giulia & Nathan</p>
-</section>
-</main>
- 
-    <div id="confirmModal" class="modal">
-<div class="modal-box">
-<h2 class="modal-title">Tudo certo?</h2>
- 
-            <p class="modal-text">
-                Depois de enviar, elas ficarão disponíveis na galeria do site
-                e não poderão ser apagadas.
-<br><br>
-                Tem certeza que deseja enviar?
-</p>
- 
-            <div class="modal-actions">
-<button
+
+
+    <!-- =========================================
+         HIBISCO SUPERIOR ESQUERDO
+    ========================================== -->
+
+    <div class="floral-decoration hibiscus-left">
+
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+
+                <filter id="softLeft">
+                    <feGaussianBlur stdDeviation="0.7"/>
+                </filter>
+
+                <radialGradient id="petalPink1">
+                    <stop offset="0%" stop-color="#f7b5c7"/>
+                    <stop offset="55%" stop-color="#df7191"/>
+                    <stop offset="100%" stop-color="#c84f73"/>
+                </radialGradient>
+
+                <radialGradient id="petalPink2">
+                    <stop offset="0%" stop-color="#f9c5d2"/>
+                    <stop offset="65%" stop-color="#e889a3"/>
+                    <stop offset="100%" stop-color="#d15c7d"/>
+                </radialGradient>
+
+            </defs>
+
+
+            <!-- folhas -->
+
+            <path
+                d="M70 280 C105 235 145 225 185 235 C145 275 110 292 70 280Z"
+                fill="#879b72"
+                opacity=".55"
+            />
+
+            <path
+                d="M115 315 C155 265 205 250 245 270 C205 315 160 330 115 315Z"
+                fill="#718b67"
+                opacity=".42"
+            />
+
+            <path
+                d="M42 245 C60 205 90 185 125 190 C105 225 80 245 42 245Z"
+                fill="#9cab82"
+                opacity=".45"
+            />
+
+
+            <!-- flor principal -->
+
+            <g filter="url(#softLeft)">
+
+                <ellipse
+                    cx="178"
+                    cy="145"
+                    rx="65"
+                    ry="92"
+                    fill="url(#petalPink1)"
+                    transform="rotate(-28 178 145)"
+                    opacity=".92"
+                />
+
+                <ellipse
+                    cx="178"
+                    cy="145"
+                    rx="65"
+                    ry="92"
+                    fill="url(#petalPink2)"
+                    transform="rotate(28 178 145)"
+                    opacity=".92"
+                />
+
+                <ellipse
+                    cx="178"
+                    cy="145"
+                    rx="65"
+                    ry="92"
+                    fill="url(#petalPink1)"
+                    transform="rotate(92 178 145)"
+                    opacity=".88"
+                />
+
+                <ellipse
+                    cx="178"
+                    cy="145"
+                    rx="65"
+                    ry="92"
+                    fill="url(#petalPink2)"
+                    transform="rotate(148 178 145)"
+                    opacity=".88"
+                />
+
+                <ellipse
+                    cx="178"
+                    cy="145"
+                    rx="63"
+                    ry="88"
+                    fill="url(#petalPink1)"
+                    transform="rotate(208 178 145)"
+                    opacity=".9"
+                />
+
+            </g>
+
+
+            <!-- centro -->
+
+            <circle
+                cx="178"
+                cy="145"
+                r="29"
+                fill="#e7a83f"
+                opacity=".85"
+            />
+
+            <circle
+                cx="178"
+                cy="145"
+                r="14"
+                fill="#c96b45"
+                opacity=".7"
+            />
+
+
+            <!-- estame -->
+
+            <path
+                d="M178 150 C210 125 235 100 248 70"
+                stroke="#c96b45"
+                stroke-width="4"
+                fill="none"
+                opacity=".8"
+            />
+
+            <circle cx="248" cy="70" r="6" fill="#e1a43c"/>
+
+        </svg>
+
+    </div>
+
+
+
+    <!-- =========================================
+         HIBISCO SUPERIOR DIREITO
+    ========================================== -->
+
+    <div class="floral-decoration hibiscus-right">
+
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+
+                <radialGradient id="pinkRight">
+                    <stop offset="0%" stop-color="#fac3d0"/>
+                    <stop offset="55%" stop-color="#e57d99"/>
+                    <stop offset="100%" stop-color="#c95778"/>
+                </radialGradient>
+
+                <radialGradient id="coralRight">
+                    <stop offset="0%" stop-color="#ffd0c4"/>
+                    <stop offset="65%" stop-color="#e98575"/>
+                    <stop offset="100%" stop-color="#cb655b"/>
+                </radialGradient>
+
+            </defs>
+
+
+            <!-- folhas -->
+
+            <path
+                d="M230 290 C270 235 320 215 360 235 C330 285 280 305 230 290Z"
+                fill="#819671"
+                opacity=".55"
+            />
+
+            <path
+                d="M180 325 C220 275 270 260 315 280 C280 325 225 340 180 325Z"
+                fill="#718867"
+                opacity=".45"
+            />
+
+
+            <!-- pétalas -->
+
+            <ellipse
+                cx="210"
+                cy="160"
+                rx="62"
+                ry="90"
+                fill="url(#pinkRight)"
+                transform="rotate(-30 210 160)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="210"
+                cy="160"
+                rx="62"
+                ry="90"
+                fill="url(#coralRight)"
+                transform="rotate(30 210 160)"
+                opacity=".85"
+            />
+
+            <ellipse
+                cx="210"
+                cy="160"
+                rx="62"
+                ry="90"
+                fill="url(#pinkRight)"
+                transform="rotate(90 210 160)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="210"
+                cy="160"
+                rx="62"
+                ry="90"
+                fill="url(#pinkRight)"
+                transform="rotate(150 210 160)"
+                opacity=".84"
+            />
+
+            <ellipse
+                cx="210"
+                cy="160"
+                rx="62"
+                ry="90"
+                fill="url(#coralRight)"
+                transform="rotate(210 210 160)"
+                opacity=".85"
+            />
+
+
+            <!-- centro -->
+
+            <circle
+                cx="210"
+                cy="160"
+                r="27"
+                fill="#e7a643"
+                opacity=".85"
+            />
+
+            <circle
+                cx="210"
+                cy="160"
+                r="12"
+                fill="#bd634e"
+                opacity=".7"
+            />
+
+
+            <!-- estame -->
+
+            <path
+                d="M210 165 C238 145 260 118 275 90"
+                stroke="#c96a4e"
+                stroke-width="4"
+                fill="none"
+                opacity=".8"
+            />
+
+            <circle cx="275" cy="90" r="6" fill="#e0a039"/>
+
+        </svg>
+
+    </div>
+
+
+
+    <!-- =========================================
+         HIBISCO INFERIOR DIREITO
+    ========================================== -->
+
+    <div class="floral-decoration hibiscus-bottom">
+
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+
+                <radialGradient id="pinkBottom">
+                    <stop offset="0%" stop-color="#f8b8c9"/>
+                    <stop offset="60%" stop-color="#dc718f"/>
+                    <stop offset="100%" stop-color="#bd4f72"/>
+                </radialGradient>
+
+            </defs>
+
+
+            <!-- folhas -->
+
+            <path
+                d="M35 260 C75 210 125 195 165 215 C130 260 85 280 35 260Z"
+                fill="#7f9671"
+                opacity=".55"
+            />
+
+            <path
+                d="M80 320 C125 265 175 250 220 270 C185 320 130 340 80 320Z"
+                fill="#718766"
+                opacity=".45"
+            />
+
+            <path
+                d="M220 315 C260 260 310 245 355 265 C320 315 270 330 220 315Z"
+                fill="#8ca178"
+                opacity=".5"
+            />
+
+
+            <!-- flor -->
+
+            <ellipse
+                cx="220"
+                cy="170"
+                rx="68"
+                ry="94"
+                fill="url(#pinkBottom)"
+                transform="rotate(-25 220 170)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="220"
+                cy="170"
+                rx="68"
+                ry="94"
+                fill="url(#pinkBottom)"
+                transform="rotate(25 220 170)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="220"
+                cy="170"
+                rx="68"
+                ry="94"
+                fill="url(#pinkBottom)"
+                transform="rotate(90 220 170)"
+                opacity=".85"
+            />
+
+            <ellipse
+                cx="220"
+                cy="170"
+                rx="68"
+                ry="94"
+                fill="url(#pinkBottom)"
+                transform="rotate(150 220 170)"
+                opacity=".86"
+            />
+
+            <ellipse
+                cx="220"
+                cy="170"
+                rx="68"
+                ry="94"
+                fill="url(#pinkBottom)"
+                transform="rotate(205 220 170)"
+                opacity=".85"
+            />
+
+
+            <!-- centro -->
+
+            <circle
+                cx="220"
+                cy="170"
+                r="29"
+                fill="#e6a33f"
+                opacity=".85"
+            />
+
+            <circle
+                cx="220"
+                cy="170"
+                r="13"
+                fill="#c4674c"
+                opacity=".7"
+            />
+
+
+            <!-- estame -->
+
+            <path
+                d="M220 175 C245 155 270 130 286 98"
+                stroke="#c96b4e"
+                stroke-width="4"
+                fill="none"
+                opacity=".8"
+            />
+
+            <circle cx="286" cy="98" r="6" fill="#dfa13b"/>
+
+        </svg>
+
+    </div>
+
+
+
+    <!-- =========================================
+         HIBISCO PEQUENO INFERIOR ESQUERDO
+    ========================================== -->
+
+    <div class="floral-decoration hibiscus-small">
+
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+
+                <radialGradient id="smallPink">
+                    <stop offset="0%" stop-color="#f9c4d0"/>
+                    <stop offset="60%" stop-color="#df7d99"/>
+                    <stop offset="100%" stop-color="#c75a7b"/>
+                </radialGradient>
+
+            </defs>
+
+
+            <path
+                d="M70 300 C110 245 160 230 205 250 C170 300 120 320 70 300Z"
+                fill="#81966f"
+                opacity=".55"
+            />
+
+            <path
+                d="M130 340 C170 285 220 270 265 290 C230 335 180 350 130 340Z"
+                fill="#718665"
+                opacity=".42"
+            />
+
+
+            <ellipse
+                cx="185"
+                cy="170"
+                rx="60"
+                ry="85"
+                fill="url(#smallPink)"
+                transform="rotate(-25 185 170)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="185"
+                cy="170"
+                rx="60"
+                ry="85"
+                fill="url(#smallPink)"
+                transform="rotate(30 185 170)"
+                opacity=".88"
+            />
+
+            <ellipse
+                cx="185"
+                cy="170"
+                rx="60"
+                ry="85"
+                fill="url(#smallPink)"
+                transform="rotate(90 185 170)"
+                opacity=".85"
+            />
+
+            <ellipse
+                cx="185"
+                cy="170"
+                rx="60"
+                ry="85"
+                fill="url(#smallPink)"
+                transform="rotate(150 185 170)"
+                opacity=".84"
+            />
+
+            <circle
+                cx="185"
+                cy="170"
+                r="25"
+                fill="#e5a23f"
+                opacity=".85"
+            />
+
+            <circle
+                cx="185"
+                cy="170"
+                r="11"
+                fill="#c76b4d"
+                opacity=".7"
+            />
+
+        </svg>
+
+    </div>
+
+
+
+    <!-- =========================================
+         CONTEÚDO PRINCIPAL
+    ========================================== -->
+
+    <section class="content">
+
+        <p class="intro">
+            Nosso casamento
+        </p>
+
+        <div class="line"></div>
+
+        <h1>
+            Giulia & Nathan
+        </h1>
+
+        <p class="date">
+            20 · 03 · 2027
+        </p>
+
+        <p class="message">
+            Queremos reviver o nosso casamento através dos seus olhos.
+            <br>
+            Fotografe, compartilhe e faça parte das nossas memórias.
+        </p>
+
+        <input
+            type="file"
+            id="photoInput"
+            accept="image/*"
+            multiple
+        >
+
+        <label
+            for="photoInput"
+            class="button"
+            id="uploadButton"
+        >
+            📸 &nbsp; COMPARTILHE SUAS FOTOS
+        </label>
+
+        <div id="uploadStatus"></div>
+
+
+
+        <!-- =========================================
+             PRÉVIA DAS FOTOS
+        ========================================== -->
+
+        <section
+            id="previewSection"
+            class="preview-section"
+        >
+
+            <h2 class="preview-title">
+                Antes de enviar...
+            </h2>
+
+            <p class="preview-subtitle">
+                Confira as fotos que você escolheu
+            </p>
+
+            <div
+                id="previewGrid"
+                class="preview-grid"
+            ></div>
+
+            <div class="preview-actions">
+
+                <label
+                    for="photoInput"
+                    class="secondary-button"
+                >
+                    + ADICIONAR MAIS
+                </label>
+
+                <button
                     type="button"
                     class="secondary-button"
-                    id="cancelConfirm"
->
-                    VOLTAR
-</button>
- 
+                    id="clearSelection"
+                >
+                    LIMPAR
+                </button>
+
                 <button
                     type="button"
                     class="confirm-button"
-                    id="finalConfirm"
+                    id="confirmSelection"
+                >
+                    ENVIAR FOTOS
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             GALERIA
+        ========================================== -->
+
+        <section class="gallery-section">
+
+            <h2 class="gallery-title">
+                Galeria
+            </h2>
+
+            <p class="gallery-subtitle">
+                em tempo real
+            </p>
+
+            <div
+                id="gallery"
+                class="gallery"
+            >
+                <div class="loading-gallery">
+                    Carregando nossas memórias...
+                </div>
+            </div>
+
+        </section>
+
+
+        <p class="footer">
+            Com amor, Giulia & Nathan
+        </p>
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================================
+     MODAL DE CONFIRMAÇÃO
+========================================== -->
+
+<div
+    id="confirmModal"
+    class="modal"
 >
-                    SIM, ENVIAR
-</button>
+
+    <div class="modal-box">
+
+        <h2 class="modal-title">
+            Tudo certo?
+        </h2>
+
+        <p class="modal-text">
+            Depois de enviar, elas ficarão disponíveis na galeria do site e não poderão ser apagadas.
+            <br><br>
+            Tem certeza que deseja enviar?
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="secondary-button"
+                id="cancelConfirm"
+            >
+                VOLTAR
+            </button>
+
+            <button
+                type="button"
+                class="confirm-button"
+                id="finalConfirm"
+            >
+                SIM, ENVIAR
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
-</div>
-</div>
- 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
- 
-    <script>
-        const SUPABASE_URL =
-            'https://jhembtsinuyailrdxrfq.supabase.co';
- 
-        const SUPABASE_KEY =
-            'sb_publishable_WIFsYfO0rCvzThuhzwhXXg_dMzYbdHm';
- 
-        const supabaseClient = window.supabase.createClient(
+
+
+
+<!-- =========================================
+     SUPABASE
+========================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+    const SUPABASE_URL =
+        'https://jhembtsinuyailrdxrfq.supabase.co';
+
+    const SUPABASE_KEY =
+        'sb_publishable_WIFsYfO0rCvzThuhzwhXXg_dMzYbdHm';
+
+    const supabaseClient =
+        window.supabase.createClient(
             SUPABASE_URL,
             SUPABASE_KEY
         );
- 
-        const photoInput = document.getElementById('photoInput');
-        const uploadButton = document.getElementById('uploadButton');
-        const uploadStatus = document.getElementById('uploadStatus');
-        const previewSection = document.getElementById('previewSection');
-        const previewGrid = document.getElementById('previewGrid');
-        const clearSelection = document.getElementById('clearSelection');
-        const confirmSelection = document.getElementById('confirmSelection');
-        const confirmModal = document.getElementById('confirmModal');
-        const cancelConfirm = document.getElementById('cancelConfirm');
-        const finalConfirm = document.getElementById('finalConfirm');
-        const gallery = document.getElementById('gallery');
- 
-        let selectedFiles = [];
- 
-        photoInput.addEventListener('change', function () {
-            const newFiles = Array.from(this.files || []);
- 
+
+
+    const photoInput =
+        document.getElementById('photoInput');
+
+    const uploadButton =
+        document.getElementById('uploadButton');
+
+    const uploadStatus =
+        document.getElementById('uploadStatus');
+
+    const previewSection =
+        document.getElementById('previewSection');
+
+    const previewGrid =
+        document.getElementById('previewGrid');
+
+    const clearSelection =
+        document.getElementById('clearSelection');
+
+    const confirmSelection =
+        document.getElementById('confirmSelection');
+
+    const confirmModal =
+        document.getElementById('confirmModal');
+
+    const cancelConfirm =
+        document.getElementById('cancelConfirm');
+
+    const finalConfirm =
+        document.getElementById('finalConfirm');
+
+    const gallery =
+        document.getElementById('gallery');
+
+
+    let selectedFiles = [];
+
+
+    /* =========================================
+       ESCOLHER FOTOS
+    ========================================= */
+
+    photoInput.addEventListener(
+        'change',
+        function () {
+
+            const newFiles =
+                Array.from(this.files || []);
+
             if (!newFiles.length) {
                 return;
             }
- 
+
             newFiles.forEach(file => {
+
                 if (!file.type.startsWith('image/')) {
                     return;
                 }
- 
-                const maxSize = 15 * 1024 * 1024;
- 
+
+                const maxSize =
+                    15 * 1024 * 1024;
+
                 if (file.size > maxSize) {
                     return;
                 }
- 
-                const alreadySelected = selectedFiles.some(
-                    existing =>
-                        existing.name === file.name &&
-                        existing.size === file.size &&
-                        existing.lastModified === file.lastModified
-                );
- 
+
+
+                /*
+                 * Evita duplicar a mesma foto
+                 * na seleção.
+                 */
+
+                const alreadySelected =
+                    selectedFiles.some(
+                        existing =>
+                            existing.name === file.name &&
+                            existing.size === file.size &&
+                            existing.lastModified === file.lastModified
+                    );
+
                 if (!alreadySelected) {
                     selectedFiles.push(file);
                 }
+
             });
- 
+
             photoInput.value = '';
+
             renderPreview();
-        });
- 
-        function renderPreview() {
-            previewGrid.innerHTML = '';
- 
-            if (!selectedFiles.length) {
-                previewSection.classList.remove('visible');
-                return;
-            }
- 
-            previewSection.classList.add('visible');
- 
-            selectedFiles.forEach((file, index) => {
-                const item = document.createElement('div');
-                item.className = 'preview-item';
- 
-                const image = document.createElement('img');
-                const objectUrl = URL.createObjectURL(file);
-                image.src = objectUrl;
-                image.alt = 'Prévia da foto selecionada';
-                image.onload = () => URL.revokeObjectURL(objectUrl);
- 
-                const removeButton = document.createElement('button');
-                removeButton.type = 'button';
-                removeButton.className = 'remove-preview';
-                removeButton.textContent = '×';
-                removeButton.title = 'Remover esta foto';
- 
-                removeButton.addEventListener('click', function () {
-                    selectedFiles.splice(index, 1);
-                    renderPreview();
-                });
- 
-                item.appendChild(image);
-                item.appendChild(removeButton);
-                previewGrid.appendChild(item);
-            });
+
         }
- 
-        clearSelection.addEventListener('click', function () {
+    );
+
+
+    /* =========================================
+       PRÉVIA
+    ========================================= */
+
+    function renderPreview() {
+
+        previewGrid.innerHTML = '';
+
+        if (!selectedFiles.length) {
+
+            previewSection.classList.remove(
+                'visible'
+            );
+
+            return;
+        }
+
+        previewSection.classList.add(
+            'visible'
+        );
+
+
+        selectedFiles.forEach(
+            (file, index) => {
+
+                const item =
+                    document.createElement('div');
+
+                item.className =
+                    'preview-item';
+
+
+                const image =
+                    document.createElement('img');
+
+                image.src =
+                    URL.createObjectURL(file);
+
+
+                const removeButton =
+                    document.createElement('button');
+
+                removeButton.type =
+                    'button';
+
+                removeButton.className =
+                    'remove-preview';
+
+                removeButton.textContent =
+                    '×';
+
+                removeButton.title =
+                    'Remover esta foto';
+
+
+                removeButton.addEventListener(
+                    'click',
+                    function () {
+
+                        selectedFiles.splice(
+                            index,
+                            1
+                        );
+
+                        renderPreview();
+
+                    }
+                );
+
+
+                item.appendChild(image);
+
+                item.appendChild(
+                    removeButton
+                );
+
+                previewGrid.appendChild(item);
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       LIMPAR SELEÇÃO
+    ========================================= */
+
+    clearSelection.addEventListener(
+        'click',
+        function () {
+
             selectedFiles = [];
+
             photoInput.value = '';
+
             renderPreview();
+
             uploadStatus.textContent = '';
-        });
- 
-        confirmSelection.addEventListener('click', function () {
+
+        }
+    );
+
+
+    /* =========================================
+       ABRIR SEGUNDA CONFIRMAÇÃO
+    ========================================= */
+
+    confirmSelection.addEventListener(
+        'click',
+        function () {
+
             if (!selectedFiles.length) {
                 return;
             }
- 
-            confirmModal.classList.add('visible');
-        });
- 
-        cancelConfirm.addEventListener('click', function () {
-            confirmModal.classList.remove('visible');
-        });
- 
-        finalConfirm.addEventListener('click', async function () {
-            confirmModal.classList.remove('visible');
-            uploadButton.classList.add('disabled');
-            uploadStatus.textContent = 'Enviando suas fotos... 💕';
- 
+
+            confirmModal.classList.add(
+                'visible'
+            );
+
+        }
+    );
+
+
+    cancelConfirm.addEventListener(
+        'click',
+        function () {
+
+            confirmModal.classList.remove(
+                'visible'
+            );
+
+        }
+    );
+
+
+    /* =========================================
+       CONFIRMAÇÃO FINAL + UPLOAD
+    ========================================= */
+
+    finalConfirm.addEventListener(
+        'click',
+        async function () {
+
+            confirmModal.classList.remove(
+                'visible'
+            );
+
+            uploadButton.classList.add(
+                'disabled'
+            );
+
+            uploadStatus.textContent =
+                'Enviando suas fotos... 💕';
+
             try {
-                let uploaded = 0;
- 
-                for (const file of selectedFiles) {
-                    const extension = file.name
-                        .split('.')
-                        .pop()
-                        .toLowerCase();
- 
+
+                let uploaded =
+                    0;
+
+
+                for (
+                    const file of selectedFiles
+                ) {
+
+                    const extension =
+                        file.name
+                            .split('.')
+                            .pop()
+                            .toLowerCase();
+
+
                     const fileName =
                         Date.now() +
                         '-' +
-                        Math.random().toString(36).substring(2, 10) +
+                        Math.random()
+                            .toString(36)
+                            .substring(2, 10) +
                         '.' +
                         extension;
- 
-                    const result = await supabaseClient
-                        .storage
-                        .from('fotos-casamento')
-                        .upload(fileName, file, {
-                            cacheControl: '3600',
-                            upsert: false,
-                            contentType: file.type
-                        });
- 
+
+
+                    const result =
+                        await supabaseClient
+                            .storage
+                            .from('fotos-casamento')
+                            .upload(
+                                fileName,
+                                file,
+                                {
+                                    cacheControl: '3600',
+                                    upsert: false,
+                                    contentType: file.type
+                                }
+                            );
+
+
                     if (result.error) {
                         throw result.error;
                     }
- 
+
+
                     uploaded++;
- 
+
                     uploadStatus.textContent =
                         `Enviando ${uploaded} de ${selectedFiles.length} fotos... 💕`;
+
                 }
- 
+
+
                 uploadStatus.textContent =
-                    `${uploaded} ${
-                        uploaded === 1 ? 'foto enviada' : 'fotos enviadas'
-                    }! Obrigada por fazer parte das nossas memórias. 💕`;
- 
+                    `${uploaded} ${uploaded === 1 ? 'foto enviada' : 'fotos enviadas'}! Obrigada por fazer parte das nossas memórias. 💕`;
+
+
                 selectedFiles = [];
+
                 photoInput.value = '';
+
                 renderPreview();
- 
+
                 await loadGallery();
-            } catch (error) {
-                console.error('ERRO NO UPLOAD:', error);
- 
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    'ERRO NO UPLOAD:',
+                    error
+                );
+
                 uploadStatus.textContent =
                     'Não conseguimos enviar todas as fotos. Tente novamente.';
-            } finally {
-                uploadButton.classList.remove('disabled');
+
             }
-        });
- 
-        async function loadGallery() {
-            gallery.innerHTML =
-                '<div class="loading-gallery">' +
-                'Carregando nossas memórias...' +
-                '</div>';
- 
-            try {
-                const result = await supabaseClient
+
+            finally {
+
+                uploadButton.classList.remove(
+                    'disabled'
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       GALERIA
+    ========================================= */
+
+    async function loadGallery() {
+
+        gallery.innerHTML =
+            '<div class="loading-gallery">Carregando nossas memórias...</div>';
+
+        try {
+
+            const result =
+                await supabaseClient
                     .storage
                     .from('fotos-casamento')
-                    .list('', {
-                        limit: 100,
-                        offset: 0,
-                        sortBy: {
-                            column: 'created_at',
-                            order: 'desc'
+                    .list(
+                        '',
+                        {
+                            limit: 100,
+                            offset: 0,
+                            sortBy: {
+                                column: 'created_at',
+                                order: 'desc'
+                            }
                         }
-                    });
- 
-                if (result.error) {
-                    throw result.error;
-                }
- 
-                const files = (result.data || []).filter(
-                    file => file.name && !file.name.endsWith('/')
-                );
- 
-                if (!files.length) {
-                    gallery.innerHTML =
-                        '<div class="empty-gallery">' +
-                        'As primeiras fotos do nosso dia aparecerão aqui. 💕' +
-                        '</div>';
-                    return;
-                }
- 
-                gallery.innerHTML = '';
- 
-                files.forEach(file => {
-                    const publicUrl = supabaseClient
-                        .storage
-                        .from('fotos-casamento')
-                        .getPublicUrl(file.name)
-                        .data
-                        .publicUrl;
- 
-                    const image = document.createElement('img');
-                    image.src = publicUrl;
-                    image.alt = 'Foto do casamento';
-                    image.className = 'gallery-item';
-                    image.loading = 'lazy';
- 
-                    gallery.appendChild(image);
-                });
-            } catch (error) {
-                console.error('ERRO AO CARREGAR GALERIA:', error);
- 
+                    );
+
+
+            if (result.error) {
+                throw result.error;
+            }
+
+
+            const files =
+                (result.data || [])
+                    .filter(
+                        file =>
+                            file.name &&
+                            !file.name.endsWith('/')
+                    );
+
+
+            if (!files.length) {
+
                 gallery.innerHTML =
                     '<div class="empty-gallery">' +
-                    'Não foi possível carregar as fotos.' +
+                    'As primeiras fotos do nosso dia aparecerão aqui. 💕' +
                     '</div>';
+
+                return;
             }
+
+
+            gallery.innerHTML = '';
+
+
+            files.forEach(
+                file => {
+
+                    const publicUrl =
+                        supabaseClient
+                            .storage
+                            .from('fotos-casamento')
+                            .getPublicUrl(
+                                file.name
+                            )
+                            .data
+                            .publicUrl;
+
+
+                    const image =
+                        document.createElement('img');
+
+                    image.src =
+                        publicUrl;
+
+                    image.alt =
+                        'Foto do casamento';
+
+                    image.className =
+                        'gallery-item';
+
+                    image.loading =
+                        'lazy';
+
+
+                    gallery.appendChild(
+                        image
+                    );
+
+                }
+            );
+
         }
- 
-        loadGallery();
+
+        catch (error) {
+
+            console.error(
+                'ERRO AO CARREGAR GALERIA:',
+                error
+            );
+
+            gallery.innerHTML =
+                '<div class="empty-gallery">' +
+                'Não foi possível carregar as fotos.' +
+                '</div>';
+
+        }
+
+    }
+
+
+    loadGallery();
+
 </script>
+
 </body>
 </html>
